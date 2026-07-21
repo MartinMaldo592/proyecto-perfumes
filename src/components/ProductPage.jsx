@@ -581,13 +581,13 @@ export const ProductPage = () => {
         </h3>
 
         {/* Mobile Horizontal Swipe Carousel / Desktop 4-Column Grid */}
-        <div className="flex overflow-x-auto snap-x snap-mandatory space-x-4 pb-4 scrollbar-none sm:grid sm:grid-cols-2 md:grid-cols-4 sm:space-x-0 sm:gap-6">
+        <div className="flex overflow-x-auto snap-x snap-mandatory space-x-3.5 sm:space-x-4 pb-4 scrollbar-none sm:grid sm:grid-cols-2 md:grid-cols-4 sm:space-x-0 sm:gap-6">
           
           {/* Card 0: ShipInsure Package Protection Card */}
-          <div className="w-[68%] xs:w-[62%] sm:w-auto flex-shrink-0 snap-start group cursor-pointer">
-            <div className="relative aspect-square bg-[#0b0c16] rounded-2xl sm:rounded-3xl p-6 flex flex-col items-center justify-center overflow-hidden mb-3 border border-gray-800">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-stone-900 rounded-2xl flex items-center justify-center mb-2 border border-stone-700 shadow-md">
-                <Lock className="w-8 h-8 text-white stroke-[1.75]" />
+          <div className="w-[46%] xs:w-[44%] sm:w-auto flex-shrink-0 snap-start group cursor-pointer">
+            <div className="relative aspect-square bg-[#0b0c16] rounded-2xl p-4 flex flex-col items-center justify-center overflow-hidden mb-2 border border-gray-800">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-stone-900 rounded-xl flex items-center justify-center mb-1 border border-stone-700 shadow-md">
+                <Lock className="w-6 h-6 sm:w-8 sm:h-8 text-white stroke-[1.75]" />
               </div>
               
               {/* Quick Add Bag Button */}
@@ -596,14 +596,14 @@ export const ProductPage = () => {
                   e.stopPropagation();
                   addToCart({ id: 'shipinsure', title: 'ShipInsure Package Protection', min_price: 0.98, main_image: '' }, null, 1);
                 }}
-                className="absolute bottom-3 right-3 w-8 h-8 bg-white text-stone-900 rounded-full flex items-center justify-center shadow-md hover:bg-stone-900 hover:text-white transition-all"
+                className="absolute bottom-2.5 right-2.5 w-7 h-7 bg-white text-stone-900 rounded-full flex items-center justify-center shadow-xs hover:bg-stone-900 hover:text-white transition-all"
                 title="Add ShipInsure"
               >
-                <ShoppingBag className="w-4 h-4" />
+                <ShoppingBag className="w-3.5 h-3.5" />
               </button>
             </div>
-            <span className="text-[11px] text-stone-500 font-medium block">ShipInsure</span>
-            <h4 className="font-serif font-semibold text-stone-900 text-sm line-clamp-1">ShipInsure Package Protection</h4>
+            <span className="text-[10px] text-stone-500 font-medium block">ShipInsure</span>
+            <h4 className="font-serif font-semibold text-stone-900 text-xs sm:text-sm line-clamp-2 leading-tight">ShipInsure Package Protection</h4>
             <span className="text-xs font-bold text-stone-900 mt-0.5 block">From $0.98 USD</span>
           </div>
 
@@ -615,13 +615,13 @@ export const ProductPage = () => {
               <div
                 key={p.id}
                 onClick={() => navigateToProduct(p)}
-                className="w-[68%] xs:w-[62%] sm:w-auto flex-shrink-0 snap-start group cursor-pointer"
+                className="w-[46%] xs:w-[44%] sm:w-auto flex-shrink-0 snap-start group cursor-pointer"
               >
-                <div className="relative aspect-square bg-[#f8f6f2] rounded-2xl sm:rounded-3xl p-4 flex items-center justify-center overflow-hidden mb-3 border border-stone-200/50 group-hover:shadow-md transition-all">
+                <div className="relative aspect-square bg-[#f8f6f2] rounded-2xl p-3 flex items-center justify-center overflow-hidden mb-2 border border-stone-200/50 group-hover:shadow-md transition-all">
                   <img
                     src={p.main_image}
                     alt={p.title}
-                    className="max-h-full max-w-full object-contain p-2 group-hover:scale-105 transition-transform duration-300"
+                    className="max-h-full max-w-full object-contain p-1 group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />
 
@@ -631,18 +631,18 @@ export const ProductPage = () => {
                       e.stopPropagation();
                       addToCart(p, null, 1);
                     }}
-                    className="absolute bottom-3 right-3 w-8 h-8 bg-white text-stone-900 rounded-full flex items-center justify-center shadow-md hover:bg-stone-900 hover:text-white transition-all opacity-90 group-hover:opacity-100"
+                    className="absolute bottom-2.5 right-2.5 w-7 h-7 bg-white text-stone-900 rounded-full flex items-center justify-center shadow-xs hover:bg-stone-900 hover:text-white transition-all opacity-90 group-hover:opacity-100"
                     title="Add to Cart"
                   >
-                    <ShoppingBag className="w-4 h-4" />
+                    <ShoppingBag className="w-3.5 h-3.5" />
                   </button>
                 </div>
-                <span className="text-[11px] text-stone-500 font-medium block">Lattafa</span>
-                <h4 className="font-serif font-semibold text-stone-900 text-sm line-clamp-1">{p.title}</h4>
-                <div className="flex items-center space-x-2 mt-0.5">
+                <span className="text-[10px] text-stone-500 font-medium block">Lattafa</span>
+                <h4 className="font-serif font-semibold text-stone-900 text-xs sm:text-sm line-clamp-1">{p.title}</h4>
+                <div className="flex items-center space-x-1.5 mt-0.5">
                   <span className="text-xs font-bold text-stone-900">${p.min_price} USD</span>
                   {p.compare_at_price && (
-                    <span className="text-xs text-stone-400 line-through">${p.compare_at_price} USD</span>
+                    <span className="text-[11px] text-stone-400 line-through">${p.compare_at_price} USD</span>
                   )}
                 </div>
               </div>
