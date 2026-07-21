@@ -48,7 +48,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-2xs transition-all duration-200">
+    <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-xs transition-all duration-200">
 
       {/* Full-width container with edge-aligned padding matching official store layout */}
       <div className="w-full px-3 sm:px-5 lg:px-6">
@@ -82,72 +82,72 @@ export const Header = () => {
               </button>
 
               {activeMenu === 'shop' && (
-                <div className="fixed top-[88px] inset-x-0 bg-white border-t border-b border-gray-100 shadow-2xl py-8 px-8 sm:px-16 lg:px-24 animate-fadeIn z-50">
-                  <div className="w-full grid grid-cols-12 gap-8 items-start">
+                <div className="absolute top-full inset-x-0 bg-white border-t border-b border-gray-100 shadow-xl py-9 px-8 sm:px-12 lg:px-20 animate-curtain z-50 overflow-hidden">
+                  <div className="w-full grid grid-cols-12 gap-6 items-start max-w-7xl mx-auto">
 
-                    {/* Left Sidebar Links */}
-                    <div className="col-span-2 space-y-4 font-serif text-lg text-stone-900 border-r border-gray-100 pr-6">
-                      <div onClick={() => { navigateToCollection('best-sellers', 'Los Más Vendidos'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Los Más Vendidos</div>
-                      <div onClick={() => { navigateToCollection('new-arrivals', 'Nuevos Lanzamientos'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Nuevos Lanzamientos</div>
-                      <div onClick={() => { navigateToCollection('bundles', 'Packs Exclusivos'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Packs Exclusivos</div>
+                    {/* Col 1: Left Main Navigation Links (Matching Lattafa USA font-serif/style) */}
+                    <div className="col-span-3 space-y-4 font-serif text-[17px] text-stone-800 tracking-wide border-r border-stone-100 pr-6">
+                      <div onClick={() => { navigateToCollection('best-sellers', 'Best Sellers'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors">Best Sellers</div>
+                      <div onClick={() => { navigateToCollection('new-arrivals', 'New Arrivals'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors">New Arrivals</div>
+                      <div onClick={() => { navigateToCollection('bundles', 'Bundles'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors">Bundles</div>
                     </div>
 
-                    {/* Middle Categories */}
-                    <div className="col-span-6 grid grid-cols-3 gap-6 text-xs">
-                      <div>
-                        <h4 className="font-serif font-bold text-stone-900 text-xs mb-3 text-gray-400">Por Categoría</h4>
-                        <ul className="space-y-2.5 text-stone-700 font-medium">
-                          <li><span onClick={() => { navigateToCollection('all', 'Todas las Fragancias'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Todas las Fragancias</span></li>
-                          <li><span onClick={() => { navigateToCollection('women', 'Fragancias para Mujer'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Fragancias para Mujer</span></li>
-                          <li><span onClick={() => { navigateToCollection('men', 'Fragancias para Hombre'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Fragancias para Hombre</span></li>
-                          <li><span onClick={() => { navigateToCollection('unisex', 'Fragancias Unisex'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Fragancias Unisex</span></li>
-                        </ul>
-                      </div>
-
-                      <div>
-                        <h4 className="font-serif font-bold text-stone-900 text-xs mb-3 text-gray-400">Por Presentación</h4>
-                        <ul className="space-y-2.5 text-stone-700 font-medium">
-                          <li><span onClick={() => { navigateToCollection('edp', 'Eau de Parfum'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Eau de Parfum (EDP)</span></li>
-                          <li><span onClick={() => { navigateToCollection('deodorant', 'Desodorantes'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Desodorantes</span></li>
-                          <li><span onClick={() => { navigateToCollection('air-freshener', 'Aromatizadores'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Aromatizadores</span></li>
-                          <li><span onClick={() => { navigateToCollection('body-spray', 'Sprays Corporales'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Sprays Corporales</span></li>
-                        </ul>
-                      </div>
-
-                      <div>
-                        <h4 className="font-serif font-bold text-stone-900 text-xs mb-3 text-gray-400">Por Línea</h4>
-                        <ul className="space-y-2.5 text-stone-700 font-medium">
-                          <li><span onClick={() => { navigateToCollection('lattafa', 'Colección Lattafa'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors font-semibold">Lattafa</span></li>
-                          <li><span onClick={() => { navigateToCollection('pride', 'Lattafa Pride'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors font-semibold">Lattafa Pride</span></li>
-                        </ul>
-                      </div>
+                    {/* Col 2: By Category */}
+                    <div className="col-span-3 text-xs">
+                      <h4 className="font-serif font-normal text-stone-500 text-sm mb-3.5">By Category</h4>
+                      <ul className="space-y-2.5 text-stone-900 font-semibold text-xs tracking-tight">
+                        <li><span onClick={() => { navigateToCollection('all', 'All Fragrances'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors block">All Fragrances</span></li>
+                        <li><span onClick={() => { navigateToCollection('women', "Women's Fragrances"); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors block">Women's Fragrances</span></li>
+                        <li><span onClick={() => { navigateToCollection('men', "Men's Fragrances"); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors block">Men's Fragrances</span></li>
+                        <li><span onClick={() => { navigateToCollection('unisex', 'Unisex Fragrances'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors block">Unisex Fragrances</span></li>
+                      </ul>
                     </div>
 
-                    {/* Right Featured Trend Carousel */}
-                    <div className="col-span-4 pl-4 border-l border-gray-100">
-                      <div className="flex justify-between items-center mb-4">
-                        <h4 className="font-serif font-semibold text-stone-900 text-sm">Tendencias de la Semana</h4>
-                        <div className="flex items-center space-x-2 text-xs text-gray-500">
-                          <button onClick={() => setTrendIndex((t) => Math.max(0, t - 1))} className="p-1 hover:text-stone-900"><ChevronLeft className="w-4 h-4" /></button>
-                          <span>1/5</span>
-                          <button onClick={() => setTrendIndex((t) => (t + 1) % trendItems.length)} className="p-1 hover:text-stone-900"><ChevronRight className="w-4 h-4" /></button>
+                    {/* Col 3: By Type */}
+                    <div className="col-span-2 text-xs border-r border-stone-100 pr-4">
+                      <h4 className="font-serif font-normal text-stone-500 text-sm mb-3.5">By Type</h4>
+                      <ul className="space-y-2.5 text-stone-900 font-semibold text-xs tracking-tight">
+                        <li><span onClick={() => { navigateToCollection('edp', 'Eau de Parfum (EDP)'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors block">Eau de Parfum (EDP)</span></li>
+                        <li><span onClick={() => { navigateToCollection('deodorant', 'Deodorant'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors block">Deodorant</span></li>
+                        <li><span onClick={() => { navigateToCollection('air-freshener', 'Air Freshener'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors block">Air Freshener</span></li>
+                        <li><span onClick={() => { navigateToCollection('body-spray', 'All Over Spray'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors block">All Over Spray</span></li>
+                      </ul>
+                    </div>
+
+                    {/* Col 4: By Brand */}
+                    <div className="col-span-1 text-xs">
+                      <h4 className="font-serif font-normal text-stone-500 text-sm mb-3.5">By Brand</h4>
+                      <ul className="space-y-2.5 text-stone-900 font-semibold text-xs tracking-tight">
+                        <li><span onClick={() => { navigateToCollection('lattafa', 'Lattafa'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors block">Lattafa</span></li>
+                        <li><span onClick={() => { navigateToCollection('pride', 'Lattafa Pride'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors block">Lattafa Pride</span></li>
+                      </ul>
+                    </div>
+
+                    {/* Col 5: Trend This Week Carousel (Matching official site styling) */}
+                    <div className="col-span-3 pl-4 border-l border-stone-100">
+                      <div className="flex justify-between items-center mb-3">
+                        <h4 className="font-serif font-normal text-stone-600 text-sm">Trend This Week</h4>
+                        <div className="flex items-center space-x-1.5 text-xs text-stone-500">
+                          <button onClick={() => setTrendIndex((t) => Math.max(0, t - 1))} className="p-0.5 hover:text-stone-900"><ChevronLeft className="w-3.5 h-3.5" /></button>
+                          <span className="text-[11px]">{trendIndex + 1}/5</span>
+                          <button onClick={() => setTrendIndex((t) => (t + 1) % trendItems.length)} className="p-0.5 hover:text-stone-900"><ChevronRight className="w-3.5 h-3.5" /></button>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-2 gap-3">
                         {trendItems.slice(0, 2).map((item, idx) => (
                           <div key={idx} onClick={() => handleCardClick(item.title)} className="group cursor-pointer">
-                            <div className="relative aspect-square bg-[#f4f4f4] rounded-2xl p-4 flex items-center justify-center overflow-hidden mb-2">
+                            <div className="relative aspect-square bg-[#f5f5f5] rounded-xl p-3 flex items-center justify-center overflow-hidden mb-2">
                               {item.soldOut && (
-                                <span className="absolute top-2 left-2 bg-stone-700 text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase">
-                                  Agotado
+                                <span className="absolute top-2 left-2 bg-stone-500 text-white text-[9px] font-medium px-2 py-0.5 rounded-full uppercase tracking-wider">
+                                  Sold out
                                 </span>
                               )}
-                              <img src={item.image} alt={item.title} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform" />
+                              <img src={item.image} alt={item.title} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300" />
                             </div>
-                            <span className="text-[10px] text-gray-500 block">Lattafa</span>
-                            <h5 className="font-serif font-bold text-stone-900 text-xs">{item.title}</h5>
-                            <span className="text-xs font-bold text-stone-900">{item.price}</span>
+                            <span className="text-[10px] text-stone-400 font-medium block">Lattafa</span>
+                            <h5 className="font-sans font-bold text-stone-900 text-xs">{item.title}</h5>
+                            <span className="text-xs font-bold text-stone-900 block mt-0.5">{item.price}</span>
                           </div>
                         ))}
                       </div>
@@ -173,7 +173,7 @@ export const Header = () => {
               </button>
 
               {activeMenu === 'new' && (
-                <div className="fixed top-[88px] inset-x-0 bg-white border-t border-b border-gray-100 shadow-2xl py-8 px-8 sm:px-16 lg:px-24 animate-fadeIn z-50">
+                <div className="absolute top-full inset-x-0 bg-white border-t border-b border-gray-100 shadow-2xl py-8 px-8 sm:px-16 lg:px-24 animate-curtain z-50 overflow-hidden">
                   <div className="w-full grid grid-cols-4 gap-6">
                     {newArrivalsCards.map((card, idx) => (
                       <div
@@ -210,7 +210,7 @@ export const Header = () => {
               </button>
 
               {activeMenu === 'bestsellers' && (
-                <div className="fixed top-[88px] inset-x-0 bg-white border-t border-b border-gray-100 shadow-2xl py-8 px-8 sm:px-16 lg:px-24 animate-fadeIn z-50">
+                <div className="absolute top-full inset-x-0 bg-white border-t border-b border-gray-100 shadow-2xl py-8 px-8 sm:px-16 lg:px-24 animate-curtain z-50 overflow-hidden">
                   <div className="w-full grid grid-cols-4 gap-6">
                     {bestSellersCards.map((card, idx) => (
                       <div
@@ -247,7 +247,7 @@ export const Header = () => {
               </button>
 
               {activeMenu === 'collections' && (
-                <div className="fixed top-[88px] inset-x-0 bg-white border-t border-b border-gray-100 shadow-2xl py-8 px-8 sm:px-16 lg:px-24 animate-fadeIn z-50">
+                <div className="absolute top-full inset-x-0 bg-white border-t border-b border-gray-100 shadow-2xl py-8 px-8 sm:px-16 lg:px-24 animate-curtain z-50 overflow-hidden">
                   <div className="w-full grid grid-cols-5 gap-5">
                     {collectionsCards.map((card, idx) => (
                       <div
