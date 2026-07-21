@@ -18,10 +18,22 @@ export const StoreProvider = ({ children }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   
+  const COLLECTION_TITLES = {
+    all: 'Todas las Fragancias',
+    men: 'Colección de Hombres',
+    women: 'Colección de Mujeres',
+    unisex: 'Fragancias Unisex',
+    lattafa: 'Colección Lattafa',
+    pride: 'Colección Lattafa Pride',
+    bundles: 'Kits y Packs Exclusivos',
+    bestsellers: 'Los Más Vendidos',
+    new: 'Nuevos Lanzamientos'
+  };
+
   // Real URL Router, Active Product & Active Collection
   const [activePage, setActivePage] = useState('home'); // 'home' | 'product' | 'collection'
   const [activeProduct, setActiveProduct] = useState(null);
-  const [activeCollection, setActiveCollection] = useState({ handle: 'all', title: 'All Fragrances' });
+  const [activeCollection, setActiveCollection] = useState({ handle: 'all', title: 'Todas las Fragancias' });
 
   // Quick View Modal
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -30,7 +42,9 @@ export const StoreProvider = ({ children }) => {
   const [includeShipInsure, setIncludeShipInsure] = useState(true);
 
   const formatTitle = (handle) => {
-    if (!handle) return 'All Fragrances';
+    if (!handle || handle === 'all') return 'Todas las Fragancias';
+    const key = handle.toLowerCase();
+    if (COLLECTION_TITLES[key]) return COLLECTION_TITLES[key];
     const words = handle.replace(/-/g, ' ').split(' ');
     return words.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
   };

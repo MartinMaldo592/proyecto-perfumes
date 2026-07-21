@@ -14,37 +14,37 @@ export const CollectionPage = () => {
   const categoryCards = [
     {
       handle: 'men',
-      title: "Men's Fragrances",
+      title: "Para Hombre",
       image: 'https://www.lattafa-usa.com/cdn/shop/files/Asad-1_ceed76c7-7a80-46b3-b372-68cc309137f4.png',
       filterFn: (p) => p.gender?.toLowerCase() === 'men' || p.tags?.includes('men') || p.title.toLowerCase().includes('men')
     },
     {
       handle: 'women',
-      title: "Women's Fragrances",
+      title: "Para Mujer",
       image: 'https://www.lattafa-usa.com/cdn/shop/files/Yara-Candy-1_86796aee-3226-4653-ba72-dd51d747c7f4.png',
       filterFn: (p) => p.gender?.toLowerCase() === 'women' || p.tags?.includes('women') || p.title.toLowerCase().includes('women')
     },
     {
       handle: 'unisex',
-      title: "Unisex Fragrances",
+      title: "Fragancias Unisex",
       image: 'https://www.lattafa-usa.com/cdn/shop/files/Khamrah-1_0ffa4f52-30e3-4dea-9399-9bae4b8cb4af.png',
       filterFn: (p) => p.gender?.toLowerCase() === 'unisex' || p.tags?.includes('unisex')
     },
     {
       handle: 'lattafa',
-      title: "Lattafa Collection",
+      title: "Colección Lattafa",
       image: 'https://www.lattafa-usa.com/cdn/shop/files/COVER_MAIN_UP_4-5.png?v=1769829986',
       filterFn: (p) => p.vendor?.toLowerCase() === 'lattafa' || !p.title.toLowerCase().includes('pride')
     },
     {
       handle: 'pride',
-      title: "Lattafa Pride Collection",
+      title: "Lattafa Pride",
       image: 'https://www.lattafa-usa.com/cdn/shop/files/Atheeri-1_f93156cf-73d9-4455-8540-5665a4312efb.png',
       filterFn: (p) => p.title.toLowerCase().includes('pride') || p.vendor?.toLowerCase().includes('pride')
     },
     {
       handle: 'bundles',
-      title: "Bundles & Gift Sets",
+      title: "Packs Exclusivos",
       image: 'https://www.lattafa-usa.com/cdn/shop/files/myyaragiftset.png?v=1750374217',
       filterFn: (p) => p.is_bundle || p.title.toLowerCase().includes('set') || p.title.toLowerCase().includes('collection') || p.title.toLowerCase().includes('bundle')
     }
@@ -106,10 +106,10 @@ export const CollectionPage = () => {
       <div className="w-full px-4 sm:px-10 lg:px-14 pt-5 pb-4 border-b border-gray-100">
         <div className="flex items-center space-x-2 text-xs text-stone-500 font-medium">
           <button onClick={navigateToHome} className="hover:text-stone-900 transition-colors">
-            Home
+            Inicio
           </button>
           <ChevronRight className="w-3 h-3 text-stone-400" />
-          <span>Collection</span>
+          <span>Colección</span>
           <ChevronRight className="w-3 h-3 text-stone-400" />
           <span className="text-stone-900 font-semibold uppercase tracking-wider">{collectionTitle}</span>
         </div>
@@ -148,7 +148,7 @@ export const CollectionPage = () => {
                   {cat.title}
                 </h4>
                 <span className="text-[11px] text-stone-500 font-medium mt-0.5 block">
-                  {count} items
+                  {count} fragancias
                 </span>
               </div>
             );
@@ -164,26 +164,26 @@ export const CollectionPage = () => {
             className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-stone-100 hover:bg-stone-200 text-stone-900 font-bold text-xs px-5 py-2.5 rounded-full uppercase tracking-wider transition-all border border-stone-200 cursor-pointer"
           >
             <SlidersHorizontal className="w-4 h-4" />
-            <span>FILTER</span>
+            <span>FILTRAR</span>
           </button>
 
           {/* Right: Products Count + Sort Dropdown */}
           <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto space-x-6 text-xs font-semibold text-stone-700">
-            <span>{filteredProducts.length} products</span>
+            <span>{filteredProducts.length} productos</span>
             
             <div className="flex items-center space-x-2">
-              <span className="text-stone-500 font-normal hidden xs:inline">Sort by:</span>
+              <span className="text-stone-500 font-normal hidden xs:inline">Ordenar por:</span>
               <div className="relative">
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
                   className="appearance-none bg-stone-50 hover:bg-stone-100 border border-stone-300 text-stone-900 text-xs font-semibold rounded-full pl-4 pr-8 py-2 focus:outline-none cursor-pointer"
                 >
-                  <option value="best-selling">Best selling</option>
-                  <option value="price-low-high">Price: Low to High</option>
-                  <option value="price-high-low">Price: High to Low</option>
-                  <option value="title-asc">Alphabetical: A-Z</option>
-                  <option value="title-desc">Alphabetical: Z-A</option>
+                  <option value="best-selling">Los Más Vendidos</option>
+                  <option value="price-low-high">Precio: Menor a Mayor</option>
+                  <option value="price-high-low">Precio: Mayor a Menor</option>
+                  <option value="title-asc">Nombre: A a la Z</option>
+                  <option value="title-desc">Nombre: Z a la A</option>
                 </select>
                 <ChevronDown className="w-3.5 h-3.5 text-stone-600 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
@@ -201,12 +201,12 @@ export const CollectionPage = () => {
           </div>
         ) : (
           <div className="text-center py-20 space-y-4">
-            <h3 className="font-serif text-2xl text-stone-600 font-normal">No products found in this collection.</h3>
+            <h3 className="font-serif text-2xl text-stone-600 font-normal">No se encontraron productos en esta colección.</h3>
             <button
-              onClick={() => navigateToCollection('all', 'All Fragrances')}
+              onClick={() => navigateToCollection('all', 'Todas las Fragancias')}
               className="bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs px-8 py-3 rounded-full uppercase tracking-widest shadow-md transition-all cursor-pointer"
             >
-              Browse All Fragrances
+              Ver Todas las Fragancias
             </button>
           </div>
         )}

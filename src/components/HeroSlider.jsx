@@ -8,24 +8,24 @@ export const HeroSlider = () => {
     {
       id: 1,
       title: "MUSAMAM BLACK INTENSE",
-      subtitle: "LATTAFA LUXURY",
-      cta: "ORDER NOW",
+      subtitle: "ALTA PERFUMERÍA LATTAFA",
+      cta: "COMPRAR AHORA",
       bgImage: "https://www.lattafa-usa.com/cdn/shop/files/COVER_MAIN_UP_4-5.png?v=1769829986",
       query: "Musamam"
     },
     {
       id: 2,
       title: "ANGHAM SECOND SONG",
-      subtitle: "NEW COLLECTION",
-      cta: "SHOP NOW",
+      subtitle: "NUEVA COLECCIÓN EXCLUSIVA",
+      cta: "EXPLORAR COLECCIÓN",
       bgImage: "https://www.lattafa-usa.com/cdn/shop/files/JPEG_image-41C4-8874-82-0.png?v=1769830090",
       query: "Angham"
     },
     {
       id: 3,
       title: "KHAMRAH WAHA",
-      subtitle: "CHARGE YOUR OASIS",
-      cta: "EXPLORE NOW",
+      subtitle: "DESCUBRE TU OASIS",
+      cta: "DESCUBRIR AHORA",
       bgImage: "https://www.lattafa-usa.com/cdn/shop/files/Khamrah_Waha_edp.png?v=1779478380",
       query: "Khamrah"
     }

@@ -8,10 +8,10 @@ export const FeaturedCollections = () => {
   const [activeTab, setActiveTab] = useState('new'); // 'new' | 'bestsellers'
 
   const collectionCards = [
-    { handle: "yara", title: "Yara Collection", count: "8 items", image: "https://www.lattafa-usa.com/cdn/shop/files/myyaragiftset.png?v=1750374217" },
-    { handle: "badee-al-oud", title: "Badee Al Oud", count: "7 items", image: "https://www.lattafa-usa.com/cdn/shop/files/Badee-Al-Oud-Noble-Blush-1_efc7268e-6d5c-413d-ae1e-ef7c9873bb6e.png" },
-    { handle: "asad", title: "Asad Collection", count: "5 items", image: "https://www.lattafa-usa.com/cdn/shop/files/Asad-1_ceed76c7-7a80-46b3-b372-68cc309137f4.png" },
-    { handle: "khamrah", title: "Khamrah Collection", count: "5 items", image: "https://www.lattafa-usa.com/cdn/shop/files/Khamrah-1_0ffa4f52-30e3-4dea-9399-9bae4b8cb4af.png" }
+    { handle: "yara", title: "Colección Yara", count: "8 fragancias", image: "https://www.lattafa-usa.com/cdn/shop/files/myyaragiftset.png?v=1750374217" },
+    { handle: "badee-al-oud", title: "Badee Al Oud", count: "7 fragancias", image: "https://www.lattafa-usa.com/cdn/shop/files/Badee-Al-Oud-Noble-Blush-1_efc7268e-6d5c-413d-ae1e-ef7c9873bb6e.png" },
+    { handle: "asad", title: "Colección Asad", count: "5 fragancias", image: "https://www.lattafa-usa.com/cdn/shop/files/Asad-1_ceed76c7-7a80-46b3-b372-68cc309137f4.png" },
+    { handle: "khamrah", title: "Colección Khamrah", count: "5 fragancias", image: "https://www.lattafa-usa.com/cdn/shop/files/Khamrah-1_0ffa4f52-30e3-4dea-9399-9bae4b8cb4af.png" }
   ];
 
   const bundleProducts = products.filter((p) => p.is_bundle || p.title.toLowerCase().includes('set') || p.title.toLowerCase().includes('collection')).slice(0, 4);
@@ -34,7 +34,7 @@ export const FeaturedCollections = () => {
                 activeTab === 'new' ? 'text-stone-900 border-b-2 border-stone-900 pb-1' : 'text-gray-400 hover:text-stone-600'
               }`}
             >
-              New Arrivals
+              Novedades
             </button>
             <button
               onClick={() => setActiveTab('bestsellers')}
@@ -42,14 +42,14 @@ export const FeaturedCollections = () => {
                 activeTab === 'bestsellers' ? 'text-stone-900 border-b-2 border-stone-900 pb-1' : 'text-gray-400 hover:text-stone-600'
               }`}
             >
-              Best Sellers
+              Los Más Vendidos
             </button>
           </div>
           <button 
-            onClick={() => navigateToCollection(activeTab === 'new' ? 'new-arrivals' : 'best-sellers', activeTab === 'new' ? 'New Arrivals' : 'Best Sellers')} 
+            onClick={() => navigateToCollection(activeTab === 'new' ? 'new-arrivals' : 'best-sellers', activeTab === 'new' ? 'Nuevos Lanzamientos' : 'Los Más Vendidos')} 
             className="text-xs font-bold uppercase tracking-wider text-stone-900 hover:underline cursor-pointer"
           >
-            SHOP ALL
+            VER CATÁLOGO
           </button>
         </div>
 
@@ -67,10 +67,10 @@ export const FeaturedCollections = () => {
       <section className="bg-[#f8f6f2] rounded-3xl p-6 sm:p-10 border border-stone-200/50">
         <div className="mb-6 max-w-xl">
           <h2 className="font-serif text-3xl sm:text-4xl font-normal text-stone-900 leading-tight mb-2">
-            Explore Our Collection
+            Explora Nuestras Colecciones
           </h2>
           <p className="text-stone-600 text-xs sm:text-sm leading-relaxed">
-            What you wear when you want to be unforgettable.
+            La fragancia perfecta para cuando deseas ser inolvidable.
           </p>
         </div>
 
@@ -102,7 +102,7 @@ export const FeaturedCollections = () => {
       <section>
         <div className="flex items-center justify-between mb-8 border-b border-gray-100 pb-4">
           <h2 className="font-serif text-2xl sm:text-3xl font-normal text-stone-900">
-            Bundles
+            Packs y Kits Exclusivos
           </h2>
           <div className="flex items-center space-x-3">
             <button className="w-9 h-9 rounded-full border border-stone-200 flex items-center justify-center hover:bg-stone-900 hover:text-white transition-colors">
@@ -126,10 +126,10 @@ export const FeaturedCollections = () => {
         {/* View More Button */}
         <div className="flex justify-center pt-10">
           <button 
-            onClick={() => navigateToCollection('bundles', 'Bundles & Gift Sets')} 
+            onClick={() => navigateToCollection('bundles', 'Packs y Kits Exclusivos')} 
             className="bg-black hover:bg-stone-800 text-white font-bold text-xs px-10 py-3.5 rounded-full uppercase tracking-widest shadow-md transition-all cursor-pointer"
           >
-            VIEW MORE
+            VER MÁS PACKS
           </button>
         </div>
       </section>
@@ -145,20 +145,20 @@ export const FeaturedCollections = () => {
         </div>
         <div className="p-8 sm:p-16 space-y-4 text-center lg:text-left">
           <span className="text-xs uppercase tracking-[0.25em] font-medium text-amber-800 block">
-            Unveil The Essence Of Elegance
+            Descubre la Esencia de la Elegancia
           </span>
           <h2 className="font-serif text-4xl sm:text-5xl font-normal text-stone-900 leading-tight">
-            Elegance Redefined Layaan
+            Elegancia Redefinida: Layaan
           </h2>
           <p className="text-stone-600 text-sm leading-relaxed max-w-md mx-auto lg:mx-0">
-            Grace, strength, and sensuality in every note. Unforgettable by design, crafted in the heart of Dubai.
+            Gracia, fuerza y sensualidad en cada nota. Diseñada para ser inolvidable, creada en el corazón de Dubái.
           </p>
           <div className="pt-4">
             <button 
-              onClick={() => navigateToCollection('layaan', 'Layaan Collection')} 
+              onClick={() => navigateToCollection('layaan', 'Colección Layaan')} 
               className="bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs px-8 py-3.5 rounded-full uppercase tracking-widest shadow-md transition-all cursor-pointer"
             >
-              EXPLORE COLLECTION
+              EXPLORAR COLECCIÓN
             </button>
           </div>
         </div>

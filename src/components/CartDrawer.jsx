@@ -31,9 +31,9 @@ export const CartDrawer = () => {
           <div className="p-5 border-b border-gray-100 flex items-center justify-between bg-stone-50">
             <div className="flex items-center space-x-2">
               <ShoppingBag className="w-5 h-5 text-amber-800" />
-              <h3 className="font-serif font-bold text-lg text-stone-900">Your Shopping Bag</h3>
+              <h3 className="font-serif font-bold text-lg text-stone-900">Tu Bolsa de Compras</h3>
               <span className="text-xs bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full font-bold">
-                {cart.length} items
+                {cart.length} productos
               </span>
             </div>
             <button
@@ -73,15 +73,15 @@ export const CartDrawer = () => {
             {cart.length === 0 ? (
               <div className="text-center py-16 space-y-4">
                 <ShoppingBag className="w-16 h-16 text-stone-300 mx-auto stroke-[1.25]" />
-                <h4 className="font-serif text-lg text-stone-700 font-medium">Your shopping bag is empty</h4>
+                <h4 className="font-serif text-lg text-stone-700 font-medium">Tu bolsa de compras está vacía</h4>
                 <p className="text-xs text-gray-500 max-w-xs mx-auto">
-                  Explore our luxury Arabic fragrances and discover your new signature scent.
+                  Explora nuestras fragancias árabes de lujo y descubre tu nuevo aroma exclusivo.
                 </p>
                 <button
                   onClick={() => setIsCartOpen(false)}
-                  className="bg-amber-800 hover:bg-amber-900 text-white font-bold text-xs uppercase px-6 py-3 rounded-xl tracking-wider shadow-md transition-all inline-block"
+                  className="bg-amber-800 hover:bg-amber-900 text-white font-bold text-xs uppercase px-6 py-3 rounded-xl tracking-wider shadow-md transition-all inline-block cursor-pointer"
                 >
-                  Start Shopping
+                  Comenzar a Comprar
                 </button>
               </div>
             ) : (
@@ -106,14 +106,14 @@ export const CartDrawer = () => {
                         </h4>
                         <button
                           onClick={() => removeFromCart(item.variant.variant_id)}
-                          className="text-gray-400 hover:text-red-600 transition-colors p-0.5"
+                          className="text-gray-400 hover:text-red-600 transition-colors p-0.5 cursor-pointer"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       </div>
 
                       <span className="text-[11px] text-gray-500 font-medium block">
-                        Size: {item.variant.variant_title}
+                        Tamaño: {item.variant.variant_title}
                       </span>
                     </div>
 
@@ -122,7 +122,7 @@ export const CartDrawer = () => {
                       <div className="flex items-center border border-gray-300 rounded-lg bg-white">
                         <button
                           onClick={() => updateQuantity(item.variant.variant_id, -1)}
-                          className="w-6 h-6 flex items-center justify-center text-xs font-bold text-gray-600 hover:bg-stone-100 rounded-l-lg"
+                          className="w-6 h-6 flex items-center justify-center text-xs font-bold text-gray-600 hover:bg-stone-100 rounded-l-lg cursor-pointer"
                         >
                           -
                         </button>
@@ -131,7 +131,7 @@ export const CartDrawer = () => {
                         </span>
                         <button
                           onClick={() => updateQuantity(item.variant.variant_id, 1)}
-                          className="w-6 h-6 flex items-center justify-center text-xs font-bold text-gray-600 hover:bg-stone-100 rounded-r-lg"
+                          className="w-6 h-6 flex items-center justify-center text-xs font-bold text-gray-600 hover:bg-stone-100 rounded-r-lg cursor-pointer"
                         >
                           +
                         </button>
@@ -156,7 +156,7 @@ export const CartDrawer = () => {
                 <div className="flex items-center space-x-2">
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
                   <div>
-                    <span className="font-bold text-stone-800 block">ShipInsure Protection</span>
+                    <span className="font-bold text-stone-800 block">Protección de Envío ShipInsure</span>
                     <span className="text-[10px] text-gray-500">Cubre pérdida, daño y robo por S/ 4.90</span>
                   </div>
                 </div>
@@ -176,12 +176,12 @@ export const CartDrawer = () => {
                 </div>
                 {includeShipInsure && (
                   <div className="flex justify-between text-gray-600">
-                    <span>Shipping Protection</span>
+                    <span>Protección de Envío</span>
                     <span className="font-semibold">S/ {shipInsureCost.toFixed(2)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-stone-900 text-sm font-bold pt-2 border-t">
-                  <span>Estimated Total</span>
+                  <span>Total Estimado</span>
                   <span className="text-amber-800 text-base">S/ {cartGrandTotal.toFixed(2)}</span>
                 </div>
               </div>
@@ -190,7 +190,7 @@ export const CartDrawer = () => {
               <div className="space-y-2 pt-2">
                 <button
                   onClick={() => alert(`Procesando Compra. Total: S/ ${cartGrandTotal.toFixed(2)}`)}
-                  className="w-full bg-[#121212] hover:bg-amber-800 text-white font-bold py-3.5 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center space-x-2 transition-all shadow-lg"
+                  className="w-full bg-[#121212] hover:bg-amber-800 text-white font-bold py-3.5 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center space-x-2 transition-all shadow-lg cursor-pointer"
                 >
                   <span>Comprar • S/ {cartGrandTotal.toFixed(2)}</span>
                   <ArrowRight className="w-4 h-4" />

@@ -32,7 +32,7 @@ export const SearchModal = () => {
           <Search className="w-5 h-5 text-amber-700" />
           <input
             type="text"
-            placeholder="Search perfumes by name or notes (e.g. Oud, Vanilla, Asad)..."
+            placeholder="Buscar perfumes por nombre o notas olfativas (ej: Oud, Vainilla, Asad)..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className="w-full text-base font-medium text-stone-900 placeholder-gray-400 focus:outline-none"
@@ -40,7 +40,7 @@ export const SearchModal = () => {
           />
           <button
             onClick={() => setIsSearchOpen(false)}
-            className="p-2 text-gray-400 hover:text-stone-900 rounded-full hover:bg-gray-100"
+            className="p-2 text-gray-400 hover:text-stone-900 rounded-full hover:bg-gray-100 cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -48,13 +48,13 @@ export const SearchModal = () => {
 
         {/* Quick Search Chips */}
         <div className="pt-4 pb-2">
-          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-2">Popular Searches</span>
+          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-2">Búsquedas Populares</span>
           <div className="flex flex-wrap gap-2">
             {quickSearches.map((term) => (
               <button
                 key={term}
                 onClick={() => setQuery(term)}
-                className="px-3 py-1 bg-stone-100 hover:bg-amber-100 text-stone-700 hover:text-amber-900 text-xs font-semibold rounded-full transition-colors"
+                className="px-3 py-1 bg-stone-100 hover:bg-amber-100 text-stone-700 hover:text-amber-900 text-xs font-semibold rounded-full transition-colors cursor-pointer"
               >
                 {term}
               </button>
@@ -66,7 +66,7 @@ export const SearchModal = () => {
         <div className="mt-4 space-y-3 max-h-96 overflow-y-auto">
           {query.trim() !== '' && results.length === 0 && (
             <div className="py-8 text-center text-xs text-gray-500">
-              No perfumes found matching "{query}". Try searching for notes like "Oud", "Vanilla", or "Amber".
+              No se encontraron perfumes que coincidan con "{query}". Intenta buscar notas como "Oud", "Vainilla", o "Ámbar".
             </div>
           )}
 

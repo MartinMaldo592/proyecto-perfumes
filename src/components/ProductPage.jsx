@@ -131,18 +131,18 @@ export const ProductPage = () => {
         </button>
       </div>
 
-      {/* Breadcrumb Navigation */}
-      <div className="w-full px-3 sm:px-10 lg:px-14 pt-3 sm:pt-4 pb-2">
-        <div className="flex items-center space-x-2 text-xs text-gray-500 font-medium">
+      {/* 1. BREADCRUMBS NAVIGATION */}
+      <div className="w-full px-4 sm:px-10 lg:px-14 pt-5 pb-4 border-b border-gray-100">
+        <div className="flex items-center space-x-2 text-xs text-stone-500 font-medium">
           <button onClick={navigateToHome} className="hover:text-stone-900 transition-colors">
-            Home
+            Inicio
           </button>
-          <span>›</span>
-          <button onClick={navigateToHome} className="hover:text-stone-900 transition-colors">
-            All Fragrances
+          <ChevronRight className="w-3 h-3 text-stone-400" />
+          <button onClick={() => navigateToHome()} className="hover:text-stone-900 transition-colors">
+            Todas las Fragancias
           </button>
-          <span>›</span>
-          <span className="text-stone-900 font-semibold">{activeProduct.title}</span>
+          <ChevronRight className="w-3 h-3 text-stone-400" />
+          <span className="text-stone-900 font-semibold uppercase tracking-wider">{activeProduct.title}</span>
         </div>
       </div>
 
@@ -153,7 +153,7 @@ export const ProductPage = () => {
           {/* LEFT COLUMN: IMAGE GALLERY (7 Columns in LG - STICKY ON SCROLL) */}
           <div className="lg:col-span-7 flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-start lg:sticky lg:top-24 lg:self-start w-full">
             
-            {/* Desktop & Tablet Vertical/Horizontal Thumbnails List (hidden on small mobile) */}
+            {/* Desktop & Tablet Vertical/Horizontal Thumbnails List */}
             {images.length > 1 && (
               <div className="hidden sm:flex sm:flex-col gap-3 overflow-x-auto sm:overflow-y-auto max-h-[540px] flex-shrink-0 w-full sm:w-22">
                 {images.map((img, idx) => (
@@ -214,7 +214,7 @@ export const ProductPage = () => {
                 <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </button>
 
-              {/* Carousel Prev/Next Arrow Buttons (Desktop/Tablet) */}
+              {/* Carousel Prev/Next Arrow Buttons */}
               {images.length > 1 && (
                 <>
                   <button
@@ -244,60 +244,43 @@ export const ProductPage = () => {
                 />
               ))}
             </div>
-
-            {/* Mobile Pagination Counter Controls (< 1/3 >) */}
-            {images.length > 1 && (
-              <div className="flex sm:hidden items-center justify-center space-x-6 text-xs font-semibold text-stone-900 w-full py-1">
-                <button onClick={handlePrevImg} className="p-1 text-stone-700 hover:text-stone-900">
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <span>{currentImgIdx + 1} / {images.length}</span>
-                <button onClick={handleNextImg} className="p-1 text-stone-700 hover:text-stone-900">
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-            )}
-
           </div>
 
-          {/* RIGHT COLUMN: SPECS & BUY SECTION (5 Columns in LG - COMPACT TIGHT LAYOUT) */}
-          <div className="lg:col-span-5 space-y-4">
+          {/* RIGHT COLUMN: PRODUCT INFO & PURCHASE CONTROLS */}
+          <div className="lg:col-span-5 space-y-5 sm:space-y-6">
             
-            {/* Vendor */}
-            <span className="text-xs font-medium text-stone-500 block uppercase tracking-wider">
-              {activeProduct.vendor || "Lattafa"}
-            </span>
-
-            {/* Product Title */}
-            <h1 className="font-serif text-4xl sm:text-5xl font-normal text-stone-900 tracking-tight leading-tight">
-              {activeProduct.title}
-            </h1>
-
-            {/* Star Rating Header */}
-            <div className="flex items-center space-x-1.5 text-xs sm:text-sm">
-              <div className="flex items-center text-stone-900">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current" />
-                ))}
-              </div>
-              <a href="#reviews-section" className="text-stone-700 hover:underline font-medium">
-                173 reviews
-              </a>
+            {/* Brand Vendor */}
+            <div>
+              <span className="text-xs uppercase tracking-[0.25em] font-semibold text-stone-400 block mb-1">
+                {activeProduct.vendor || "LATTAFA"}
+              </span>
+              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-stone-900 leading-tight">
+                {activeProduct.title}
+              </h1>
             </div>
 
-            {/* Single Pulsing Stock Badge (Shopify Official PDP Style) */}
-            <div className="pt-1">
-              {!activeProduct.is_available ? (
-                <span className="bg-stone-300 text-stone-700 text-xs font-bold px-3.5 py-1 rounded-md uppercase tracking-wider inline-block">
-                  Sold out
-                </span>
-              ) : (
-                <span className="inline-flex items-center space-x-2 text-xs font-semibold text-emerald-700">
+            {/* Ratings Summary */}
+            <div className="flex items-center space-x-3 text-xs">
+              <div className="flex items-center text-stone-900">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className="w-3.5 h-3.5 fill-current text-stone-900"
+                  />
+                ))}
+              </div>
+              <span className="text-stone-600 font-medium">{activeProduct.review_count || 173} reseñas</span>
+            </div>
+
+            {/* Single Pulsing Stock Status Indicator */}
+            <div className="flex items-center space-x-2 pt-1">
+              {activeProduct.is_available && (
+                <span className="inline-flex items-center space-x-2 text-xs font-bold text-emerald-700">
                   <span className="relative flex h-2.5 w-2.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                   </span>
-                  <span>In stock</span>
+                  <span>En stock</span>
                 </span>
               )}
             </div>
@@ -308,12 +291,12 @@ export const ProductPage = () => {
                 S/ {price.toFixed(2)}
               </div>
               <p className="text-xs text-gray-500 mt-0.5">
-                <u>Shipping</u> calculated at checkout.
+                <u>Envío</u> calculado en la pantalla de pago.
               </p>
               <div className="text-xs sm:text-sm text-stone-700 mt-1 flex items-center space-x-1.5">
                 <span>Paga en 2 cuotas sin interés de <b>S/ {(price/2).toFixed(2)}</b> con</span>
                 <span className="font-bold text-indigo-700 bg-indigo-50 px-1.5 py-0.5 rounded text-[11px]">shopPay</span>
-                <u className="cursor-pointer font-medium font-serif">Learn more</u>
+                <u className="cursor-pointer font-medium font-serif">Conocer más</u>
               </div>
             </div>
 
@@ -321,7 +304,7 @@ export const ProductPage = () => {
             {activeProduct.variants && activeProduct.variants.length > 0 && (
               <div className="pt-2">
                 <label className="block text-xs font-semibold text-stone-900 mb-1.5">
-                  Size: <span className="font-normal">{selectedVariant?.variant_title || "100ML"}</span>
+                  Tamaño: <span className="font-normal">{selectedVariant?.variant_title || "100ML"}</span>
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {activeProduct.variants.map((v) => (
@@ -341,59 +324,88 @@ export const ProductPage = () => {
               </div>
             )}
 
-            {/* Description & Bullet points */}
-            <div className="text-sm text-stone-700 leading-relaxed space-y-2.5 pt-2">
-              <p className="font-semibold text-stone-900 text-base">
-                Power. Confidence. Masculine luxury.
-              </p>
-              <p>
-                {activeProduct.description_plain || "The Asad Collection by Lattafa is the ultimate fragrance set for men who want variety, strength, and presence in every spray."}
-              </p>
-              
-              {/* Bullet points format matching screenshots */}
-              <ul className="space-y-1.5 text-sm text-stone-800 font-medium pt-1">
-                <li>• <b>Asad Original</b> – bold and commanding</li>
-                <li>• <b>Asad Zanzibar</b> – fresh, modern, and confident</li>
-                <li>• <b>Asad Bourbon</b> – deep, warm, and masculine</li>
-                <li>• <b>Asad Elixir</b> – intense, refined, and powerful</li>
-              </ul>
-            </div>
-
-            {/* Wishlist Link */}
-            <div className="pt-2">
-              <button
-                onClick={() => toggleWishlist(activeProduct.id)}
-                className="flex items-center space-x-2 text-xs sm:text-sm font-bold text-stone-800 hover:text-amber-800 tracking-wider uppercase cursor-pointer"
-              >
-                <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-amber-600 text-amber-600' : ''}`} />
-                <span>{isWishlisted ? 'ADDED TO WISHLIST' : 'ADD TO WISHLIST'}</span>
-              </button>
-            </div>
-
-            {/* Quantity Selector + Add to Cart CTA */}
-            <div className="pt-2 space-y-3">
-              <div className="flex items-center space-x-4">
+            {/* Quantity Selector & Add to Cart */}
+            <div className="space-y-3 pt-2">
+              <div className="flex items-center space-x-3">
                 
-                {/* Quantity */}
-                <div className="flex items-center border border-gray-300 rounded-full bg-stone-50 px-4 py-2.5">
-                  <button onClick={() => setQuantity((q) => Math.max(1, q - 1))} className="px-2 font-bold text-stone-600 hover:text-stone-900 text-sm">-</button>
-                  <span className="px-3 text-sm font-bold text-stone-900">{quantity}</span>
-                  <button onClick={() => setQuantity((q) => q + 1)} className="px-2 font-bold text-stone-600 hover:text-stone-900 text-sm">+</button>
+                {/* Quantity Controller */}
+                <div className="flex items-center border border-gray-200 rounded-full bg-stone-50 px-4 py-2.5">
+                  <button
+                    onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                    className="w-5 h-5 flex items-center justify-center font-bold text-stone-700 hover:text-black transition-colors"
+                  >
+                    -
+                  </button>
+                  <span className="w-8 text-center text-xs font-bold text-stone-900">{quantity}</span>
+                  <button
+                    onClick={() => setQuantity((q) => q + 1)}
+                    className="w-5 h-5 flex items-center justify-center font-bold text-stone-700 hover:text-black transition-colors"
+                  >
+                    +
+                  </button>
                 </div>
 
-                {/* Add to Cart Rounded Button */}
+                {/* Main Add to Cart Button */}
                 <button
                   onClick={() => addToCart(activeProduct, selectedVariant, quantity)}
                   disabled={!activeProduct.is_available}
                   className={`flex-1 py-4 px-10 rounded-full font-bold text-xs sm:text-sm uppercase tracking-widest transition-all shadow-md ${
                     activeProduct.is_available
-                      ? 'bg-[#121212] hover:bg-stone-800 text-white'
+                      ? 'bg-[#121212] hover:bg-stone-800 text-white cursor-pointer hover:shadow-lg'
                       : 'bg-[#808080] text-white cursor-not-allowed'
                   }`}
                 >
-                  {activeProduct.is_available ? 'ADD TO CART' : 'SOLD OUT'}
+                  {activeProduct.is_available ? 'AÑADIR AL CARRITO' : 'AGOTADO'}
                 </button>
+
+                {/* Wishlist Button */}
+                <button
+                  onClick={() => toggleWishlist(activeProduct.id)}
+                  className={`p-3.5 border rounded-full transition-all ${
+                    isWishlisted
+                      ? 'border-amber-600 bg-amber-50 text-amber-700'
+                      : 'border-gray-200 text-stone-600 hover:border-gray-400'
+                  }`}
+                  title="Guardar en Favoritos"
+                >
+                  <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-amber-600 text-amber-600' : ''}`} />
+                </button>
+
               </div>
+            </div>
+
+            {/* Description & Perfume Notes Details */}
+            <div className="pt-4 border-t border-gray-100 space-y-4">
+              <h4 className="font-serif font-bold text-[#121212] text-lg sm:text-xl">
+                {activeProduct.slogan || "Potencia, Confianza y Lujo Masculino."}
+              </h4>
+              <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
+                {activeProduct.description_plain || "Descubre el cautivador contraste de calidez y frescura de esta exclusiva fragancia de Lattafa, elaborada para quienes aprecian la elegancia y la sofisticación moderna."}
+              </p>
+
+              {/* Notes Accordion Summary */}
+              {(activeProduct.top_notes || activeProduct.heart_notes || activeProduct.base_notes) && (
+                <div className="bg-stone-50 rounded-2xl p-4 border border-stone-200/60 space-y-2 text-xs">
+                  {activeProduct.top_notes && (
+                    <div>
+                      <span className="font-bold text-stone-900">Notas de Salida: </span>
+                      <span className="text-stone-700">{activeProduct.top_notes}</span>
+                    </div>
+                  )}
+                  {activeProduct.heart_notes && (
+                    <div>
+                      <span className="font-bold text-stone-900">Notas de Corazón: </span>
+                      <span className="text-stone-700">{activeProduct.heart_notes}</span>
+                    </div>
+                  )}
+                  {activeProduct.base_notes && (
+                    <div>
+                      <span className="font-bold text-stone-900">Notas de Fondo: </span>
+                      <span className="text-stone-700">{activeProduct.base_notes}</span>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Trust Perks List */}
@@ -404,27 +416,26 @@ export const ProductPage = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <RotateCcw className="w-4 h-4 text-stone-800" />
-                <span>Easy Return</span>
+                <span>Devoluciones sencillas</span>
               </div>
               <div className="flex items-center space-x-2">
                 <ShieldCheck className="w-4 h-4 text-stone-800" />
-                <span>Secure Payment</span>
+                <span>Pago 100% Seguro</span>
               </div>
               <div className="flex items-center space-x-3 pt-1">
                 <div className="flex items-center space-x-1 hover:underline cursor-pointer">
                   <Share2 className="w-3.5 h-3.5 text-stone-700" />
-                  <span>Share</span>
+                  <span>Compartir</span>
                 </div>
                 <span>•</span>
                 <div className="flex items-center space-x-1 hover:underline cursor-pointer">
                   <HelpCircle className="w-3.5 h-3.5 text-stone-700" />
-                  <span>Ask a question</span>
+                  <span>Hacer una pregunta</span>
                 </div>
               </div>
             </div>
 
           </div>
-
         </div>
       </div>
 
@@ -436,88 +447,87 @@ export const ProductPage = () => {
             <div className="w-11 h-11 rounded-full border-2 border-stone-900 flex items-center justify-center mb-1">
               <CheckCircle2 className="w-5 h-5 text-stone-900" />
             </div>
-            <h4 className="font-serif font-bold text-sm text-stone-900">100% Authentic Fragrances</h4>
-            <p className="text-xs text-gray-500">Direct from Lattafa</p>
+            <h4 className="font-serif font-bold text-sm text-stone-900">Perfumes 100% Auténticos</h4>
+            <p className="text-xs text-gray-500">Importado Directo de Lattafa Dubái</p>
           </div>
 
           <div className="flex flex-col items-center space-y-1.5">
             <div className="w-11 h-11 rounded-full border-2 border-stone-900 flex items-center justify-center mb-1">
               <Package className="w-5 h-5 text-stone-900" />
             </div>
-            <h4 className="font-serif font-bold text-sm text-stone-900">Easy Returns</h4>
-            <p className="text-xs text-gray-500">Satisfaction Guarantee</p>
+            <h4 className="font-serif font-bold text-sm text-stone-900">Devoluciones Sencillas</h4>
+            <p className="text-xs text-gray-500">Garantía de Satisfacción</p>
           </div>
 
           <div className="flex flex-col items-center space-y-1.5">
             <div className="w-11 h-11 rounded-full border-2 border-stone-900 flex items-center justify-center mb-1">
               <Truck className="w-5 h-5 text-stone-900" />
             </div>
-            <h4 className="font-serif font-bold text-sm text-stone-900">Free Shipping</h4>
-            <p className="text-xs text-gray-500">En pedidos superiores a S/ 375.00</p>
+            <h4 className="font-serif font-bold text-sm text-stone-900">Envío Gratis</h4>
+            <p className="text-xs text-gray-500">En compras superiores a S/ 225.00</p>
           </div>
 
           <div className="flex flex-col items-center space-y-1.5">
             <div className="w-11 h-11 rounded-full border-2 border-stone-900 flex items-center justify-center mb-1">
               <Lock className="w-5 h-5 text-stone-900" />
             </div>
-            <h4 className="font-serif font-bold text-sm text-stone-900">Secure Checkout</h4>
-            <p className="text-xs text-gray-500">Apple Pay, PayPal & Stripe</p>
+            <h4 className="font-serif font-bold text-sm text-stone-900">Pago 100% Seguro</h4>
+            <p className="text-xs text-gray-500">Tarjetas, Niubiz y Yape / PLIN</p>
           </div>
 
         </div>
       </section>
 
-      {/* CUSTOMER REVIEWS SECTION */}
-      <section id="reviews-section" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <h3 className="font-serif font-semibold text-2xl text-center text-stone-900 mb-8">
-          Customer Reviews
-        </h3>
-
-        {/* Rating Overview Summary Box */}
-        <div className="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 mb-10 flex flex-col md:flex-row items-center justify-between gap-8">
-          
-          <div className="text-center md:text-left flex flex-col items-center md:items-start">
-            <div className="flex items-center space-x-1 text-stone-900 mb-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-current" />
-              ))}
+      {/* REVIEWS SECTION */}
+      <section className="w-full px-4 sm:px-10 lg:px-14 py-10 bg-[#fafafa]">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 pb-6 border-b border-gray-200 gap-4">
+          <div>
+            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-2">Opiniones de Clientes</h3>
+            <div className="flex items-center space-x-3">
+              <div className="flex items-center text-stone-900">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-current text-stone-900" />
+                ))}
+              </div>
+              <span className="text-sm font-bold text-stone-900">4.9 de 5</span>
+              <span className="text-xs text-gray-400 font-normal">Basado en 173 reseñas verificadas</span>
             </div>
-            <span className="font-bold text-base text-stone-900">4.43 out of 5</span>
-            <span className="text-xs text-gray-500">Based on 7 reviews ✓</span>
           </div>
 
-          {/* Progress Distribution Bars */}
-          <div className="w-full max-w-xs space-y-1.5 text-xs">
+          {/* Rating Breakdown Bars */}
+          <div className="w-full sm:w-64 space-y-1 text-xs text-gray-500">
             <div className="flex items-center space-x-2">
-              <span className="w-12 font-medium text-gray-600">5 stars</span>
-              <div className="flex-1 bg-gray-100 h-2.5 rounded-full overflow-hidden">
-                <div className="bg-stone-900 h-full w-[85%]"></div>
+              <span className="w-4">5★</span>
+              <div className="flex-1 bg-gray-200 h-2 rounded-full overflow-hidden">
+                <div className="bg-stone-900 h-full w-[90%]" />
               </div>
-              <span className="w-6 text-right font-semibold">6</span>
+              <span className="w-6 text-right">155</span>
             </div>
-
-            <div className="flex items-center space-x-2 text-gray-400">
-              <span className="w-12 font-medium">4 stars</span>
-              <div className="flex-1 bg-gray-100 h-2.5 rounded-full"></div>
+            <div className="flex items-center space-x-2">
+              <span className="w-4">4★</span>
+              <div className="flex-1 bg-gray-200 h-2 rounded-full overflow-hidden">
+                <div className="bg-stone-900 h-full w-[8%]" />
+              </div>
+              <span className="w-6 text-right">14</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="w-4">3★</span>
+              <div className="flex-1 bg-gray-200 h-2 rounded-full overflow-hidden">
+                <div className="bg-stone-900 h-full w-[2%]" />
+              </div>
+              <span className="w-6 text-right">3</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="w-4">2★</span>
+              <div className="flex-1 bg-gray-200 h-2 rounded-full overflow-hidden">
+                <div className="bg-stone-900 h-full w-[0%]" />
+              </div>
               <span className="w-6 text-right">0</span>
             </div>
-
-            <div className="flex items-center space-x-2 text-gray-400">
-              <span className="w-12 font-medium">3 stars</span>
-              <div className="flex-1 bg-gray-100 h-2.5 rounded-full"></div>
-              <span className="w-6 text-right">0</span>
-            </div>
-
-            <div className="flex items-center space-x-2 text-gray-400">
-              <span className="w-12 font-medium">2 stars</span>
-              <div className="flex-1 bg-gray-100 h-2.5 rounded-full"></div>
-              <span className="w-6 text-right">0</span>
-            </div>
-
-            <div className="flex items-center space-x-2 text-gray-400">
-              <span className="w-12 font-medium">1 star</span>
-              <div className="flex-1 bg-gray-100 h-2.5 rounded-full overflow-hidden">
-                <div className="bg-stone-400 h-full w-[15%]"></div>
+            <div className="flex items-center space-x-2">
+              <span className="w-4">1★</span>
+              <div className="flex-1 bg-gray-200 h-2 rounded-full overflow-hidden">
+                <div className="bg-stone-900 h-full w-[1%]" />
               </div>
               <span className="w-6 text-right">1</span>
             </div>
@@ -525,7 +535,7 @@ export const ProductPage = () => {
 
           <div>
             <button className="bg-[#121212] hover:bg-stone-800 text-white font-bold text-xs px-6 py-3 rounded-lg uppercase tracking-wider shadow-md transition-all">
-              Write a review
+              Escribir una Reseña
             </button>
           </div>
 
@@ -552,7 +562,7 @@ export const ProductPage = () => {
                   <span className="font-bold text-stone-900 text-xs">{rev.author}</span>
                   {rev.verified && (
                     <span className="bg-stone-900 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">
-                      Verified
+                      Verificado
                     </span>
                   )}
                 </div>
@@ -574,10 +584,10 @@ export const ProductPage = () => {
         </div>
       </section>
 
-      {/* "YOU MAY ALSO LIKE" CAROUSEL SECTION (Matching Official Lattafa USA PDP Screenshots) */}
+      {/* "YOU MAY ALSO LIKE" CAROUSEL SECTION */}
       <section className="w-full px-4 sm:px-10 lg:px-14 py-12 border-t border-gray-100">
         <h3 className="font-serif text-2xl sm:text-3xl font-normal text-stone-900 mb-6 tracking-tight">
-          You may also like
+          También te podría gustar
         </h3>
 
         {/* Mobile Horizontal Swipe Carousel / Desktop 4-Column Grid */}
@@ -594,16 +604,16 @@ export const ProductPage = () => {
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
-                  addToCart({ id: 'shipinsure', title: 'ShipInsure Package Protection', min_price: 3.70, main_image: '' }, null, 1);
+                  addToCart({ id: 'shipinsure', title: 'Protección de Envío ShipInsure', min_price: 3.70, main_image: '' }, null, 1);
                 }}
                 className="absolute bottom-2.5 right-2.5 w-7 h-7 bg-white text-stone-900 rounded-full flex items-center justify-center shadow-xs hover:bg-stone-900 hover:text-white transition-all"
-                title="Add ShipInsure"
+                title="Añadir Protección"
               >
                 <ShoppingBag className="w-3.5 h-3.5" />
               </button>
             </div>
             <span className="text-[10px] text-stone-500 font-medium block">ShipInsure</span>
-            <h4 className="font-serif font-semibold text-stone-900 text-xs sm:text-sm line-clamp-2 leading-tight">ShipInsure Package Protection</h4>
+            <h4 className="font-serif font-semibold text-stone-900 text-xs sm:text-sm line-clamp-2 leading-tight">Protección de Envío ShipInsure</h4>
             <span className="text-xs font-bold text-stone-900 mt-0.5 block">Desde S/ 3.70</span>
           </div>
 
@@ -632,7 +642,7 @@ export const ProductPage = () => {
                       addToCart(p, null, 1);
                     }}
                     className="absolute bottom-2.5 right-2.5 w-7 h-7 bg-white text-stone-900 rounded-full flex items-center justify-center shadow-xs hover:bg-stone-900 hover:text-white transition-all opacity-90 group-hover:opacity-100"
-                    title="Add to Cart"
+                    title="Añadir a la bolsa"
                   >
                     <ShoppingBag className="w-3.5 h-3.5" />
                   </button>
@@ -651,21 +661,21 @@ export const ProductPage = () => {
         </div>
       </section>
 
-      {/* SUBSCRIBE TO GET 10% OFF SECTION (Official Lattafa Newsletter Block) */}
+      {/* SUBSCRIBE TO GET 10% OFF SECTION */}
       <section className="w-full bg-[#f8f6f2] py-12 px-6 sm:px-12 border-t border-stone-200/60">
         <div className="max-w-xl mx-auto text-center space-y-4">
           <h3 className="font-serif text-3xl sm:text-4xl font-normal text-stone-900 leading-tight">
-            Subscribe to get 10% OFF
+            Suscríbete y recibe 10% de Descuento
           </h3>
           <p className="text-stone-600 text-xs sm:text-sm">
-            Subscribe for discounts updates.
+            Recibe novedades exclusivas y ofertas especiales.
           </p>
 
           <form onSubmit={(e) => e.preventDefault()} className="pt-2">
             <div className="relative max-w-md mx-auto">
               <input
                 type="email"
-                placeholder="Email"
+                placeholder="Ingresa tu correo electrónico"
                 className="w-full bg-white border border-stone-200 rounded-full pl-5 pr-12 py-3.5 text-xs text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-900 shadow-2xs"
               />
               <button
@@ -678,7 +688,7 @@ export const ProductPage = () => {
           </form>
 
           <p className="text-[11px] text-stone-500 pt-2">
-            By subscribing you agree to the <a href="#terms" className="underline hover:text-stone-900">Terms of Use</a> & <a href="#privacy" className="underline hover:text-stone-900">Privacy Policy</a>.
+            Al suscribirte aceptas los <a href="#terms" className="underline hover:text-stone-900">Términos de Uso</a> y la <a href="#privacy" className="underline hover:text-stone-900">Política de Privacidad</a>.
           </p>
         </div>
       </section>

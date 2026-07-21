@@ -107,12 +107,12 @@ export const Footer = () => {
 
             {subscribed && (
               <p className="text-xs text-emerald-700 font-medium pt-1">
-                ✓ Thank you for subscribing! Check your email for your 10% OFF discount.
+                ✓ ¡Gracias por suscribirte! Revisa tu correo para recibir tu 10% de descuento.
               </p>
             )}
 
             <p className="text-[11px] text-stone-500 pt-2 leading-normal">
-              By subscribing you agree to the <u className="cursor-pointer hover:text-stone-900">Terms of Use</u> & <u className="cursor-pointer hover:text-stone-900">Privacy Policy</u>.
+              Al suscribirte aceptas los <u className="cursor-pointer hover:text-stone-900">Términos de Uso</u> y la <u className="cursor-pointer hover:text-stone-900">Política de Privacidad</u>.
             </p>
           </div>
 
@@ -121,37 +121,37 @@ export const Footer = () => {
             
             {/* Quick Shop */}
             <div>
-              <h4 className="font-serif font-bold text-stone-900 text-sm mb-4">Quick Shop</h4>
+              <h4 className="font-serif font-bold text-stone-900 text-sm mb-4">Navegación Rápida</h4>
               <ul className="space-y-3 text-stone-700 font-medium">
-                <li><a href="#all" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">All Fragrances</a></li>
-                <li><a href="#new" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">New Arrivals</a></li>
-                <li><a href="#bestsellers" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Bestsellers</a></li>
-                <li><a href="#gift" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Gift Card</a></li>
-                <li><a href="#bundles" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Bundles</a></li>
+                <li><a href="#all" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Todas las Fragancias</a></li>
+                <li><a href="#new" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Nuevos Lanzamientos</a></li>
+                <li><a href="#bestsellers" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Los Más Vendidos</a></li>
+                <li><a href="#gift" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Tarjetas de Regalo</a></li>
+                <li><a href="#bundles" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Packs Exclusivos</a></li>
               </ul>
             </div>
 
             {/* Customer Support */}
             <div>
-              <h4 className="font-serif font-bold text-stone-900 text-sm mb-4">Customer Support</h4>
+              <h4 className="font-serif font-bold text-stone-900 text-sm mb-4">Atención al Cliente</h4>
               <ul className="space-y-3 text-stone-700 font-medium">
-                <li><a href="#faqs" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">FAQs</a></li>
-                <li><a href="#rewards" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Referral and Rewards</a></li>
-                <li><a href="#shipping" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Shipping & Returns</a></li>
-                <li><a href="#track" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Track My Order</a></li>
-                <li><a href="#contact" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Contact Us</a></li>
+                <li><a href="#faqs" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Preguntas Frecuentes</a></li>
+                <li><a href="#rewards" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Programa de Recompensas</a></li>
+                <li><a href="#shipping" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Envíos y Devoluciones</a></li>
+                <li><a href="#track" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Seguir Mi Pedido</a></li>
+                <li><a href="#contact" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Contacto Directo</a></li>
               </ul>
             </div>
 
             {/* Know More */}
             <div>
-              <h4 className="font-serif font-bold text-stone-900 text-sm mb-4">Know More</h4>
+              <h4 className="font-serif font-bold text-stone-900 text-sm mb-4">Conócenos</h4>
               <ul className="space-y-3 text-stone-700 font-medium">
-                <li><a href="#about" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">About Us</a></li>
-                <li><a href="#blogs" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Blogs</a></li>
-                <li><a href="#reviews" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Reviews</a></li>
-                <li><a href="#account" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">My Account</a></li>
-                <li><a href="#wholesale" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Wholesale/Reseller</a></li>
+                <li><a href="#about" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Sobre Nosotros</a></li>
+                <li><a href="#blogs" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Blog y Noticias</a></li>
+                <li><a href="#reviews" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Reseñas de Clientes</a></li>
+                <li><a href="#account" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Mi Cuenta</a></li>
+                <li><a href="#wholesale" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Ventas al Mayor</a></li>
               </ul>
             </div>
 
@@ -167,7 +167,7 @@ export const Footer = () => {
             
             {/* Country Selector Pill Dropdown */}
             <div className="inline-flex items-center space-x-2 bg-stone-50 border border-gray-200 rounded-full px-4 py-2 text-xs font-semibold text-stone-900 cursor-pointer hover:bg-stone-100 transition-colors">
-              <span>🇺🇸 United States (USD $)</span>
+              <span>🇵🇪 Perú (PEN S/)</span>
               <ChevronDown className="w-3.5 h-3.5 text-stone-500" />
             </div>
 

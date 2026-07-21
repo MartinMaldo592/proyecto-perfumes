@@ -22,11 +22,11 @@ export const FragranceFilter = () => {
           <div className="p-5 border-b border-gray-100 flex items-center justify-between bg-stone-50">
             <div className="flex items-center space-x-2">
               <SlidersHorizontal className="w-5 h-5 text-amber-800" />
-              <h3 className="font-serif font-bold text-lg text-stone-900">Fragrance Filters</h3>
+              <h3 className="font-serif font-bold text-lg text-stone-900">Filtros de Fragancias</h3>
             </div>
             <button
               onClick={() => setIsFilterOpen(false)}
-              className="p-2 text-gray-500 hover:text-stone-900 rounded-full hover:bg-gray-200"
+              className="p-2 text-gray-500 hover:text-stone-900 rounded-full hover:bg-gray-200 cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -37,19 +37,24 @@ export const FragranceFilter = () => {
             
             {/* Gender Filter */}
             <div>
-              <label className="text-xs font-bold text-stone-900 uppercase tracking-wider block mb-3">Target Gender</label>
+              <label className="text-xs font-bold text-stone-900 uppercase tracking-wider block mb-3">Género / Uso</label>
               <div className="grid grid-cols-2 gap-2">
-                {["All", "Unisex", "Men", "Women"].map((gender) => (
+                {[
+                  { label: "Todos", value: "All" },
+                  { label: "Unisex", value: "Unisex" },
+                  { label: "Hombre", value: "Men" },
+                  { label: "Mujer", value: "Women" }
+                ].map((gender) => (
                   <button
-                    key={gender}
-                    onClick={() => setSelectedGender(gender)}
-                    className={`py-2 px-3 text-xs font-semibold rounded-lg border transition-all ${
-                      selectedGender === gender
+                    key={gender.value}
+                    onClick={() => setSelectedGender(gender.value)}
+                    className={`py-2 px-3 text-xs font-semibold rounded-lg border transition-all cursor-pointer ${
+                      selectedGender === gender.value
                         ? 'border-amber-600 bg-amber-50 text-amber-900 shadow-sm'
                         : 'border-gray-200 text-stone-600 hover:border-gray-300'
                     }`}
                   >
-                    {gender}
+                    {gender.label}
                   </button>
                 ))}
               </div>
@@ -58,20 +63,20 @@ export const FragranceFilter = () => {
             {/* Olfactory Notes Filter */}
             <div>
               <label className="text-xs font-bold text-stone-900 uppercase tracking-wider block mb-3 flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-amber-600" /> Olfactory Note Accord
+                <Sparkles className="w-3.5 h-3.5 text-amber-600" /> Notas Olfativas
               </label>
               <div className="flex flex-wrap gap-2">
                 {olfactoryNotes.map((note) => (
                   <button
                     key={note}
                     onClick={() => setSelectedNote(note)}
-                    className={`py-1.5 px-3 text-xs font-medium rounded-full border transition-all ${
+                    className={`py-1.5 px-3 text-xs font-medium rounded-full border transition-all cursor-pointer ${
                       selectedNote === note
                         ? 'border-amber-600 bg-amber-600 text-white shadow-sm'
                         : 'border-gray-200 text-stone-600 hover:bg-stone-50'
                     }`}
                   >
-                    {note}
+                    {note === 'All' ? 'Todas' : note}
                   </button>
                 ))}
               </div>
@@ -80,7 +85,7 @@ export const FragranceFilter = () => {
             {/* Price Filter */}
             <div>
               <div className="flex justify-between items-center mb-2">
-                <label className="text-xs font-bold text-stone-900 uppercase tracking-wider">Max Price</label>
+                <label className="text-xs font-bold text-stone-900 uppercase tracking-wider">Precio Máximo</label>
                 <span className="text-xs font-bold text-amber-800">S/ {maxPrice}</span>
               </div>
               <input
@@ -89,7 +94,7 @@ export const FragranceFilter = () => {
                 max="500"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
-                className="w-full accent-amber-600"
+                className="w-full accent-amber-600 cursor-pointer"
               />
             </div>
 
@@ -99,9 +104,9 @@ export const FragranceFilter = () => {
           <div className="p-5 border-t border-gray-100 bg-stone-50">
             <button
               onClick={() => setIsFilterOpen(false)}
-              className="w-full bg-[#121212] hover:bg-amber-800 text-white font-bold py-3.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors shadow-lg"
+              className="w-full bg-[#121212] hover:bg-amber-800 text-white font-bold py-3.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-colors shadow-lg cursor-pointer"
             >
-              Apply Fragrance Filters
+              Aplicar Filtros
             </button>
           </div>
 

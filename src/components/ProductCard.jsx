@@ -28,7 +28,7 @@ export const ProductCard = ({ product }) => {
         <div className="absolute top-3 left-3 z-20 flex flex-col gap-1.5 pointer-events-none">
           {!product.is_available ? (
             <span className="bg-[#121212]/80 backdrop-blur-md text-white text-[10px] sm:text-[11px] font-semibold px-2.5 py-1 rounded-md uppercase tracking-wider">
-              Sold out
+              Agotado
             </span>
           ) : discount > 0 ? (
             <span className="bg-amber-700 text-white text-[10px] sm:text-[11px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">
@@ -44,7 +44,7 @@ export const ProductCard = ({ product }) => {
             setSelectedProduct(product);
           }}
           className="absolute top-3 right-3 z-30 w-9 h-9 bg-white text-stone-900 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-90 group-hover:scale-100 shadow-md hover:bg-stone-900 hover:text-white"
-          title="Quick View"
+          title="Vista Rápida"
         >
           <Search className="w-4 h-4" />
         </button>
@@ -60,7 +60,7 @@ export const ProductCard = ({ product }) => {
         {/* Secondary Image (Bottle + Box Packaging - Fades In on Hover) */}
         <img
           src={hoverImage}
-          alt={`${product.title} with box packaging`}
+          alt={`${product.title} con empaque de caja`}
           className="absolute inset-0 w-full h-full object-contain p-4 transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100 scale-100 group-hover:scale-105 transition-transform duration-700"
           loading="lazy"
         />
@@ -73,7 +73,7 @@ export const ProductCard = ({ product }) => {
           }}
           disabled={!product.is_available}
           className="sm:hidden absolute bottom-3 right-3 z-30 w-9 h-9 bg-white text-stone-900 rounded-full flex items-center justify-center shadow-md active:scale-95 transition-all"
-          title="Quick Add to Cart"
+          title="Añadir al Carrito"
         >
           <ShoppingBag className="w-4 h-4 text-stone-900 stroke-[2]" />
         </button>
@@ -92,7 +92,7 @@ export const ProductCard = ({ product }) => {
                 : 'bg-stone-300 text-stone-500 cursor-not-allowed'
             }`}
           >
-            {product.is_available ? 'ADD TO CART' : 'SOLD OUT'}
+            {product.is_available ? 'AÑADIR AL CARRITO' : 'AGOTADO'}
           </button>
         </div>
 

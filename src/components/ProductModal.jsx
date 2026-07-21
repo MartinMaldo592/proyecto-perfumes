@@ -98,7 +98,7 @@ export const ProductModal = () => {
               </div>
               <span>•</span>
               <span className="text-emerald-700 font-semibold flex items-center">
-                <ShieldCheck className="w-4 h-4 mr-1" /> In Stock (Direct USA)
+                <ShieldCheck className="w-4 h-4 mr-1" /> En Stock (Envíos a todo el Perú)
               </span>
             </div>
 
@@ -114,7 +114,7 @@ export const ProductModal = () => {
               )}
               {selectedProduct.discount_percent > 0 && (
                 <span className="text-xs font-bold text-red-600 bg-red-100 px-2 py-0.5 rounded">
-                  Save {selectedProduct.discount_percent}%
+                  Ahorras {selectedProduct.discount_percent}%
                 </span>
               )}
             </div>
@@ -123,7 +123,7 @@ export const ProductModal = () => {
             {selectedProduct.variants && selectedProduct.variants.length > 1 && (
               <div className="mb-6">
                 <label className="block text-xs font-bold text-stone-800 uppercase tracking-wider mb-2">
-                  Select Size / Volume:
+                  Seleccionar Tamaño / Presentación:
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {selectedProduct.variants.map((v) => (
@@ -147,26 +147,26 @@ export const ProductModal = () => {
             <div className="mb-6 bg-[#fcfbfa] p-4 rounded-xl border border-amber-900/10 space-y-2.5">
               <h4 className="text-xs font-bold text-amber-900 uppercase tracking-widest flex items-center gap-1.5 border-b pb-2">
                 <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-                Olfactory Notes Pyramid
+                Pirámide Olfativa
               </h4>
 
               <div className="grid grid-cols-3 gap-2 pt-1 text-xs">
                 <div className="bg-amber-100/50 p-2 rounded-lg">
-                  <span className="text-[10px] font-bold text-amber-900 block uppercase">Top Notes</span>
+                  <span className="text-[10px] font-bold text-amber-900 block uppercase">Notas de Salida</span>
                   <p className="text-gray-700 text-[11px] font-medium leading-snug mt-0.5">
-                    {selectedProduct.top_notes || "Bergamot, Citrus Accord"}
+                    {selectedProduct.top_notes || "Bergamota, Acorde Cítrico"}
                   </p>
                 </div>
                 <div className="bg-amber-100/50 p-2 rounded-lg">
-                  <span className="text-[10px] font-bold text-amber-900 block uppercase">Heart Notes</span>
+                  <span className="text-[10px] font-bold text-amber-900 block uppercase">Notas de Corazón</span>
                   <p className="text-gray-700 text-[11px] font-medium leading-snug mt-0.5">
-                    {selectedProduct.heart_notes || "Lavender, Patchouli"}
+                    {selectedProduct.heart_notes || "Lavanda, Pachulí"}
                   </p>
                 </div>
                 <div className="bg-amber-100/50 p-2 rounded-lg">
-                  <span className="text-[10px] font-bold text-amber-900 block uppercase">Base Notes</span>
+                  <span className="text-[10px] font-bold text-amber-900 block uppercase">Notas de Fondo</span>
                   <p className="text-gray-700 text-[11px] font-medium leading-snug mt-0.5">
-                    {selectedProduct.base_notes || "Amber, Vanilla, Oud"}
+                    {selectedProduct.base_notes || "Ámbar, Vainilla, Oud"}
                   </p>
                 </div>
               </div>
@@ -204,7 +204,7 @@ export const ProductModal = () => {
                 className="flex-1 bg-[#121212] hover:bg-amber-700 text-white py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center space-x-2 transition-all shadow-lg"
               >
                 <ShoppingBag className="w-4 h-4" />
-                <span>Add To Shopping Cart</span>
+                <span>Añadir a la Bolsa</span>
               </button>
 
               {/* Wishlist button */}
@@ -220,7 +220,7 @@ export const ProductModal = () => {
 
             <div className="flex items-center justify-center space-x-2 text-[11px] text-gray-500 pt-1">
               <Truck className="w-3.5 h-3.5 text-amber-600" />
-              <span>Spend $60 for <b>FREE Shipping</b> across North America.</span>
+              <span>Compra S/ 225.00 para <b>Envío GRATIS</b> a todo el Perú.</span>
             </div>
           </div>
 
