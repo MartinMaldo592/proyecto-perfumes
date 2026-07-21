@@ -6,14 +6,6 @@ export const HeroSlider = () => {
 
   const slides = [
     {
-      id: 0,
-      title: "MAKANAKY LA REALEZA",
-      subtitle: "EDICIÓN ESPECIAL EXCLUSIVA",
-      cta: "COMPRAR AHORA",
-      bgImage: "/makanaky_user.jpg",
-      query: "Asad"
-    },
-    {
       id: 1,
       title: "MUSAMAM BLACK INTENSE",
       subtitle: "ALTA PERFUMERÍA LATTAFA",

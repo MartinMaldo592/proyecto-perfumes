@@ -23,16 +23,16 @@ export const FeaturedCollections = () => {
     : products.filter((p) => p.rating >= 4.5 || p.review_count > 50).slice(0, 4);
 
   return (
-    <div className="w-full px-6 sm:px-10 lg:px-14 py-12 space-y-20">
+    <div className="w-full px-4 sm:px-10 lg:px-14 py-8 sm:py-12 space-y-16 sm:space-y-20">
       
       {/* 1. TABBED PRODUCTS SECTION */}
       <section>
         <ScrollReveal animation="fade-up" duration={600}>
-          <div className="flex items-center justify-between border-b border-gray-100 pb-4 mb-8">
-            <div className="flex items-center space-x-8">
+          <div className="flex items-center justify-between border-b border-gray-100 pb-4 mb-6 sm:mb-8">
+            <div className="flex items-center space-x-6 sm:space-x-8">
               <button
                 onClick={() => setActiveTab('new')}
-                className={`font-serif text-2xl sm:text-3xl font-semibold transition-colors cursor-pointer ${
+                className={`font-serif text-xl sm:text-3xl font-semibold transition-colors cursor-pointer ${
                   activeTab === 'new' ? 'text-stone-900 border-b-2 border-stone-900 pb-1' : 'text-gray-400 hover:text-stone-600'
                 }`}
               >
@@ -40,7 +40,7 @@ export const FeaturedCollections = () => {
               </button>
               <button
                 onClick={() => setActiveTab('bestsellers')}
-                className={`font-serif text-2xl sm:text-3xl font-semibold transition-colors cursor-pointer ${
+                className={`font-serif text-xl sm:text-3xl font-semibold transition-colors cursor-pointer ${
                   activeTab === 'bestsellers' ? 'text-stone-900 border-b-2 border-stone-900 pb-1' : 'text-gray-400 hover:text-stone-600'
                 }`}
               >
@@ -56,27 +56,24 @@ export const FeaturedCollections = () => {
           </div>
         </ScrollReveal>
 
-        {/* Mobile Horizontal Swipe Carousel / Desktop 4-Card Grid with Staggered Scroll Reveal */}
+        {/* Mobile Horizontal Swipe Carousel / Desktop 4-Card Grid */}
         <div className="flex overflow-x-auto snap-x snap-mandatory space-x-4 pb-4 sm:pb-0 scrollbar-none sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:space-x-0 sm:gap-6">
-          {displayedProducts.map((product, idx) => (
-            <ScrollReveal
+          {displayedProducts.map((product) => (
+            <div
               key={product.id}
-              animation="fade-up"
-              delay={idx * 120}
-              duration={700}
-              className="w-[78%] xs:w-[74%] sm:w-auto flex-shrink-0 snap-start h-full"
+              className="w-[75%] xs:w-[70%] sm:w-auto flex-shrink-0 snap-start h-full"
             >
               <ProductCard product={product} />
-            </ScrollReveal>
+            </div>
           ))}
         </div>
       </section>
 
-      {/* 2. EXPLORE OUR COLLECTION */}
-      <section className="bg-[#f8f6f2] rounded-3xl p-6 sm:p-10 border border-stone-200/50">
+      {/* 2. EXPLORE OUR COLLECTION (Clean Frame-less Container) */}
+      <section className="bg-[#f8f6f2] rounded-3xl p-6 sm:p-10">
         <ScrollReveal animation="fade-up" duration={600}>
           <div className="mb-6 max-w-xl">
-            <h2 className="font-serif text-3xl sm:text-4xl font-normal text-stone-900 leading-tight mb-2">
+            <h2 className="font-serif text-2xl sm:text-4xl font-normal text-stone-900 leading-tight mb-2">
               Explora Nuestras Colecciones
             </h2>
             <p className="text-stone-600 text-xs sm:text-sm leading-relaxed">
@@ -88,16 +85,13 @@ export const FeaturedCollections = () => {
         {/* Mobile Horizontal Swipe Carousel / Desktop 4-Column Grid */}
         <div className="flex overflow-x-auto snap-x snap-mandatory space-x-4 pb-2 scrollbar-none sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:space-x-0 sm:gap-5">
           {collectionCards.map((col, idx) => (
-            <ScrollReveal
+            <div
               key={idx}
-              animation="zoom-in"
-              delay={idx * 100}
-              duration={650}
-              className="w-[74%] xs:w-[70%] sm:w-auto flex-shrink-0 snap-start"
+              className="w-[72%] xs:w-[68%] sm:w-auto flex-shrink-0 snap-start"
             >
               <div
                 onClick={() => navigateToCollection(col.handle, col.title)}
-                className="bg-white rounded-2xl p-3 shadow-xs hover:shadow-md transition-all group cursor-pointer border border-stone-100 h-full"
+                className="bg-white rounded-2xl p-3 shadow-xs hover:shadow-md transition-all group cursor-pointer border-0 h-full"
               >
                 <div className="aspect-square w-full overflow-hidden rounded-xl bg-stone-100">
                   <img
@@ -111,7 +105,7 @@ export const FeaturedCollections = () => {
                   <span className="text-xs text-stone-500 mt-0.5 block">{col.count}</span>
                 </div>
               </div>
-            </ScrollReveal>
+            </div>
           ))}
         </div>
       </section>
@@ -136,16 +130,13 @@ export const FeaturedCollections = () => {
 
         {/* Mobile Horizontal Swipe Carousel / Desktop 4-Card Grid */}
         <div className="flex overflow-x-auto snap-x snap-mandatory space-x-4 pb-4 sm:pb-0 scrollbar-none sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:space-x-0 sm:gap-6">
-          {displayBundles.map((product, idx) => (
-            <ScrollReveal
+          {displayBundles.map((product) => (
+            <div
               key={product.id}
-              animation="fade-up"
-              delay={idx * 120}
-              duration={700}
-              className="w-[78%] xs:w-[74%] sm:w-auto flex-shrink-0 snap-start h-full"
+              className="w-[75%] xs:w-[70%] sm:w-auto flex-shrink-0 snap-start h-full"
             >
               <ProductCard product={product} />
-            </ScrollReveal>
+            </div>
           ))}
         </div>
 
@@ -160,8 +151,8 @@ export const FeaturedCollections = () => {
         </ScrollReveal>
       </section>
 
-      {/* 4. SPLIT BANNER (LAYAAN OFFICIAL) */}
-      <section className="bg-[#f8f6f2] rounded-3xl overflow-hidden grid grid-cols-1 lg:grid-cols-2 items-center border border-stone-200/60">
+      {/* 4. SPLIT BANNER (LAYAAN OFFICIAL - Frame-less Clean Container) */}
+      <section className="bg-[#f8f6f2] rounded-3xl overflow-hidden grid grid-cols-1 lg:grid-cols-2 items-center">
         <ScrollReveal animation="fade-right" duration={800} className="h-80 sm:h-96 lg:h-[480px]">
           <img
             src="https://www.lattafa-usa.com/cdn/shop/files/layaan-12.png?v=1760222559&width=1019"
@@ -174,7 +165,7 @@ export const FeaturedCollections = () => {
           <span className="text-xs uppercase tracking-[0.25em] font-medium text-amber-800 block">
             Descubre la Esencia de la Elegancia
           </span>
-          <h2 className="font-serif text-4xl sm:text-5xl font-normal text-stone-900 leading-tight">
+          <h2 className="font-serif text-3xl sm:text-5xl font-normal text-stone-900 leading-tight">
             Elegancia Redefinida: Layaan
           </h2>
           <p className="text-stone-600 text-sm leading-relaxed max-w-md mx-auto lg:mx-0">

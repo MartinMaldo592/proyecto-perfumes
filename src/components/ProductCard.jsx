@@ -53,7 +53,7 @@ export const ProductCard = ({ product }) => {
         <img
           src={mainImage}
           alt={product.title}
-          className="absolute inset-0 w-full h-full object-contain p-4 transition-opacity duration-500 ease-in-out opacity-100 group-hover:opacity-0"
+          className="absolute inset-0 w-full h-full object-contain p-4 transition-opacity duration-500 ease-in-out opacity-100 group-hover:opacity-0 pointer-events-none select-none max-h-full"
           loading="lazy"
         />
 
@@ -61,7 +61,7 @@ export const ProductCard = ({ product }) => {
         <img
           src={hoverImage}
           alt={`${product.title} con empaque de caja`}
-          className="absolute inset-0 w-full h-full object-contain p-4 transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100 scale-100 group-hover:scale-105 transition-transform duration-700"
+          className="absolute inset-0 w-full h-full object-contain p-4 transition-opacity duration-500 ease-in-out opacity-0 group-hover:opacity-100 scale-100 group-hover:scale-105 transition-transform duration-700 pointer-events-none select-none max-h-full"
           loading="lazy"
         />
 

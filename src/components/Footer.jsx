@@ -156,14 +156,7 @@ export const Footer = () => {
 
             {/* Copyright */}
             <div className="text-xs text-stone-500">
-              © 2026 Lattafa . <u className="cursor-pointer hover:text-stone-900">Desarrollado con Shopify</u>
-            </div>
-
-            {/* Purple Follow on shop button */}
-            <div>
-              <button className="bg-[#5a31f4] hover:bg-[#4924d6] text-white px-4 py-2 rounded-full text-xs font-bold flex items-center space-x-1.5 shadow-xs transition-colors cursor-pointer">
-                <span>💜 Seguir en la Tienda</span>
-              </button>
+              © 2026 Lattafa Perfumes. Todos los derechos reservados.
             </div>
 
           </div>
