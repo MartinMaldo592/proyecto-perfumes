@@ -25,7 +25,7 @@ export const Footer = () => {
   return (
     <footer className="bg-white text-stone-900 font-sans border-t border-gray-200">
       
-      {/* 1. TOP 4 BRAND GUARANTEE PILLARS (Image 2) */}
+      {/* 1. TOP 4 BRAND GUARANTEE PILLARS */}
       <div className="w-full px-6 sm:px-10 lg:px-14 py-12 border-b border-gray-100">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
           
@@ -34,8 +34,8 @@ export const Footer = () => {
               <CheckCircle2 className="w-7 h-7 text-stone-900 stroke-[1.5]" />
             </div>
             <div>
-              <h4 className="font-serif font-semibold text-base text-stone-900">100% Authentic Fragrances</h4>
-              <p className="text-xs text-stone-500 mt-0.5">Direct from Lattafa</p>
+              <h4 className="font-serif font-semibold text-base text-stone-900">Perfumes 100% Auténticos</h4>
+              <p className="text-xs text-stone-500 mt-0.5">Importado Directo de Lattafa</p>
             </div>
           </div>
 
@@ -44,8 +44,8 @@ export const Footer = () => {
               <Package className="w-7 h-7 text-stone-900 stroke-[1.5]" />
             </div>
             <div>
-              <h4 className="font-serif font-semibold text-base text-stone-900">Easy Returns</h4>
-              <p className="text-xs text-stone-500 mt-0.5">Satisfaction Guarantee</p>
+              <h4 className="font-serif font-semibold text-base text-stone-900">Devoluciones Sencillas</h4>
+              <p className="text-xs text-stone-500 mt-0.5">Garantía de Satisfacción</p>
             </div>
           </div>
 
@@ -54,8 +54,8 @@ export const Footer = () => {
               <Truck className="w-7 h-7 text-stone-900 stroke-[1.5]" />
             </div>
             <div>
-              <h4 className="font-serif font-semibold text-base text-stone-900">Free Shipping</h4>
-              <p className="text-xs text-stone-500 mt-0.5">En pedidos mayores a S/ 225.00</p>
+              <h4 className="font-serif font-semibold text-base text-stone-900">Envío Gratis</h4>
+              <p className="text-xs text-stone-500 mt-0.5">En compras superiores a S/ 225.00</p>
             </div>
           </div>
 
@@ -64,8 +64,8 @@ export const Footer = () => {
               <ShieldCheck className="w-7 h-7 text-stone-900 stroke-[1.5]" />
             </div>
             <div>
-              <h4 className="font-serif font-semibold text-base text-stone-900">Secure Checkout</h4>
-              <p className="text-xs text-stone-500 mt-0.5">100% Encrypted</p>
+              <h4 className="font-serif font-semibold text-base text-stone-900">Pago 100% Seguro</h4>
+              <p className="text-xs text-stone-500 mt-0.5">Transacciones Encriptadas</p>
             </div>
           </div>
 
@@ -79,10 +79,10 @@ export const Footer = () => {
           {/* Left Column: Subscribe Newsletter */}
           <div className="lg:col-span-5 space-y-4 pr-0 lg:pr-8">
             <h3 className="font-serif text-3xl sm:text-4xl font-normal text-stone-900 tracking-tight">
-              Subscribe to get 10% OFF
+              Suscríbete y recibe 10% de Descuento
             </h3>
             <p className="text-xs text-stone-600">
-              Subscribe for discounts updates.
+              Recibe novedades exclusivas y ofertas especiales.
             </p>
 
             {/* Pill Subscription Form */}
@@ -92,7 +92,7 @@ export const Footer = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Email"
+                  placeholder="Correo Electrónico"
                   required
                   className="w-full bg-transparent px-5 py-2.5 text-xs text-stone-900 placeholder-stone-500 focus:outline-none"
                 />
@@ -173,13 +173,13 @@ export const Footer = () => {
 
             {/* Copyright */}
             <div className="text-xs text-stone-500">
-              © 2026 Lattafa . <u className="cursor-pointer hover:text-stone-900">Powered by Shopify</u>
+              © 2026 Lattafa . <u className="cursor-pointer hover:text-stone-900">Desarrollado con Shopify</u>
             </div>
 
             {/* Purple Follow on shop button */}
             <div>
-              <button className="bg-[#5a31f4] hover:bg-[#4924d6] text-white px-4 py-2 rounded-full text-xs font-bold flex items-center space-x-1.5 shadow-xs transition-colors">
-                <span>💜 Follow on shop</span>
+              <button className="bg-[#5a31f4] hover:bg-[#4924d6] text-white px-4 py-2 rounded-full text-xs font-bold flex items-center space-x-1.5 shadow-xs transition-colors cursor-pointer">
+                <span>💜 Seguir en la Tienda</span>
               </button>
             </div>
 

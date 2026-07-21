@@ -744,11 +744,11 @@ export const ProductPage = () => {
               disabled={!activeProduct.is_available}
               className={`py-3 px-8 rounded-full font-bold text-xs uppercase tracking-wider shadow-lg transition-all ${
                 activeProduct.is_available
-                  ? 'bg-[#121212] hover:bg-stone-800 text-white'
+                  ? 'bg-[#121212] hover:bg-stone-800 text-white cursor-pointer'
                   : 'bg-[#808080] text-white cursor-not-allowed'
               }`}
             >
-              {activeProduct.is_available ? 'ADD TO CART' : 'SOLD OUT'}
+              {activeProduct.is_available ? 'AÑADIR AL CARRITO' : 'AGOTADO'}
             </button>
 
           </div>
