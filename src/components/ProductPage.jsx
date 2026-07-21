@@ -234,16 +234,18 @@ export const ProductPage = () => {
               )}
 
               {/* Absolute Stacked Images for Smooth Cross-Fade Transition */}
-              {images.map((img, idx) => (
+              {/* Main Displayed Image with Parallax Hero Shift & Zoom (Option 3 Effect) */}
+              <div className="w-full h-full overflow-hidden flex items-center justify-center relative">
                 <img
-                  key={idx}
-                  src={img}
+                  key={currentImgIdx}
+                  src={images[currentImgIdx]}
                   alt={activeProduct.title}
-                  className={`absolute inset-0 w-full h-full object-contain p-4 sm:p-8 transition-all duration-500 ease-in-out ${
-                    currentImgIdx === idx ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-95 z-0 pointer-events-none'
-                  }`}
+                  className="max-h-full max-w-full object-contain filter drop-shadow-xl transition-all duration-700 ease-out transform scale-100 animate-heroZoom"
+                  style={{
+                    transform: isDragging ? `translateX(${dragOffset}px)` : 'none'
+                  }}
                 />
-              ))}
+              </div>
             </div>
           </div>
 

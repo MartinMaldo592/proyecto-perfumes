@@ -17,7 +17,8 @@ body,
 #root {
   font-family: var(--font-sans);
   color: #121212;
-  background-color: #ffffff;
+  background-color: var(--page-bg-color, #ffffff);
+  transition: background-color 700ms cubic-bezier(0.16, 1, 0.3, 1), color 700ms cubic-bezier(0.16, 1, 0.3, 1);
   overflow-x: hidden !important;
   max-width: 100vw;
   position: relative;
@@ -64,6 +65,57 @@ body,
   animation: megaMenuDown 650ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
   transform-origin: top center;
   will-change: transform, opacity;
+}
+
+/* Keyframes for Option 3: Parallax Hero Shift & Zoom Effect */
+@keyframes heroZoom {
+  0% {
+    opacity: 0.3;
+    transform: scale(1.12) translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-heroZoom {
+  animation: heroZoom 750ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+/* Keyframe animation for Gold Glow Skeleton Shimmer Loading */
+@keyframes goldShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.gold-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.gold-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(212, 175, 55, 0.18) 40%,
+    rgba(255, 223, 118, 0.35) 50%,
+    rgba(212, 175, 55, 0.18) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: goldShimmer 1.4s infinite;
 }
 
 /* Custom scrollbar */

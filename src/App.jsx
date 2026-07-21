@@ -12,8 +12,12 @@ import { SearchModal } from './components/SearchModal';
 import { FragranceFilter } from './components/FragranceFilter';
 import { Footer } from './components/Footer';
 
+import { SkeletonLoader } from './components/SkeletonLoader';
+
 const MainLayout = () => {
-  const { activePage } = useStore();
+  const { activePage, loading, pageTransitioning } = useStore();
+
+  const isPending = loading || pageTransitioning;
 
   return (
     <div className="min-h-screen bg-white text-stone-900 flex flex-col font-sans selection:bg-amber-500 selection:text-white">
@@ -24,9 +28,11 @@ const MainLayout = () => {
       {/* Sticky Luxury Header */}
       <Header />
 
-      {/* Main Content View Switcher */}
+      {/* Main Content View Switcher with Tailor-Made Gold Shimmer Skeleton Transition (Product & Collection Pages Only) */}
       <main className="flex-1">
-        {activePage === 'product' ? (
+        {isPending && activePage !== 'home' ? (
+          <SkeletonLoader type={activePage} />
+        ) : activePage === 'product' ? (
           <ProductPage />
         ) : activePage === 'collection' ? (
           <CollectionPage />

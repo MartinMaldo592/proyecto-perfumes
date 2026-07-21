@@ -118,28 +118,93 @@ export const StoreProvider = ({ children }) => {
     return () => window.removeEventListener('popstate', handlePopState);
   }, [products]);
 
-  const navigateToProduct = (product) => {
-    const targetUrl = `/products/${product.handle || product.id}`;
-    window.history.pushState({ handle: product.handle }, '', targetUrl);
-    setActiveProduct(product);
-    setActivePage('product');
+  const [ambientTheme, setAmbientTheme] = useState({
+    bg: '#ffffff',
+    glow: 'rgba(212, 175, 55, 0.08)',
+    accent: '#d4b068'
+  });
+
+  const getFragrancePalette = (product) => {
+    if (!product) return { bg: '#ffffff', glow: 'rgba(212, 175, 55, 0.08)', accent: '#d4b068' };
+    const name = (product.title || '').toLowerCase();
+    const handle = (product.handle || '').toLowerCase();
+
+    if (name.includes('black') || name.includes('oud') || handle.includes('badee')) {
+      return { bg: '#171615', glow: 'rgba(212, 175, 55, 0.15)', accent: '#d4b068', textDark: false };
+    }
+    if (name.includes('yara') || name.includes('candy') || name.includes('pink')) {
+      return { bg: '#faf4f6', glow: 'rgba(244, 182, 194, 0.25)', accent: '#e07a93', textDark: true };
+    }
+    if (name.includes('khamrah') || name.includes('vanille') || name.includes('amber')) {
+      return { bg: '#fdf8f2', glow: 'rgba(217, 149, 70, 0.2)', accent: '#c87c2b', textDark: true };
+    }
+    if (name.includes('his confession') || name.includes('blue') || name.includes('musam')) {
+      return { bg: '#f4f6fa', glow: 'rgba(92, 128, 188, 0.18)', accent: '#4a6fa5', textDark: true };
+    }
+    return { bg: '#fcfbf9', glow: 'rgba(212, 175, 55, 0.12)', accent: '#d4b068', textDark: true };
+  };
+
+  const [pageTransitioning, setPageTransitioning] = useState(false);
+
+  /**
+   * CONFIGURACIÓN DE DURACIÓN DEL SKELETON (TRANSICIÓN DE PÁGINA)
+   * 
+   * NOTA PARA FUTURA MODIFICACIÓN A "CARGA AUTOMÁTICA REAL":
+   * Para hacer que el skeleton desaparezca exactamente cuando las imágenes de alta resolución
+   * del producto o colección terminen de cargar (onLoad real del DOM), puedes:
+   * 1. Eliminar los timeouts fijos de abajo.
+   * 2. Mantener setPageTransitioning(true) en el evento onClick.
+   * 3. Escuchar el evento onLoad de la imagen principal en ProductPage.jsx / CollectionPage.jsx
+   *    y llamar a setPageTransitioning(false).
+   */
+  const triggerPageTransition = (callback) => {
+    setPageTransitioning(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      callback();
+      setTimeout(() => {
+        setPageTransitioning(false);
+      }, 450); // Duración moderada actual (450ms)
+    }, 450);
+  };
+
+  const navigateToProduct = (product) => {
+    triggerPageTransition(() => {
+      const palette = getFragrancePalette(product);
+      setAmbientTheme(palette);
+      document.documentElement.style.setProperty('--page-bg-color', palette.bg);
+
+      const targetUrl = `/products/${product.handle || product.id}`;
+      window.history.pushState({ handle: product.handle }, '', targetUrl);
+      setActiveProduct(product);
+      setActivePage('product');
+    });
   };
 
   const navigateToCollection = (handle = 'all', title = null) => {
-    const targetUrl = `/collections/${handle}`;
-    const displayTitle = title || formatTitle(handle);
-    window.history.pushState({ handle }, '', targetUrl);
-    setActiveCollection({ handle, title: displayTitle });
-    setActivePage('collection');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    triggerPageTransition(() => {
+      const palette = { bg: '#ffffff', glow: 'rgba(212, 175, 55, 0.08)', accent: '#d4b068', textDark: true };
+      setAmbientTheme(palette);
+      document.documentElement.style.setProperty('--page-bg-color', '#ffffff');
+
+      const targetUrl = `/collections/${handle}`;
+      const displayTitle = title || formatTitle(handle);
+      window.history.pushState({ handle }, '', targetUrl);
+      setActiveCollection({ handle, title: displayTitle });
+      setActivePage('collection');
+    });
   };
 
   const navigateToHome = () => {
-    window.history.pushState(null, '', '/');
-    setActivePage('home');
-    setActiveProduct(null);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    triggerPageTransition(() => {
+      const palette = { bg: '#ffffff', glow: 'rgba(212, 175, 55, 0.08)', accent: '#d4b068', textDark: true };
+      setAmbientTheme(palette);
+      document.documentElement.style.setProperty('--page-bg-color', '#ffffff');
+
+      window.history.pushState(null, '', '/');
+      setActivePage('home');
+      setActiveProduct(null);
+    });
   };
 
   // Cart operations
@@ -212,6 +277,8 @@ export const StoreProvider = ({ children }) => {
       value={{
         products,
         loading,
+        pageTransitioning,
+        ambientTheme,
         cart,
         isCartOpen,
         setIsCartOpen,
