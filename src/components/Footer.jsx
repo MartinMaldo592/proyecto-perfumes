@@ -8,6 +8,7 @@ import {
   ChevronDown
 } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
+import { ScrollReveal } from './ScrollReveal';
 
 export const Footer = () => {
   const { navigateToHome } = useStore();
@@ -22,58 +23,40 @@ export const Footer = () => {
     }
   };
 
+  const pillars = [
+    { icon: CheckCircle2, title: "Perfumes 100% Auténticos", subtitle: "Importado Directo de Lattafa" },
+    { icon: Package, title: "Devoluciones Sencillas", subtitle: "Garantía de Satisfacción" },
+    { icon: Truck, title: "Envío Gratis", subtitle: "En compras superiores a S/ 225.00" },
+    { icon: ShieldCheck, title: "Pago 100% Seguro", subtitle: "Transacciones Encriptadas" }
+  ];
+
   return (
     <footer className="bg-white text-stone-900 font-sans border-t border-gray-200">
       
       {/* 1. TOP 4 BRAND GUARANTEE PILLARS */}
       <div className="w-full px-6 sm:px-10 lg:px-14 py-12 border-b border-gray-100">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
-          
-          <div className="flex items-center space-x-4">
-            <div className="w-14 h-14 rounded-full border border-stone-900 flex items-center justify-center flex-shrink-0">
-              <CheckCircle2 className="w-7 h-7 text-stone-900 stroke-[1.5]" />
-            </div>
-            <div>
-              <h4 className="font-serif font-semibold text-base text-stone-900">Perfumes 100% Auténticos</h4>
-              <p className="text-xs text-stone-500 mt-0.5">Importado Directo de Lattafa</p>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <div className="w-14 h-14 rounded-full border border-stone-900 flex items-center justify-center flex-shrink-0">
-              <Package className="w-7 h-7 text-stone-900 stroke-[1.5]" />
-            </div>
-            <div>
-              <h4 className="font-serif font-semibold text-base text-stone-900">Devoluciones Sencillas</h4>
-              <p className="text-xs text-stone-500 mt-0.5">Garantía de Satisfacción</p>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <div className="w-14 h-14 rounded-full border border-stone-900 flex items-center justify-center flex-shrink-0">
-              <Truck className="w-7 h-7 text-stone-900 stroke-[1.5]" />
-            </div>
-            <div>
-              <h4 className="font-serif font-semibold text-base text-stone-900">Envío Gratis</h4>
-              <p className="text-xs text-stone-500 mt-0.5">En compras superiores a S/ 225.00</p>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <div className="w-14 h-14 rounded-full border border-stone-900 flex items-center justify-center flex-shrink-0">
-              <ShieldCheck className="w-7 h-7 text-stone-900 stroke-[1.5]" />
-            </div>
-            <div>
-              <h4 className="font-serif font-semibold text-base text-stone-900">Pago 100% Seguro</h4>
-              <p className="text-xs text-stone-500 mt-0.5">Transacciones Encriptadas</p>
-            </div>
-          </div>
-
+          {pillars.map((pillar, idx) => {
+            const IconComponent = pillar.icon;
+            return (
+              <ScrollReveal key={idx} animation="fade-up" delay={idx * 100} duration={600}>
+                <div className="flex items-center space-x-4">
+                  <div className="w-14 h-14 rounded-full border border-stone-900 flex items-center justify-center flex-shrink-0">
+                    <IconComponent className="w-7 h-7 text-stone-900 stroke-[1.5]" />
+                  </div>
+                  <div>
+                    <h4 className="font-serif font-semibold text-base text-stone-900">{pillar.title}</h4>
+                    <p className="text-xs text-stone-500 mt-0.5">{pillar.subtitle}</p>
+                  </div>
+                </div>
+              </ScrollReveal>
+            );
+          })}
         </div>
       </div>
 
       {/* 2. MAIN FOOTER CONTENT (Clean White Theme) */}
-      <div className="w-full px-6 sm:px-10 lg:px-14 py-16">
+      <ScrollReveal animation="fade-up" duration={700} className="w-full px-6 sm:px-10 lg:px-14 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           {/* Left Column: Subscribe Newsletter */}
@@ -98,7 +81,7 @@ export const Footer = () => {
                 />
                 <button
                   type="submit"
-                  className="w-9 h-9 bg-transparent hover:bg-stone-200 text-stone-900 rounded-full flex items-center justify-center transition-colors flex-shrink-0"
+                  className="w-9 h-9 bg-transparent hover:bg-stone-200 text-stone-900 rounded-full flex items-center justify-center transition-colors flex-shrink-0 cursor-pointer"
                 >
                   <ArrowRight className="w-4 h-4" />
                 </button>
@@ -218,7 +201,7 @@ export const Footer = () => {
 
         </div>
 
-      </div>
+      </ScrollReveal>
 
     </footer>
   );

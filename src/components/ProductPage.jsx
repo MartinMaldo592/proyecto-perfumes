@@ -17,6 +17,7 @@ import {
   ShoppingBag
 } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
+import { ScrollReveal } from './ScrollReveal';
 
 export const ProductPage = () => {
   const { activeProduct, navigateToHome, navigateToProduct, addToCart, toggleWishlist, wishlist, products } = useStore();
@@ -440,7 +441,7 @@ export const ProductPage = () => {
       </div>
 
       {/* MIDDLE SECTION: 4 BRAND GUARANTEE PILLARS */}
-      <section className="my-12 bg-[#f9f8f6] py-10 border-y border-stone-200/60">
+      <ScrollReveal animation="fade-up" duration={600} className="my-12 bg-[#f9f8f6] py-10 border-y border-stone-200/60">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
           
           <div className="flex flex-col items-center space-y-1.5">
@@ -476,10 +477,10 @@ export const ProductPage = () => {
           </div>
 
         </div>
-      </section>
+      </ScrollReveal>
 
       {/* REVIEWS SECTION */}
-      <section className="w-full px-4 sm:px-10 lg:px-14 py-10 bg-[#fafafa]">
+      <ScrollReveal animation="fade-up" duration={700} className="w-full px-4 sm:px-10 lg:px-14 py-10 bg-[#fafafa]">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 pb-6 border-b border-gray-200 gap-4">
           <div>
             <h3 className="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-2">Opiniones de Clientes</h3>
@@ -534,7 +535,7 @@ export const ProductPage = () => {
           </div>
 
           <div>
-            <button className="bg-[#121212] hover:bg-stone-800 text-white font-bold text-xs px-6 py-3 rounded-lg uppercase tracking-wider shadow-md transition-all">
+            <button className="bg-[#121212] hover:bg-stone-800 text-white font-bold text-xs px-6 py-3 rounded-lg uppercase tracking-wider shadow-md transition-all cursor-pointer">
               Escribir una Reseña
             </button>
           </div>
@@ -543,49 +544,51 @@ export const ProductPage = () => {
 
         {/* Customer Review Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {sampleReviews.map((rev) => (
-            <div key={rev.id} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center text-stone-900">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-3.5 h-3.5 ${i < rev.rating ? 'fill-current' : 'text-gray-200'}`}
-                      />
-                    ))}
+          {sampleReviews.map((rev, idx) => (
+            <ScrollReveal key={rev.id} animation="fade-up" delay={idx * 100} duration={600}>
+              <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between h-full">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center text-stone-900">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`w-3.5 h-3.5 ${i < rev.rating ? 'fill-current' : 'text-gray-200'}`}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-[11px] text-gray-400 font-medium">{rev.date}</span>
                   </div>
-                  <span className="text-[11px] text-gray-400 font-medium">{rev.date}</span>
-                </div>
 
-                <div className="flex items-center space-x-1.5 mb-2">
-                  <span className="font-bold text-stone-900 text-xs">{rev.author}</span>
-                  {rev.verified && (
-                    <span className="bg-stone-900 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">
-                      Verificado
-                    </span>
-                  )}
-                </div>
+                  <div className="flex items-center space-x-1.5 mb-2">
+                    <span className="font-bold text-stone-900 text-xs">{rev.author}</span>
+                    {rev.verified && (
+                      <span className="bg-stone-900 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">
+                        Verificado
+                      </span>
+                    )}
+                  </div>
 
-                <h5 className="font-bold text-stone-900 text-sm mb-1">{rev.title}</h5>
-                <p className="text-xs text-gray-600 leading-relaxed">{rev.body}</p>
+                  <h5 className="font-bold text-stone-900 text-sm mb-1">{rev.title}</h5>
+                  <p className="text-xs text-gray-600 leading-relaxed">{rev.body}</p>
+                </div>
               </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
 
         {/* Reviews Pagination Bar (1 2 3 > >|) */}
         <div className="flex items-center justify-center space-x-4 pt-8 text-xs font-semibold text-stone-900">
           <span className="w-7 h-7 rounded-full bg-stone-100 text-stone-900 flex items-center justify-center font-bold">1</span>
-          <button className="text-stone-500 hover:text-stone-900 transition-colors">2</button>
-          <button className="text-stone-500 hover:text-stone-900 transition-colors">3</button>
-          <button className="text-stone-500 hover:text-stone-900 transition-colors">›</button>
-          <button className="text-stone-500 hover:text-stone-900 transition-colors">»</button>
+          <button className="text-stone-500 hover:text-stone-900 transition-colors cursor-pointer">2</button>
+          <button className="text-stone-500 hover:text-stone-900 transition-colors cursor-pointer">3</button>
+          <button className="text-stone-500 hover:text-stone-900 transition-colors cursor-pointer">›</button>
+          <button className="text-stone-500 hover:text-stone-900 transition-colors cursor-pointer">»</button>
         </div>
-      </section>
+      </ScrollReveal>
 
       {/* "YOU MAY ALSO LIKE" CAROUSEL SECTION */}
-      <section className="w-full px-4 sm:px-10 lg:px-14 py-12 border-t border-gray-100">
+      <ScrollReveal animation="fade-up" duration={700} className="w-full px-4 sm:px-10 lg:px-14 py-12 border-t border-gray-100">
         <h3 className="font-serif text-2xl sm:text-3xl font-normal text-stone-900 mb-6 tracking-tight">
           También te podría gustar
         </h3>
@@ -606,7 +609,7 @@ export const ProductPage = () => {
                   e.stopPropagation();
                   addToCart({ id: 'shipinsure', title: 'Protección de Envío ShipInsure', min_price: 3.70, main_image: '' }, null, 1);
                 }}
-                className="absolute bottom-2.5 right-2.5 w-7 h-7 bg-white text-stone-900 rounded-full flex items-center justify-center shadow-xs hover:bg-stone-900 hover:text-white transition-all"
+                className="absolute bottom-2.5 right-2.5 w-7 h-7 bg-white text-stone-900 rounded-full flex items-center justify-center shadow-xs hover:bg-stone-900 hover:text-white transition-all cursor-pointer"
                 title="Añadir Protección"
               >
                 <ShoppingBag className="w-3.5 h-3.5" />
@@ -641,7 +644,7 @@ export const ProductPage = () => {
                       e.stopPropagation();
                       addToCart(p, null, 1);
                     }}
-                    className="absolute bottom-2.5 right-2.5 w-7 h-7 bg-white text-stone-900 rounded-full flex items-center justify-center shadow-xs hover:bg-stone-900 hover:text-white transition-all opacity-90 group-hover:opacity-100"
+                    className="absolute bottom-2.5 right-2.5 w-7 h-7 bg-white text-stone-900 rounded-full flex items-center justify-center shadow-xs hover:bg-stone-900 hover:text-white transition-all opacity-90 group-hover:opacity-100 cursor-pointer"
                     title="Añadir a la bolsa"
                   >
                     <ShoppingBag className="w-3.5 h-3.5" />
@@ -659,10 +662,10 @@ export const ProductPage = () => {
             ))}
 
         </div>
-      </section>
+      </ScrollReveal>
 
       {/* SUBSCRIBE TO GET 10% OFF SECTION */}
-      <section className="w-full bg-[#f8f6f2] py-12 px-6 sm:px-12 border-t border-stone-200/60">
+      <ScrollReveal animation="fade-up" duration={700} className="w-full bg-[#f8f6f2] py-12 px-6 sm:px-12 border-t border-stone-200/60">
         <div className="max-w-xl mx-auto text-center space-y-4">
           <h3 className="font-serif text-3xl sm:text-4xl font-normal text-stone-900 leading-tight">
             Suscríbete y recibe 10% de Descuento
@@ -680,7 +683,7 @@ export const ProductPage = () => {
               />
               <button
                 type="submit"
-                className="absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 bg-stone-900 hover:bg-stone-800 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-xs transition-colors"
+                className="absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 bg-stone-900 hover:bg-stone-800 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-xs transition-colors cursor-pointer"
               >
                 ›
               </button>
@@ -691,7 +694,7 @@ export const ProductPage = () => {
             Al suscribirte aceptas los <a href="#terms" className="underline hover:text-stone-900">Términos de Uso</a> y la <a href="#privacy" className="underline hover:text-stone-900">Política de Privacidad</a>.
           </p>
         </div>
-      </section>
+      </ScrollReveal>
 
       {/* STICKY BOTTOM BAR ON SCROLL */}
       {showStickyBar && (
