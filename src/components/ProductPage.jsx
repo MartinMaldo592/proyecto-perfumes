@@ -311,7 +311,7 @@ export const ProductPage = () => {
                 <u>Shipping</u> calculated at checkout.
               </p>
               <div className="text-xs sm:text-sm text-stone-700 mt-1 flex items-center space-x-1.5">
-                <span>Paga en 2 cuotas sin interés de <b>S/ ${(price/2).toFixed(2)}</b> con</span>
+                <span>Paga en 2 cuotas sin interés de <b>S/ {(price/2).toFixed(2)}</b> con</span>
                 <span className="font-bold text-indigo-700 bg-indigo-50 px-1.5 py-0.5 rounded text-[11px]">shopPay</span>
                 <u className="cursor-pointer font-medium font-serif">Learn more</u>
               </div>

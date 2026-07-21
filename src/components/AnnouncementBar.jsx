@@ -2,13 +2,13 @@ import React from 'react';
 
 export const AnnouncementBar = () => {
   const announcements = [
-    "FREE Shipping On Orders Over USD $60",
+    "ENVÍO GRATIS en compras superiores a S/ 225.00",
     "•",
-    "100% Authentic Luxury Arabian Fragrances",
+    "Fragancias de Lujo 100% Auténticas",
     "•",
-    "FREE Shipping On Orders Over USD $60",
+    "ENVÍO GRATIS en compras superiores a S/ 225.00",
     "•",
-    "Direct USA Distribution",
+    "Distribución Oficial Lattafa",
     "•",
   ];
 
