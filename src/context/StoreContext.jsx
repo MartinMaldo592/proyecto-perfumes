@@ -53,9 +53,13 @@ export const StoreProvider = ({ children }) => {
   const syncRouteWithLocation = (catalog = products) => {
     const path = window.location.pathname;
     if (path.startsWith('/productos/')) {
-      const handle = path.replace('/productos/', '').replace(/\/$/, '');
+      const handle = decodeURIComponent(path.replace('/productos/', '').replace(/\/$/, '')).toLowerCase();
       if (catalog && catalog.length > 0) {
-        const found = catalog.find((p) => p.handle === handle || p.id?.toString() === handle);
+        const found = catalog.find((p) => 
+          (p.handle && p.handle.toLowerCase() === handle) || 
+          p.id?.toString() === handle ||
+          (p.title && p.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') === handle)
+        );
         if (found) {
           setActiveProduct(found);
           setActivePage('product');
