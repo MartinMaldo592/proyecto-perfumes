@@ -50,12 +50,12 @@ export const Header = () => {
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-2xs transition-all duration-200">
 
-      {/* Full-width container with compact side padding and height matching original Lattafa site */}
-      <div className="w-full px-4 sm:px-8 lg:px-12">
+      {/* Full-width container with edge-aligned padding matching official store layout */}
+      <div className="w-full px-3 sm:px-5 lg:px-6">
         <div className="flex items-center justify-between h-13 sm:h-16 lg:h-18">
 
           {/* Logo on Left Edge */}
-          <div className="flex-shrink-0 flex items-center mr-4 sm:mr-6 lg:mr-10">
+          <div className="flex-shrink-0 flex items-center mr-2 sm:mr-4 lg:mr-6">
             <img
               src="/logo.avif"
               alt="Lattafa Perfumes"
