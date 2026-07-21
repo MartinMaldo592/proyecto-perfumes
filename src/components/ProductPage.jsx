@@ -18,7 +18,7 @@ import {
 import { useStore } from '../context/StoreContext';
 
 export const ProductPage = () => {
-  const { activeProduct, navigateToHome, addToCart, toggleWishlist, wishlist } = useStore();
+  const { activeProduct, navigateToHome, navigateToProduct, addToCart, toggleWishlist, wishlist, products } = useStore();
 
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [currentImgIdx, setCurrentImgIdx] = useState(0);
@@ -561,6 +561,124 @@ export const ProductPage = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Reviews Pagination Bar (1 2 3 > >|) */}
+        <div className="flex items-center justify-center space-x-4 pt-8 text-xs font-semibold text-stone-900">
+          <span className="w-7 h-7 rounded-full bg-stone-100 text-stone-900 flex items-center justify-center font-bold">1</span>
+          <button className="text-stone-500 hover:text-stone-900 transition-colors">2</button>
+          <button className="text-stone-500 hover:text-stone-900 transition-colors">3</button>
+          <button className="text-stone-500 hover:text-stone-900 transition-colors">›</button>
+          <button className="text-stone-500 hover:text-stone-900 transition-colors">»</button>
+        </div>
+      </section>
+
+      {/* "YOU MAY ALSO LIKE" CAROUSEL SECTION (Matching Official Lattafa USA PDP Screenshots) */}
+      <section className="w-full px-4 sm:px-10 lg:px-14 py-12 border-t border-gray-100">
+        <h3 className="font-serif text-2xl sm:text-3xl font-normal text-stone-900 mb-6 tracking-tight">
+          You may also like
+        </h3>
+
+        {/* Mobile Horizontal Swipe Carousel / Desktop 4-Column Grid */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory space-x-4 pb-4 scrollbar-none sm:grid sm:grid-cols-2 md:grid-cols-4 sm:space-x-0 sm:gap-6">
+          
+          {/* Card 0: ShipInsure Package Protection Card */}
+          <div className="w-[68%] xs:w-[62%] sm:w-auto flex-shrink-0 snap-start group cursor-pointer">
+            <div className="relative aspect-square bg-[#0b0c16] rounded-2xl sm:rounded-3xl p-6 flex flex-col items-center justify-center overflow-hidden mb-3 border border-gray-800">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-stone-900 rounded-2xl flex items-center justify-center mb-2 border border-stone-700 shadow-md">
+                <Lock className="w-8 h-8 text-white stroke-[1.75]" />
+              </div>
+              
+              {/* Quick Add Bag Button */}
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  addToCart({ id: 'shipinsure', title: 'ShipInsure Package Protection', min_price: 0.98, main_image: '' }, null, 1);
+                }}
+                className="absolute bottom-3 right-3 w-8 h-8 bg-white text-stone-900 rounded-full flex items-center justify-center shadow-md hover:bg-stone-900 hover:text-white transition-all"
+                title="Add ShipInsure"
+              >
+                <ShoppingBag className="w-4 h-4" />
+              </button>
+            </div>
+            <span className="text-[11px] text-stone-500 font-medium block">ShipInsure</span>
+            <h4 className="font-serif font-semibold text-stone-900 text-sm line-clamp-1">ShipInsure Package Protection</h4>
+            <span className="text-xs font-bold text-stone-900 mt-0.5 block">From $0.98 USD</span>
+          </div>
+
+          {/* Catalog Perfume Cards */}
+          {products
+            .filter((p) => p.id !== activeProduct.id)
+            .slice(0, 7)
+            .map((p) => (
+              <div
+                key={p.id}
+                onClick={() => navigateToProduct(p)}
+                className="w-[68%] xs:w-[62%] sm:w-auto flex-shrink-0 snap-start group cursor-pointer"
+              >
+                <div className="relative aspect-square bg-[#f8f6f2] rounded-2xl sm:rounded-3xl p-4 flex items-center justify-center overflow-hidden mb-3 border border-stone-200/50 group-hover:shadow-md transition-all">
+                  <img
+                    src={p.main_image}
+                    alt={p.title}
+                    className="max-h-full max-w-full object-contain p-2 group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+
+                  {/* Floating Add to Bag Icon Button */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      addToCart(p, null, 1);
+                    }}
+                    className="absolute bottom-3 right-3 w-8 h-8 bg-white text-stone-900 rounded-full flex items-center justify-center shadow-md hover:bg-stone-900 hover:text-white transition-all opacity-90 group-hover:opacity-100"
+                    title="Add to Cart"
+                  >
+                    <ShoppingBag className="w-4 h-4" />
+                  </button>
+                </div>
+                <span className="text-[11px] text-stone-500 font-medium block">Lattafa</span>
+                <h4 className="font-serif font-semibold text-stone-900 text-sm line-clamp-1">{p.title}</h4>
+                <div className="flex items-center space-x-2 mt-0.5">
+                  <span className="text-xs font-bold text-stone-900">${p.min_price} USD</span>
+                  {p.compare_at_price && (
+                    <span className="text-xs text-stone-400 line-through">${p.compare_at_price} USD</span>
+                  )}
+                </div>
+              </div>
+            ))}
+
+        </div>
+      </section>
+
+      {/* SUBSCRIBE TO GET 10% OFF SECTION (Official Lattafa Newsletter Block) */}
+      <section className="w-full bg-[#f8f6f2] py-12 px-6 sm:px-12 border-t border-stone-200/60">
+        <div className="max-w-xl mx-auto text-center space-y-4">
+          <h3 className="font-serif text-3xl sm:text-4xl font-normal text-stone-900 leading-tight">
+            Subscribe to get 10% OFF
+          </h3>
+          <p className="text-stone-600 text-xs sm:text-sm">
+            Subscribe for discounts updates.
+          </p>
+
+          <form onSubmit={(e) => e.preventDefault()} className="pt-2">
+            <div className="relative max-w-md mx-auto">
+              <input
+                type="email"
+                placeholder="Email"
+                className="w-full bg-white border border-stone-200 rounded-full pl-5 pr-12 py-3.5 text-xs text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-900 shadow-2xs"
+              />
+              <button
+                type="submit"
+                className="absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 bg-stone-900 hover:bg-stone-800 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-xs transition-colors"
+              >
+                ›
+              </button>
+            </div>
+          </form>
+
+          <p className="text-[11px] text-stone-500 pt-2">
+            By subscribing you agree to the <a href="#terms" className="underline hover:text-stone-900">Terms of Use</a> & <a href="#privacy" className="underline hover:text-stone-900">Privacy Policy</a>.
+          </p>
         </div>
       </section>
 
