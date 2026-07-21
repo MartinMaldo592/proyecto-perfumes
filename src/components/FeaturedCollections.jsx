@@ -4,14 +4,14 @@ import { useStore } from '../context/StoreContext';
 import { ProductCard } from './ProductCard';
 
 export const FeaturedCollections = () => {
-  const { products, navigateToProduct, navigateToHome } = useStore();
+  const { products, navigateToCollection } = useStore();
   const [activeTab, setActiveTab] = useState('new'); // 'new' | 'bestsellers'
 
   const collectionCards = [
-    { title: "Yara", count: "8 items", image: "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=600&auto=format&fit=crop" },
-    { title: "Badee Al Oud", count: "7 items", image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&auto=format&fit=crop" },
-    { title: "Asad", count: "5 items", image: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=600&auto=format&fit=crop" },
-    { title: "Khamrah", count: "5 items", image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&auto=format&fit=crop" }
+    { handle: "yara", title: "Yara Collection", count: "8 items", image: "https://www.lattafa-usa.com/cdn/shop/files/myyaragiftset.png?v=1750374217" },
+    { handle: "badee-al-oud", title: "Badee Al Oud", count: "7 items", image: "https://www.lattafa-usa.com/cdn/shop/files/Badee-Al-Oud-Noble-Blush-1_efc7268e-6d5c-413d-ae1e-ef7c9873bb6e.png" },
+    { handle: "asad", title: "Asad Collection", count: "5 items", image: "https://www.lattafa-usa.com/cdn/shop/files/Asad-1_ceed76c7-7a80-46b3-b372-68cc309137f4.png" },
+    { handle: "khamrah", title: "Khamrah Collection", count: "5 items", image: "https://www.lattafa-usa.com/cdn/shop/files/Khamrah-1_0ffa4f52-30e3-4dea-9399-9bae4b8cb4af.png" }
   ];
 
   const bundleProducts = products.filter((p) => p.is_bundle || p.title.toLowerCase().includes('set') || p.title.toLowerCase().includes('collection')).slice(0, 4);
@@ -45,7 +45,10 @@ export const FeaturedCollections = () => {
               Best Sellers
             </button>
           </div>
-          <button onClick={navigateToHome} className="text-xs font-bold uppercase tracking-wider text-stone-900 hover:underline cursor-pointer">
+          <button 
+            onClick={() => navigateToCollection(activeTab === 'new' ? 'new-arrivals' : 'best-sellers', activeTab === 'new' ? 'New Arrivals' : 'Best Sellers')} 
+            className="text-xs font-bold uppercase tracking-wider text-stone-900 hover:underline cursor-pointer"
+          >
             SHOP ALL
           </button>
         </div>
@@ -76,7 +79,7 @@ export const FeaturedCollections = () => {
           {collectionCards.map((col, idx) => (
             <div
               key={idx}
-              onClick={navigateToHome}
+              onClick={() => navigateToCollection(col.handle, col.title)}
               className="w-[74%] xs:w-[70%] sm:w-auto flex-shrink-0 snap-start bg-white rounded-2xl p-3 shadow-xs hover:shadow-md transition-all group cursor-pointer border border-stone-100"
             >
               <div className="aspect-square w-full overflow-hidden rounded-xl bg-stone-100">
@@ -122,18 +125,21 @@ export const FeaturedCollections = () => {
 
         {/* View More Button */}
         <div className="flex justify-center pt-10">
-          <button onClick={navigateToHome} className="bg-black hover:bg-stone-800 text-white font-bold text-xs px-10 py-3.5 rounded-full uppercase tracking-widest shadow-md transition-all cursor-pointer">
+          <button 
+            onClick={() => navigateToCollection('bundles', 'Bundles & Gift Sets')} 
+            className="bg-black hover:bg-stone-800 text-white font-bold text-xs px-10 py-3.5 rounded-full uppercase tracking-widest shadow-md transition-all cursor-pointer"
+          >
             VIEW MORE
           </button>
         </div>
       </section>
 
-      {/* 4. "UNVEIL THE ESSENCE OF ELEGANCE" SPLIT BANNER */}
+      {/* 4. "UNVEIL THE ESSENCE OF ELEGANCE" SPLIT BANNER (LAYAAN OFFICIAL) */}
       <section className="bg-[#f8f6f2] rounded-3xl overflow-hidden grid grid-cols-1 lg:grid-cols-2 items-center border border-stone-200/60">
         <div className="h-80 sm:h-96 lg:h-[480px]">
           <img
-            src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=900&auto=format&fit=crop"
-            alt="Essence of Elegance"
+            src="https://www.lattafa-usa.com/cdn/shop/files/layaan-12.png?v=1760222559&width=1019"
+            alt="Layaan Luxury Perfume"
             className="w-full h-full object-cover"
           />
         </div>
@@ -142,13 +148,16 @@ export const FeaturedCollections = () => {
             Unveil The Essence Of Elegance
           </span>
           <h2 className="font-serif text-4xl sm:text-5xl font-normal text-stone-900 leading-tight">
-            Elegance Redefined
+            Elegance Redefined Layaan
           </h2>
           <p className="text-stone-600 text-sm leading-relaxed max-w-md mx-auto lg:mx-0">
-            Crafted in the heart of Dubai, every bottle represents unmatched richness, projection, and sophistication.
+            Grace, strength, and sensuality in every note. Unforgettable by design, crafted in the heart of Dubai.
           </p>
           <div className="pt-4">
-            <button onClick={navigateToHome} className="bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs px-8 py-3.5 rounded-full uppercase tracking-widest shadow-md transition-all cursor-pointer">
+            <button 
+              onClick={() => navigateToCollection('layaan', 'Layaan Collection')} 
+              className="bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs px-8 py-3.5 rounded-full uppercase tracking-widest shadow-md transition-all cursor-pointer"
+            >
               EXPLORE COLLECTION
             </button>
           </div>

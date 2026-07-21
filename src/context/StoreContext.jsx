@@ -12,15 +12,22 @@ export const StoreProvider = ({ children }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   
-  // Real URL Router & Active Product
-  const [activePage, setActivePage] = useState('home'); // 'home' | 'product'
+  // Real URL Router, Active Product & Active Collection
+  const [activePage, setActivePage] = useState('home'); // 'home' | 'product' | 'collection'
   const [activeProduct, setActiveProduct] = useState(null);
-  
+  const [activeCollection, setActiveCollection] = useState({ handle: 'all', title: 'All Fragrances' });
+
   // Quick View Modal
   const [selectedProduct, setSelectedProduct] = useState(null);
   
   const [wishlist, setWishlist] = useState([]);
   const [includeShipInsure, setIncludeShipInsure] = useState(true);
+
+  const formatTitle = (handle) => {
+    if (!handle) return 'All Fragrances';
+    const words = handle.replace(/-/g, ' ').split(' ');
+    return words.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  };
 
   // Sync route based on window.location.pathname
   const syncRouteWithLocation = (catalog = products) => {
@@ -35,6 +42,11 @@ export const StoreProvider = ({ children }) => {
           return;
         }
       }
+    } else if (path.startsWith('/collections/')) {
+      const handle = path.replace('/collections/', '').replace(/\/$/, '');
+      setActiveCollection({ handle, title: formatTitle(handle) });
+      setActivePage('collection');
+      return;
     }
     setActivePage('home');
     setActiveProduct(null);
@@ -69,6 +81,15 @@ export const StoreProvider = ({ children }) => {
     window.history.pushState({ handle: product.handle }, '', targetUrl);
     setActiveProduct(product);
     setActivePage('product');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const navigateToCollection = (handle = 'all', title = null) => {
+    const targetUrl = `/collections/${handle}`;
+    const displayTitle = title || formatTitle(handle);
+    window.history.pushState({ handle }, '', targetUrl);
+    setActiveCollection({ handle, title: displayTitle });
+    setActivePage('collection');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -158,7 +179,9 @@ export const StoreProvider = ({ children }) => {
         setIsFilterOpen,
         activePage,
         activeProduct,
+        activeCollection,
         navigateToProduct,
+        navigateToCollection,
         navigateToHome,
         selectedProduct,
         setSelectedProduct,

@@ -24,6 +24,11 @@ export const ProductPage = () => {
   const [currentImgIdx, setCurrentImgIdx] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [showStickyBar, setShowStickyBar] = useState(false);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
 
   useEffect(() => {
     if (activeProduct) {
@@ -164,8 +169,44 @@ export const ProductPage = () => {
               </div>
             )}
 
-            {/* Main Image Stage Container - Edge-to-Edge on Mobile */}
-            <div className="relative flex-1 bg-[#f5f5f5] rounded-2xl sm:rounded-3xl p-4 sm:p-10 flex items-center justify-center border border-gray-100/60 h-[380px] xs:h-[420px] sm:h-[500px] lg:h-[540px] w-full overflow-hidden">
+            {/* Main Image Stage Container - Drag Swipe & Smooth Fade Effect */}
+            <div 
+              onMouseDown={(e) => {
+                setDragStart(e.clientX);
+                setIsDragging(true);
+              }}
+              onMouseMove={(e) => {
+                if (!isDragging) return;
+                setDragOffset(e.clientX - dragStart);
+              }}
+              onMouseUp={() => {
+                if (isDragging) {
+                  if (dragOffset < -50) handleNextImg();
+                  else if (dragOffset > 50) handlePrevImg();
+                }
+                setIsDragging(false);
+                setDragOffset(0);
+              }}
+              onMouseLeave={() => {
+                setIsDragging(false);
+                setDragOffset(0);
+              }}
+              onTouchStart={(e) => {
+                setTouchStart(e.touches[0].clientX);
+              }}
+              onTouchMove={(e) => {
+                setTouchEnd(e.touches[0].clientX);
+              }}
+              onTouchEnd={() => {
+                if (!touchStart || !touchEnd) return;
+                const distance = touchStart - touchEnd;
+                if (distance > 50) handleNextImg();
+                else if (distance < -50) handlePrevImg();
+                setTouchStart(0);
+                setTouchEnd(0);
+              }}
+              className="relative flex-1 bg-[#f5f5f5] rounded-2xl sm:rounded-3xl p-4 sm:p-10 flex items-center justify-center border border-gray-100/60 h-[380px] xs:h-[420px] sm:h-[500px] lg:h-[540px] w-full overflow-hidden select-none cursor-grab active:cursor-grabbing"
+            >
               
               {/* Zoom Search Button Top-Right */}
               <button className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-8 h-8 sm:w-9 sm:h-9 bg-white/90 hover:bg-white text-stone-800 rounded-full flex items-center justify-center shadow-xs transition-all">
@@ -190,12 +231,17 @@ export const ProductPage = () => {
                 </>
               )}
 
-              {/* Active Image View */}
-              <img
-                src={images[currentImgIdx] || activeProduct.main_image}
-                alt={activeProduct.title}
-                className="max-h-[340px] xs:max-h-[380px] sm:max-h-[440px] lg:max-h-[460px] w-auto h-auto object-contain transition-all duration-300"
-              />
+              {/* Absolute Stacked Images for Smooth Cross-Fade Transition */}
+              {images.map((img, idx) => (
+                <img
+                  key={idx}
+                  src={img}
+                  alt={activeProduct.title}
+                  className={`absolute max-h-[340px] xs:max-h-[380px] sm:max-h-[440px] lg:max-h-[460px] w-auto h-auto object-contain transition-all duration-500 ease-in-out ${
+                    currentImgIdx === idx ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-95 z-0 pointer-events-none'
+                  }`}
+                />
+              ))}
             </div>
 
             {/* Mobile Pagination Counter Controls (< 1/3 >) */}
@@ -217,23 +263,9 @@ export const ProductPage = () => {
           <div className="lg:col-span-5 space-y-4">
             
             {/* Vendor */}
-            <span className="text-xs font-medium text-stone-500 block">
+            <span className="text-xs font-medium text-stone-500 block uppercase tracking-wider">
               {activeProduct.vendor || "Lattafa"}
             </span>
-
-            {/* Stock Pill Badge */}
-            <div>
-              {!activeProduct.is_available ? (
-                <span className="bg-stone-300 text-stone-700 text-xs font-bold px-3.5 py-1 rounded-md uppercase tracking-wider inline-block">
-                  Sold out
-                </span>
-              ) : (
-                <span className="inline-flex items-center space-x-1.5 bg-[#e8f5e9] text-[#2e7d32] px-3.5 py-1 rounded-full text-xs font-semibold">
-                  <span className="w-2 h-2 rounded-full bg-[#4caf50]"></span>
-                  <span>In stock</span>
-                </span>
-              )}
-            </div>
 
             {/* Product Title */}
             <h1 className="font-serif text-4xl sm:text-5xl font-normal text-stone-900 tracking-tight leading-tight">
@@ -252,10 +284,21 @@ export const ProductPage = () => {
               </a>
             </div>
 
-            {/* Stock status indicator */}
-            <div className="flex items-center space-x-2 text-xs sm:text-sm font-medium text-gray-500">
-              <span className={`w-2.5 h-2.5 rounded-full ${activeProduct.is_available ? 'bg-emerald-500' : 'bg-stone-400'}`}></span>
-              <span>{activeProduct.is_available ? 'In stock' : 'Out of stock'}</span>
+            {/* Single Pulsing Stock Badge (Shopify Official PDP Style) */}
+            <div className="pt-1">
+              {!activeProduct.is_available ? (
+                <span className="bg-stone-300 text-stone-700 text-xs font-bold px-3.5 py-1 rounded-md uppercase tracking-wider inline-block">
+                  Sold out
+                </span>
+              ) : (
+                <span className="inline-flex items-center space-x-2 text-xs font-semibold text-emerald-700">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                  </span>
+                  <span>In stock</span>
+                </span>
+              )}
             </div>
 
             {/* Price & Installments */}

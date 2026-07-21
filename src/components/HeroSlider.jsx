@@ -7,27 +7,27 @@ export const HeroSlider = () => {
   const slides = [
     {
       id: 1,
-      title: "KHAMRAH WAHA",
-      subtitle: "CHARGE YOUR OASIS",
-      cta: "EXPLORE NOW",
-      bgImage: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=1600&auto=format&fit=crop",
-      query: "Khamrah"
-    },
-    {
-      id: 2,
       title: "MUSAMAM BLACK INTENSE",
-      subtitle: "Lattafa",
+      subtitle: "LATTAFA LUXURY",
       cta: "ORDER NOW",
-      bgImage: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=1600&auto=format&fit=crop",
+      bgImage: "https://www.lattafa-usa.com/cdn/shop/files/COVER_MAIN_UP_4-5.png?v=1769829986",
       query: "Musamam"
     },
     {
-      id: 3,
+      id: 2,
       title: "ANGHAM SECOND SONG",
       subtitle: "NEW COLLECTION",
       cta: "SHOP NOW",
-      bgImage: "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=1600&auto=format&fit=crop",
+      bgImage: "https://www.lattafa-usa.com/cdn/shop/files/JPEG_image-41C4-8874-82-0.png?v=1769830090",
       query: "Angham"
+    },
+    {
+      id: 3,
+      title: "KHAMRAH WAHA",
+      subtitle: "CHARGE YOUR OASIS",
+      cta: "EXPLORE NOW",
+      bgImage: "https://www.lattafa-usa.com/cdn/shop/files/Khamrah_Waha_edp.png?v=1779478380",
+      query: "Khamrah"
     }
   ];
 
@@ -36,7 +36,7 @@ export const HeroSlider = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
-    }, 7000);
+    }, 5000);
     return () => clearInterval(timer);
   }, [slides.length]);
 
@@ -68,7 +68,7 @@ export const HeroSlider = () => {
                 <img
                   src={slide.bgImage}
                   alt={slide.title}
-                  className={`w-full h-full object-cover transition-transform duration-[7000ms] cubic-bezier(0.25, 1, 0.5, 1) ${
+                  className={`w-full h-full object-cover transition-transform duration-[3000ms] cubic-bezier(0.25, 1, 0.5, 1) ${
                     isActive ? 'scale-100' : 'scale-115 duration-0'
                   }`}
                 />

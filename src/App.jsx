@@ -5,6 +5,7 @@ import { Header } from './components/Header';
 import { HeroSlider } from './components/HeroSlider';
 import { FeaturedCollections } from './components/FeaturedCollections';
 import { ProductPage } from './components/ProductPage';
+import { CollectionPage } from './components/CollectionPage';
 import { ProductModal } from './components/ProductModal';
 import { CartDrawer } from './components/CartDrawer';
 import { SearchModal } from './components/SearchModal';
@@ -27,6 +28,8 @@ const MainLayout = () => {
       <main className="flex-1">
         {activePage === 'product' ? (
           <ProductPage />
+        ) : activePage === 'collection' ? (
+          <CollectionPage />
         ) : (
           <>
             <HeroSlider />

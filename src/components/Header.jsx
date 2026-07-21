@@ -3,7 +3,7 @@ import { Search, ShoppingBag, User, ChevronDown, ArrowUpRight, ChevronLeft, Chev
 import { useStore } from '../context/StoreContext';
 
 export const Header = () => {
-  const { cartItemCount, setIsCartOpen, setIsSearchOpen, wishlist, navigateToHome, navigateToProduct, products } = useStore();
+  const { cartItemCount, setIsCartOpen, setIsSearchOpen, wishlist, navigateToHome, navigateToProduct, navigateToCollection, products } = useStore();
   const [activeMenu, setActiveMenu] = useState(null);
   const [trendIndex, setTrendIndex] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -17,25 +17,24 @@ export const Header = () => {
   ];
 
   const newArrivalsCards = [
-    { title: "Art of Universe", image: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=600&auto=format&fit=crop" },
-    { title: "Atheeri", image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600&auto=format&fit=crop" },
-    { title: "Khamrah Dukhan", image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&auto=format&fit=crop" },
-    { title: "Victoria", image: "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=600&auto=format&fit=crop" }
+    { title: "Atheeri", image: "https://www.lattafa-usa.com/cdn/shop/files/Atheeri-1_f93156cf-73d9-4455-8540-5665a4312efb.png" },
+    { title: "Khamrah Dukhan", image: "https://www.lattafa-usa.com/cdn/shop/files/Khamrah-Dukhan-1_a62cb1af-0737-4709-86c2-f275a5f5b023.png" },
+    { title: "Teriaq Intense", image: "https://www.lattafa-usa.com/cdn/shop/files/Teriaq-Intense-1_b9408dff-5346-4542-a598-cfffb8454d81.png" },
+    { title: "His Confession", image: "https://www.lattafa-usa.com/cdn/shop/files/His-Confession-1_2614a68d-8561-4a94-9c54-7739ae06f986.png" }
   ];
 
   const bestSellersCards = [
-    { title: "Badee Al Oud Amethyst", image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&auto=format&fit=crop" },
-    { title: "Asad", image: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=600&auto=format&fit=crop" },
-    { title: "Yara Candy", image: "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=600&auto=format&fit=crop" },
-    { title: "Fakhar Black", image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&auto=format&fit=crop" }
+    { title: "Badee Al Oud Noble Blush", image: "https://www.lattafa-usa.com/cdn/shop/files/Badee-Al-Oud-Noble-Blush-1_efc7268e-6d5c-413d-ae1e-ef7c9873bb6e.png" },
+    { title: "Asad", image: "https://www.lattafa-usa.com/cdn/shop/files/Asad-1_ceed76c7-7a80-46b3-b372-68cc309137f4.png" },
+    { title: "Yara Candy", image: "https://www.lattafa-usa.com/cdn/shop/files/Yara-Candy-1_86796aee-3226-4653-ba72-dd51d747c7f4.png" },
+    { title: "Eclaire", image: "https://www.lattafa-usa.com/cdn/shop/files/Eclaire-1_5803282e-ea5b-4de5-99a5-7d06f5cbae33.png" }
   ];
 
   const collectionsCards = [
-    { title: "Lattafa Pride", image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&auto=format&fit=crop" },
-    { title: "Asad", image: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=600&auto=format&fit=crop" },
-    { title: "Khamrah", image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&auto=format&fit=crop" },
-    { title: "Badee Al Oud", image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600&auto=format&fit=crop" },
-    { title: "Yara", image: "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=600&auto=format&fit=crop" }
+    { title: "Badee Al Oud", image: "https://www.lattafa-usa.com/cdn/shop/files/Badee-Al-Oud-Noble-Blush-1_efc7268e-6d5c-413d-ae1e-ef7c9873bb6e.png" },
+    { title: "Asad", image: "https://www.lattafa-usa.com/cdn/shop/files/Asad-1_ceed76c7-7a80-46b3-b372-68cc309137f4.png" },
+    { title: "Khamrah", image: "https://www.lattafa-usa.com/cdn/shop/files/Khamrah-1_0ffa4f52-30e3-4dea-9399-9bae4b8cb4af.png" },
+    { title: "Yara", image: "https://www.lattafa-usa.com/cdn/shop/files/myyaragiftset.png?v=1750374217" }
   ];
 
   const handleCardClick = (title) => {
@@ -43,7 +42,7 @@ export const Header = () => {
     if (found) {
       navigateToProduct(found);
     } else {
-      navigateToHome();
+      navigateToCollection('all', 'All Fragrances');
     }
     setActiveMenu(null);
   };
@@ -56,17 +55,17 @@ export const Header = () => {
         <div className="flex items-center justify-between h-13 sm:h-16 lg:h-18">
 
           {/* Logo on Left Edge */}
-          <div className="flex-shrink-0 flex items-center">
+          <div className="flex-shrink-0 flex items-center mr-4 sm:mr-6 lg:mr-10">
             <img
               src="/logo.avif"
               alt="Lattafa Perfumes"
               onClick={navigateToHome}
-              className="h-10 sm:h-12 lg:h-13 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity"
+              className="h-9 sm:h-11 lg:h-12 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity"
             />
           </div>
 
-          {/* Centered Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center space-x-7 lg:space-x-9 text-xs font-semibold uppercase tracking-wider text-[#121212]">
+          {/* Centered Desktop Navigation Links (Responsive Spacing, Never Overlaps Logo) */}
+          <nav className="hidden lg:flex items-center space-x-4 lg:space-x-6 xl:space-x-8 text-[11px] xl:text-xs font-semibold uppercase tracking-wider text-[#121212]">
 
             {/* 1. SHOP MEGA MENU */}
             <div
@@ -74,7 +73,10 @@ export const Header = () => {
               onMouseEnter={() => setActiveMenu('shop')}
               onMouseLeave={() => setActiveMenu(null)}
             >
-              <button className="flex items-center space-x-1 hover:text-[#c5a059] transition-colors py-1 cursor-pointer">
+              <button 
+                onClick={() => { navigateToCollection('all', 'All Fragrances'); setActiveMenu(null); }}
+                className="flex items-center space-x-1 hover:text-[#c5a059] transition-colors py-1 cursor-pointer"
+              >
                 <span>SHOP</span>
                 <ChevronDown className="w-3.5 h-3.5 text-stone-700 group-hover:rotate-180 transition-transform" />
               </button>
@@ -85,9 +87,9 @@ export const Header = () => {
 
                     {/* Left Sidebar Links */}
                     <div className="col-span-2 space-y-4 font-serif text-lg text-stone-900 border-r border-gray-100 pr-6">
-                      <div onClick={navigateToHome} className="hover:text-[#c5a059] cursor-pointer transition-colors">Best Sellers</div>
-                      <div onClick={navigateToHome} className="hover:text-[#c5a059] cursor-pointer transition-colors">New Arrivals</div>
-                      <div onClick={navigateToHome} className="hover:text-[#c5a059] cursor-pointer transition-colors">Bundles</div>
+                      <div onClick={() => { navigateToCollection('best-sellers', 'Best Sellers'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Best Sellers</div>
+                      <div onClick={() => { navigateToCollection('new-arrivals', 'New Arrivals'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">New Arrivals</div>
+                      <div onClick={() => { navigateToCollection('bundles', 'Bundles & Gift Sets'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Bundles</div>
                     </div>
 
                     {/* Middle Categories */}
@@ -95,28 +97,28 @@ export const Header = () => {
                       <div>
                         <h4 className="font-serif font-bold text-stone-900 text-xs mb-3 text-gray-400">By Category</h4>
                         <ul className="space-y-2.5 text-stone-700 font-medium">
-                          <li><a href="#all" onClick={navigateToHome} className="hover:text-[#c5a059] transition-colors">All Fragrances</a></li>
-                          <li><a href="#women" onClick={navigateToHome} className="hover:text-[#c5a059] transition-colors">Women's Fragrances</a></li>
-                          <li><a href="#men" onClick={navigateToHome} className="hover:text-[#c5a059] transition-colors">Men's Fragrances</a></li>
-                          <li><a href="#unisex" onClick={navigateToHome} className="hover:text-[#c5a059] transition-colors">Unisex Fragrances</a></li>
+                          <li><span onClick={() => { navigateToCollection('all', 'All Fragrances'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">All Fragrances</span></li>
+                          <li><span onClick={() => { navigateToCollection('women', "Women's Fragrances"); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Women's Fragrances</span></li>
+                          <li><span onClick={() => { navigateToCollection('men', "Men's Fragrances"); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Men's Fragrances</span></li>
+                          <li><span onClick={() => { navigateToCollection('unisex', 'Unisex Fragrances'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Unisex Fragrances</span></li>
                         </ul>
                       </div>
 
                       <div>
                         <h4 className="font-serif font-bold text-stone-900 text-xs mb-3 text-gray-400">By Type</h4>
                         <ul className="space-y-2.5 text-stone-700 font-medium">
-                          <li><a href="#edp" onClick={navigateToHome} className="hover:text-[#c5a059] transition-colors">Eau de Parfum (EDP)</a></li>
-                          <li><a href="#deodorants" onClick={navigateToHome} className="hover:text-[#c5a059] transition-colors">Deodorant</a></li>
-                          <li><a href="#air" onClick={navigateToHome} className="hover:text-[#c5a059] transition-colors">Air Freshener</a></li>
-                          <li><a href="#body" onClick={navigateToHome} className="hover:text-[#c5a059] transition-colors">All Over Spray</a></li>
+                          <li><span onClick={() => { navigateToCollection('edp', 'Eau de Parfum'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Eau de Parfum (EDP)</span></li>
+                          <li><span onClick={() => { navigateToCollection('deodorant', 'Deodorant'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Deodorant</span></li>
+                          <li><span onClick={() => { navigateToCollection('air-freshener', 'Air Freshener'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">Air Freshener</span></li>
+                          <li><span onClick={() => { navigateToCollection('body-spray', 'All Over Spray'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors">All Over Spray</span></li>
                         </ul>
                       </div>
 
                       <div>
                         <h4 className="font-serif font-bold text-stone-900 text-xs mb-3 text-gray-400">By Brand</h4>
                         <ul className="space-y-2.5 text-stone-700 font-medium">
-                          <li><a href="#lattafa" onClick={navigateToHome} className="hover:text-[#c5a059] transition-colors font-semibold">Lattafa</a></li>
-                          <li><a href="#pride" onClick={navigateToHome} className="hover:text-[#c5a059] transition-colors font-semibold">Lattafa Pride</a></li>
+                          <li><span onClick={() => { navigateToCollection('lattafa', 'Lattafa Collection'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors font-semibold">Lattafa</span></li>
+                          <li><span onClick={() => { navigateToCollection('pride', 'Lattafa Pride Collection'); setActiveMenu(null); }} className="hover:text-[#c5a059] cursor-pointer transition-colors font-semibold">Lattafa Pride</span></li>
                         </ul>
                       </div>
                     </div>
@@ -156,13 +158,16 @@ export const Header = () => {
               )}
             </div>
 
-            {/* 2. NEW ARRIVALS MEGA MENU */}
+            {/* 2. NEW ARRIVALS */}
             <div
               className="py-6"
               onMouseEnter={() => setActiveMenu('new')}
               onMouseLeave={() => setActiveMenu(null)}
             >
-              <button className="flex items-center space-x-1 hover:text-[#c5a059] transition-colors py-1 cursor-pointer">
+              <button 
+                onClick={() => { navigateToCollection('new-arrivals', 'New Arrivals'); setActiveMenu(null); }}
+                className="flex items-center space-x-1 hover:text-[#c5a059] transition-colors py-1 cursor-pointer"
+              >
                 <span>NEW ARRIVALS</span>
                 <ChevronDown className="w-3.5 h-3.5 text-stone-700 group-hover:rotate-180 transition-transform" />
               </button>
@@ -196,7 +201,10 @@ export const Header = () => {
               onMouseEnter={() => setActiveMenu('bestsellers')}
               onMouseLeave={() => setActiveMenu(null)}
             >
-              <button className="flex items-center space-x-1 hover:text-[#c5a059] transition-colors py-1 cursor-pointer">
+              <button 
+                onClick={() => { navigateToCollection('best-sellers', 'Best Sellers'); setActiveMenu(null); }}
+                className="flex items-center space-x-1 hover:text-[#c5a059] transition-colors py-1 cursor-pointer"
+              >
                 <span>BEST SELLERS</span>
                 <ChevronDown className="w-3.5 h-3.5 text-stone-700 group-hover:rotate-180 transition-transform" />
               </button>
@@ -230,7 +238,10 @@ export const Header = () => {
               onMouseEnter={() => setActiveMenu('collections')}
               onMouseLeave={() => setActiveMenu(null)}
             >
-              <button className="flex items-center space-x-1 hover:text-[#c5a059] transition-colors py-1 cursor-pointer">
+              <button 
+                onClick={() => { navigateToCollection('all', 'All Collections'); setActiveMenu(null); }}
+                className="flex items-center space-x-1 hover:text-[#c5a059] transition-colors py-1 cursor-pointer"
+              >
                 <span>COLLECTIONS</span>
                 <ChevronDown className="w-3.5 h-3.5 text-stone-700 group-hover:rotate-180 transition-transform" />
               </button>
@@ -258,10 +269,10 @@ export const Header = () => {
               )}
             </div>
 
-            <button onClick={navigateToHome} className="hover:text-[#c5a059] transition-colors py-1 cursor-pointer">
+            <button onClick={() => navigateToCollection('bundles', 'Bundles & Gift Sets')} className="hover:text-[#c5a059] transition-colors py-1 cursor-pointer">
               BUNDLES
             </button>
-            <button onClick={navigateToHome} className="hover:text-[#c5a059] transition-colors py-1 cursor-pointer">
+            <button onClick={() => setIsSearchOpen(true)} className="hover:text-[#c5a059] transition-colors py-1 cursor-pointer">
               TRACK MY ORDER
             </button>
           </nav>
@@ -300,7 +311,7 @@ export const Header = () => {
             {/* Mobile Hamburger Menu Icon */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="p-1 text-stone-900 hover:text-[#c5a059] transition-colors rounded-full md:hidden"
+              className="p-1 text-stone-900 hover:text-[#c5a059] transition-colors rounded-full lg:hidden"
               title="Menu"
             >
               <Menu className="w-5 h-5 stroke-[1.75]" />
@@ -312,7 +323,7 @@ export const Header = () => {
 
       {/* FULL-SCREEN MOBILE NAVIGATION DRAWER (Matching Lattafa USA Image 2) */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-white animate-fadeIn text-stone-900 md:hidden">
+        <div className="fixed inset-0 z-50 flex flex-col bg-white animate-fadeIn text-stone-900 lg:hidden">
           
           {/* Drawer Top Header (Logo + Close X) */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
@@ -339,10 +350,10 @@ export const Header = () => {
               </div>
               {expandedMobileSubmenu === 'shop' && (
                 <div className="pl-4 py-2 space-y-3 text-sm font-medium text-stone-700 bg-stone-50 rounded-xl my-2">
-                  <div onClick={() => { navigateToHome(); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">All Fragrances</div>
-                  <div onClick={() => { navigateToHome(); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Eau de Parfum</div>
-                  <div onClick={() => { navigateToHome(); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Home Fragrances</div>
-                  <div onClick={() => { navigateToHome(); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Concentrated Perfume Oils</div>
+                  <div onClick={() => { navigateToCollection('all', 'All Fragrances'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">All Fragrances</div>
+                  <div onClick={() => { navigateToCollection('edp', 'Eau de Parfum'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Eau de Parfum</div>
+                  <div onClick={() => { navigateToCollection('air-freshener', 'Air Fresheners'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Air Fresheners</div>
+                  <div onClick={() => { navigateToCollection('body-spray', 'All Over Spray'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">All Over Spray</div>
                 </div>
               )}
             </div>
@@ -358,6 +369,7 @@ export const Header = () => {
               </div>
               {expandedMobileSubmenu === 'new' && (
                 <div className="pl-4 py-2 space-y-3 text-sm font-medium text-stone-700 bg-stone-50 rounded-xl my-2">
+                  <div onClick={() => { navigateToCollection('new-arrivals', 'New Arrivals'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">See All New Arrivals</div>
                   <div onClick={() => { handleCardClick('Khamrah Waha'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Khamrah Waha</div>
                   <div onClick={() => { handleCardClick('Art of Universe'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Art of Universe</div>
                   <div onClick={() => { handleCardClick('Atheeri'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Atheeri</div>
@@ -376,6 +388,7 @@ export const Header = () => {
               </div>
               {expandedMobileSubmenu === 'bestsellers' && (
                 <div className="pl-4 py-2 space-y-3 text-sm font-medium text-stone-700 bg-stone-50 rounded-xl my-2">
+                  <div onClick={() => { navigateToCollection('best-sellers', 'Best Sellers'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">See All Best Sellers</div>
                   <div onClick={() => { handleCardClick('Asad'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Asad</div>
                   <div onClick={() => { handleCardClick('Yara'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Yara Candy</div>
                   <div onClick={() => { handleCardClick('Badee'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Badee Al Oud</div>
@@ -394,15 +407,16 @@ export const Header = () => {
               </div>
               {expandedMobileSubmenu === 'collections' && (
                 <div className="pl-4 py-2 space-y-3 text-sm font-medium text-stone-700 bg-stone-50 rounded-xl my-2">
-                  <div onClick={() => { navigateToHome(); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Lattafa Pride</div>
-                  <div onClick={() => { navigateToHome(); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Teryaq</div>
+                  <div onClick={() => { navigateToCollection('pride', 'Lattafa Pride Collection'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Lattafa Pride</div>
+                  <div onClick={() => { navigateToCollection('badee-al-oud', 'Badee Al Oud Collection'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Badee Al Oud</div>
+                  <div onClick={() => { navigateToCollection('asad', 'Asad Collection'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Asad</div>
                 </div>
               )}
             </div>
 
             {/* 5. Bundles */}
             <div 
-              onClick={() => { navigateToHome(); setIsMobileMenuOpen(false); }}
+              onClick={() => { navigateToCollection('bundles', 'Bundles & Gift Sets'); setIsMobileMenuOpen(false); }}
               className="py-4 border-b border-gray-100 font-serif text-lg text-stone-900 cursor-pointer"
             >
               Bundles
@@ -410,7 +424,7 @@ export const Header = () => {
 
             {/* 6. Track My Order */}
             <div 
-              onClick={() => { navigateToHome(); setIsMobileMenuOpen(false); }}
+              onClick={() => { setIsSearchOpen(true); setIsMobileMenuOpen(false); }}
               className="py-4 border-b border-gray-100 font-serif text-lg text-stone-900 cursor-pointer"
             >
               Track My Order
