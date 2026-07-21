@@ -13,7 +13,8 @@ import {
   CheckCircle2,
   Package,
   Lock,
-  Gift
+  Gift,
+  ShoppingBag
 } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 
@@ -607,8 +608,8 @@ export const ProductPage = () => {
           </div>
 
           {/* Catalog Perfume Cards */}
-          {products
-            .filter((p) => p.id !== activeProduct.id)
+          {(products || [])
+            .filter((p) => p && activeProduct && p.id !== activeProduct.id)
             .slice(0, 7)
             .map((p) => (
               <div
