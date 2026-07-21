@@ -11,7 +11,7 @@ from rich.panel import Panel
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
 from rich.table import Table
 
-from config import DEFAULT_STORE_URL, OUTPUT_DIR, IMAGES_DIR
+from config import DEFAULT_STORE_URL, OUTPUT_DIR, IMAGES_DIR, FRONTEND_DATA_DIR
 from scraper.shopify_scraper import ShopifyScraper
 from scraper.perfume_enricher import PerfumeEnricher
 from scraper.exporter import DataExporter
@@ -91,6 +91,7 @@ def main():
 
     if args.format in ["all", "json"]:
         json_path = exporter.export_json(enriched_products)
+        DataExporter(output_dir=FRONTEND_DATA_DIR).export_json(enriched_products)
         exported_files.append(("JSON Dataset", json_path))
 
     # Step 4: Download Images (Optional)

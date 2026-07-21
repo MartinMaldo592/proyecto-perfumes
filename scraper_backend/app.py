@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 from pathlib import Path
 
-from config import DEFAULT_STORE_URL, OUTPUT_DIR, IMAGES_DIR
+from config import DEFAULT_STORE_URL, OUTPUT_DIR, IMAGES_DIR, FRONTEND_DATA_DIR
 from scraper.shopify_scraper import ShopifyScraper
 from scraper.perfume_enricher import PerfumeEnricher
 from scraper.exporter import DataExporter
@@ -99,6 +99,7 @@ if start_scraping:
         exporter.export_excel(enriched)
         exporter.export_csv(enriched)
         exporter.export_json(enriched)
+        DataExporter(FRONTEND_DATA_DIR).export_json(enriched)
 
         if download_imgs:
             status_text.text("Downloading high-resolution product images...")

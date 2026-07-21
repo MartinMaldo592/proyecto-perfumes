@@ -3,12 +3,15 @@ from pathlib import Path
 
 # Base Paths
 BASE_DIR = Path(__file__).resolve().parent
+ROOT_DIR = BASE_DIR.parent
 OUTPUT_DIR = BASE_DIR / "output"
 IMAGES_DIR = OUTPUT_DIR / "images"
+FRONTEND_DATA_DIR = ROOT_DIR / "public" / "data"
 
 # Ensure directories exist
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+FRONTEND_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 # Scraper Settings
 DEFAULT_STORE_URL = "https://www.lattafa-usa.com"
