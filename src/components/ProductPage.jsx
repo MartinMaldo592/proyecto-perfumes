@@ -150,7 +150,7 @@ export const ProductPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-12 items-start">
           
           {/* LEFT COLUMN: IMAGE GALLERY (7 Columns in LG - STICKY ON SCROLL) */}
-          <div className="lg:col-span-7 flex flex-col sm:flex-row gap-3 sm:gap-4 items-start lg:sticky lg:top-24 lg:self-start">
+          <div className="lg:col-span-7 flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-start lg:sticky lg:top-24 lg:self-start w-full">
             
             {/* Desktop & Tablet Vertical/Horizontal Thumbnails List (hidden on small mobile) */}
             {images.length > 1 && (
@@ -205,7 +205,7 @@ export const ProductPage = () => {
                 setTouchStart(0);
                 setTouchEnd(0);
               }}
-              className="relative flex-1 bg-[#f5f5f5] rounded-2xl sm:rounded-3xl p-4 sm:p-10 flex items-center justify-center border border-gray-100/60 h-[380px] xs:h-[420px] sm:h-[500px] lg:h-[540px] w-full overflow-hidden select-none cursor-grab active:cursor-grabbing"
+              className="relative w-full aspect-square sm:aspect-auto sm:h-[500px] lg:h-[540px] bg-[#f5f5f5] rounded-2xl sm:rounded-3xl p-4 sm:p-8 flex items-center justify-center border border-gray-100/60 overflow-hidden select-none cursor-grab active:cursor-grabbing"
             >
               
               {/* Zoom Search Button Top-Right */}
@@ -237,7 +237,7 @@ export const ProductPage = () => {
                   key={idx}
                   src={img}
                   alt={activeProduct.title}
-                  className={`absolute max-h-[340px] xs:max-h-[380px] sm:max-h-[440px] lg:max-h-[460px] w-auto h-auto object-contain transition-all duration-500 ease-in-out ${
+                  className={`absolute inset-0 w-full h-full object-contain p-4 sm:p-8 transition-all duration-500 ease-in-out ${
                     currentImgIdx === idx ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-95 z-0 pointer-events-none'
                   }`}
                 />
