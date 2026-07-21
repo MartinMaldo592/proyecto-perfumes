@@ -32,10 +32,17 @@ export const HeroSlider = () => {
   ];
 
   const [current, setCurrent] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState(0);
+
+  const handleNext = () => setCurrent((prev) => (prev + 1) % slides.length);
+  const handlePrev = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
+      handleNext();
     }, 5000);
     return () => clearInterval(timer);
   }, [slides.length]);
@@ -50,10 +57,35 @@ export const HeroSlider = () => {
   };
 
   return (
-    <div className="relative w-full bg-white overflow-hidden">
+    <div className="relative w-full bg-white overflow-hidden select-none">
       
-      {/* 1. TOP HERO CAMPAIGN IMAGE STAGE (Ken Burns Smooth Zoom-Out Effect) */}
-      <div className="relative w-full h-[420px] xs:h-[480px] sm:h-[580px] lg:h-[680px] bg-stone-900 overflow-hidden">
+      {/* 1. TOP HERO CAMPAIGN IMAGE STAGE (Ken Burns Smooth Zoom-Out Effect & Swipe Gestures) */}
+      <div 
+        onMouseDown={(e) => {
+          setDragStart(e.clientX);
+          setIsDragging(true);
+        }}
+        onMouseUp={(e) => {
+          if (isDragging) {
+            const diff = e.clientX - dragStart;
+            if (diff < -40) handleNext();
+            else if (diff > 40) handlePrev();
+          }
+          setIsDragging(false);
+        }}
+        onMouseLeave={() => setIsDragging(false)}
+        onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
+        onTouchMove={(e) => setTouchEnd(e.touches[0].clientX)}
+        onTouchEnd={() => {
+          if (!touchStart || !touchEnd) return;
+          const diff = touchStart - touchEnd;
+          if (diff > 40) handleNext();
+          else if (diff < -40) handlePrev();
+          setTouchStart(0);
+          setTouchEnd(0);
+        }}
+        className="relative w-full h-[420px] xs:h-[480px] sm:h-[580px] lg:h-[680px] bg-stone-900 overflow-hidden cursor-grab active:cursor-grabbing group"
+      >
         {slides.map((slide, index) => {
           const isActive = index === current;
           return (
@@ -63,8 +95,8 @@ export const HeroSlider = () => {
                 isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
               }`}
             >
-              {/* Image Container with Ken Burns Zoom-Out Animation (starts scale-115 -> zooms out smoothly to scale-100) */}
-              <div className="w-full h-full overflow-hidden relative">
+              {/* Image Container with Ken Burns Zoom-Out Animation */}
+              <div className="w-full h-full overflow-hidden relative pointer-events-none">
                 <img
                   src={slide.bgImage}
                   alt={slide.title}
@@ -73,7 +105,7 @@ export const HeroSlider = () => {
                   }`}
                 />
                 
-                {/* Overlay text on top of image for Slide 1 (Khamrah Waha overlay style) */}
+                {/* Overlay text on top of image */}
                 <div className="absolute inset-0 bg-black/20 flex flex-col items-center justify-center p-6 text-center text-white">
                   <span className="text-xs sm:text-sm font-semibold tracking-[0.3em] uppercase text-stone-200 drop-shadow-md mb-2">
                     {slide.subtitle}
@@ -87,6 +119,22 @@ export const HeroSlider = () => {
             </div>
           );
         })}
+
+        {/* Hover Arrow Controls for Desktop Navigation */}
+        <button
+          onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 bg-white/20 hover:bg-white/80 text-white hover:text-stone-900 rounded-full flex items-center justify-center backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
+          title="Previous slide"
+        >
+          ‹
+        </button>
+        <button
+          onClick={(e) => { e.stopPropagation(); handleNext(); }}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 bg-white/20 hover:bg-white/80 text-white hover:text-stone-900 rounded-full flex items-center justify-center backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
+          title="Next slide"
+        >
+          ›
+        </button>
       </div>
 
       {/* 2. BOTTOM ACTION SECTION ON CLEAN WHITE CANVAS (Matching Lattafa USA Images 1 & 2) */}
