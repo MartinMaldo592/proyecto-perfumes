@@ -2,7 +2,13 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const StoreContext = createContext();
 
-export const FREE_SHIPPING_THRESHOLD = 60.00; // USD
+export const FREE_SHIPPING_THRESHOLD = 225.00; // S/ 225.00 PEN (approx $60 USD)
+export const EXCHANGE_RATE = 3.75; // 1 USD = 3.75 PEN
+
+export const formatCurrency = (amount) => {
+  const num = parseFloat(amount) || 0;
+  return `S/ ${num.toFixed(2)}`;
+};
 
 export const StoreProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
@@ -52,14 +58,36 @@ export const StoreProvider = ({ children }) => {
     setActiveProduct(null);
   };
 
-  // Load scraped products JSON on mount & sync route
+  // Load scraped products JSON on mount & convert prices to Peruvian Soles (PEN) at 3.75 exchange rate
   useEffect(() => {
     fetch('/data/lattafa_perfumes.json')
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data);
+        const convertedData = data.map((p) => {
+          const minPricePen = p.min_price ? (parseFloat(p.min_price) * EXCHANGE_RATE).toFixed(2) : '0.00';
+          const maxPricePen = p.max_price ? (parseFloat(p.max_price) * EXCHANGE_RATE).toFixed(2) : '0.00';
+          const comparePricePen = p.compare_at_price ? (parseFloat(p.compare_at_price) * EXCHANGE_RATE).toFixed(2) : '';
+          const discount = comparePricePen && parseFloat(comparePricePen) > parseFloat(minPricePen)
+            ? Math.round(((parseFloat(comparePricePen) - parseFloat(minPricePen)) / parseFloat(comparePricePen)) * 100)
+            : 0;
+
+          return {
+            ...p,
+            min_price: minPricePen,
+            max_price: maxPricePen,
+            compare_at_price: comparePricePen,
+            discount_percent: discount,
+            variants: (p.variants || []).map((v) => ({
+              ...v,
+              price: v.price ? (parseFloat(v.price) * EXCHANGE_RATE).toFixed(2) : minPricePen,
+              compare_at_price: v.compare_at_price ? (parseFloat(v.compare_at_price) * EXCHANGE_RATE).toFixed(2) : ''
+            }))
+          };
+        });
+
+        setProducts(convertedData);
         setLoading(false);
-        syncRouteWithLocation(data);
+        syncRouteWithLocation(convertedData);
       })
       .catch((err) => {
         console.error('Failed to load perfumes catalog:', err);
@@ -158,7 +186,7 @@ export const StoreProvider = ({ children }) => {
     0
   );
   
-  const shipInsureCost = includeShipInsure && cart.length > 0 ? 1.30 : 0.00;
+  const shipInsureCost = includeShipInsure && cart.length > 0 ? 4.90 : 0.00;
   const cartGrandTotal = cartSubtotal + shipInsureCost;
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
@@ -183,6 +211,7 @@ export const StoreProvider = ({ children }) => {
         navigateToProduct,
         navigateToCollection,
         navigateToHome,
+        formatCurrency,
         selectedProduct,
         setSelectedProduct,
         wishlist,

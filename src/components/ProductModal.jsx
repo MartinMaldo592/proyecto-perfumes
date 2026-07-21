@@ -105,11 +105,11 @@ export const ProductModal = () => {
             {/* Pricing */}
             <div className="flex items-baseline space-x-3 mb-6 p-3 bg-stone-50 rounded-xl border border-stone-100">
               <span className="text-2xl font-bold text-stone-900">
-                ${price.toFixed(2)} USD
+                S/ {price.toFixed(2)}
               </span>
               {compareAt > price && (
                 <span className="text-sm text-gray-400 line-through">
-                  ${compareAt.toFixed(2)}
+                  S/ {compareAt.toFixed(2)}
                 </span>
               )}
               {selectedProduct.discount_percent > 0 && (
@@ -136,7 +136,7 @@ export const ProductModal = () => {
                           : 'border-gray-200 text-stone-600 hover:border-gray-400'
                       }`}
                     >
-                      {v.variant_title} - ${v.price}
+                      {v.variant_title} - S/ {parseFloat(v.price).toFixed(2)}
                     </button>
                   ))}
                 </div>

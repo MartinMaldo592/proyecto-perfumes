@@ -81,12 +81,12 @@ export const FragranceFilter = () => {
             <div>
               <div className="flex justify-between items-center mb-2">
                 <label className="text-xs font-bold text-stone-900 uppercase tracking-wider">Max Price</label>
-                <span className="text-xs font-bold text-amber-800">${maxPrice} USD</span>
+                <span className="text-xs font-bold text-amber-800">S/ {maxPrice}</span>
               </div>
               <input
                 type="range"
-                min="10"
-                max="150"
+                min="30"
+                max="500"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
                 className="w-full accent-amber-600"

@@ -11,9 +11,9 @@ export const Header = () => {
 
   // Trending items for SHOP menu
   const trendItems = [
-    { title: "Afeef", price: "$49.99 USD", soldOut: true, image: "https://cdn.shopify.com/s/files/1/0556/4101/4371/files/Afeef.png?v=1700000000" },
-    { title: "Asad", price: "From $14.99 USD", soldOut: false, image: "https://cdn.shopify.com/s/files/1/0556/4101/4371/files/Asad.png?v=1700000000" },
-    { title: "Khamrah Waha", price: "$49.99 USD", soldOut: false, image: "https://cdn.shopify.com/s/files/1/0556/4101/4371/files/Khamrah_Waha.png?v=1700000000" }
+    { title: "Afeef", price: "S/ 187.50", soldOut: true, image: "https://cdn.shopify.com/s/files/1/0556/4101/4371/files/Afeef.png?v=1700000000" },
+    { title: "Asad", price: "Desde S/ 56.20", soldOut: false, image: "https://cdn.shopify.com/s/files/1/0556/4101/4371/files/Asad.png?v=1700000000" },
+    { title: "Khamrah Waha", price: "S/ 187.50", soldOut: false, image: "https://cdn.shopify.com/s/files/1/0556/4101/4371/files/Khamrah_Waha.png?v=1700000000" }
   ];
 
   const newArrivalsCards = [
@@ -437,7 +437,7 @@ export const Header = () => {
             
             {/* Country Selector */}
             <div className="inline-flex items-center justify-center space-x-2 text-xs font-semibold text-stone-900 cursor-pointer">
-              <span>🇺🇸 United States (USD $)</span>
+              <span>🇵🇪 Perú (PEN S/)</span>
               <ChevronDown className="w-3.5 h-3.5 text-stone-600" />
             </div>
 

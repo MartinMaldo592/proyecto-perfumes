@@ -50,11 +50,11 @@ export const CartDrawer = () => {
               <Truck className="w-4 h-4 text-amber-400" />
               {amountToFreeShipping > 0 ? (
                 <span>
-                  Spend <b className="text-amber-400">${amountToFreeShipping.toFixed(2)}</b> more to unlock <b>FREE SHIPPING</b>!
+                  Agrega <b className="text-amber-400">S/ {amountToFreeShipping.toFixed(2)}</b> más para obtener <b>ENVÍO GRATIS</b>!
                 </span>
               ) : (
                 <span className="text-emerald-400 font-bold">
-                  🎉 Congratulations! You unlocked FREE SHIPPING!
+                  ¡Felicidades! ¡Desbloqueaste ENVÍO GRATIS!
                 </span>
               )}
             </div>
@@ -71,37 +71,33 @@ export const CartDrawer = () => {
           {/* Cart Item List */}
           <div className="flex-1 overflow-y-auto p-5 space-y-4">
             {cart.length === 0 ? (
-              <div className="py-16 text-center space-y-4">
-                <div className="w-16 h-16 bg-stone-100 text-stone-400 rounded-full flex items-center justify-center mx-auto">
-                  <ShoppingBag className="w-8 h-8" />
-                </div>
-                <h4 className="font-serif font-bold text-stone-800 text-base">Your Bag is Empty</h4>
+              <div className="text-center py-16 space-y-4">
+                <ShoppingBag className="w-16 h-16 text-stone-300 mx-auto stroke-[1.25]" />
+                <h4 className="font-serif text-lg text-stone-700 font-medium">Your shopping bag is empty</h4>
                 <p className="text-xs text-gray-500 max-w-xs mx-auto">
-                  Discover Lattafa Arabian Eau De Parfum series and add your favorite scents.
+                  Explore our luxury Arabic fragrances and discover your new signature scent.
                 </p>
                 <button
                   onClick={() => setIsCartOpen(false)}
-                  className="bg-[#121212] text-white text-xs font-bold px-6 py-3 rounded-full hover:bg-amber-700 transition-colors"
+                  className="bg-amber-800 hover:bg-amber-900 text-white font-bold text-xs uppercase px-6 py-3 rounded-xl tracking-wider shadow-md transition-all inline-block"
                 >
-                  START SHOPPING
+                  Start Shopping
                 </button>
               </div>
             ) : (
-              cart.map((item, idx) => (
+              cart.map((item) => (
                 <div
-                  key={idx}
-                  className="flex space-x-4 p-3 bg-stone-50 rounded-xl border border-stone-100 hover:border-gray-200 transition-colors"
+                  key={`${item.product.id}-${item.variant.variant_id}`}
+                  className="flex space-x-4 p-3 bg-stone-50 rounded-xl border border-stone-200/60 relative group"
                 >
-                  {/* Thumbnail */}
-                  <div className="w-20 h-20 bg-white rounded-lg p-1 flex items-center justify-center border border-gray-100 flex-shrink-0">
-                    <img
-                      src={item.product.main_image}
-                      alt={item.product.title}
-                      className="max-h-full max-w-full object-contain"
-                    />
-                  </div>
+                  {/* Item Image */}
+                  <img
+                    src={item.product.main_image || item.variant.image}
+                    alt={item.product.title}
+                    className="w-20 h-20 object-contain bg-white rounded-lg p-1.5 border border-stone-200"
+                  />
 
-                  {/* Info */}
+                  {/* Item Info */}
                   <div className="flex-1 flex flex-col justify-between">
                     <div>
                       <div className="flex justify-between items-start">
@@ -110,39 +106,39 @@ export const CartDrawer = () => {
                         </h4>
                         <button
                           onClick={() => removeFromCart(item.variant.variant_id)}
-                          className="text-gray-400 hover:text-red-600 transition-colors"
+                          className="text-gray-400 hover:text-red-600 transition-colors p-0.5"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       </div>
 
-                      <span className="text-[11px] text-gray-500 block">
-                        {item.variant.variant_title || "100 ml"}
+                      <span className="text-[11px] text-gray-500 font-medium block">
+                        Size: {item.variant.variant_title}
                       </span>
                     </div>
 
-                    {/* Quantity & Item Subtotal */}
-                    <div className="flex justify-between items-center mt-2">
-                      <div className="flex items-center border border-gray-300 rounded bg-white">
+                    <div className="flex items-center justify-between mt-2">
+                      {/* Quantity Controller */}
+                      <div className="flex items-center border border-gray-300 rounded-lg bg-white">
                         <button
                           onClick={() => updateQuantity(item.variant.variant_id, -1)}
-                          className="px-2 py-0.5 text-xs text-gray-600 hover:bg-gray-100"
+                          className="w-6 h-6 flex items-center justify-center text-xs font-bold text-gray-600 hover:bg-stone-100 rounded-l-lg"
                         >
                           -
                         </button>
-                        <span className="px-2 py-0.5 text-xs font-bold text-stone-900">
+                        <span className="w-6 text-center text-xs font-bold text-stone-900">
                           {item.quantity}
                         </span>
                         <button
                           onClick={() => updateQuantity(item.variant.variant_id, 1)}
-                          className="px-2 py-0.5 text-xs text-gray-600 hover:bg-gray-100"
+                          className="w-6 h-6 flex items-center justify-center text-xs font-bold text-gray-600 hover:bg-stone-100 rounded-r-lg"
                         >
                           +
                         </button>
                       </div>
 
                       <span className="font-bold text-xs text-stone-900">
-                        ${((parseFloat(item.variant.price) || 0) * item.quantity).toFixed(2)}
+                        S/ {((parseFloat(item.variant.price) || 0) * item.quantity).toFixed(2)}
                       </span>
                     </div>
                   </div>
@@ -161,7 +157,7 @@ export const CartDrawer = () => {
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
                   <div>
                     <span className="font-bold text-stone-800 block">ShipInsure Protection</span>
-                    <span className="text-[10px] text-gray-500">Covers loss, damage & theft for $1.30</span>
+                    <span className="text-[10px] text-gray-500">Cubre pérdida, daño y robo por S/ 4.90</span>
                   </div>
                 </div>
                 <input
@@ -176,27 +172,27 @@ export const CartDrawer = () => {
               <div className="space-y-1 text-xs">
                 <div className="flex justify-between text-gray-600">
                   <span>Subtotal</span>
-                  <span className="font-semibold">${cartSubtotal.toFixed(2)} USD</span>
+                  <span className="font-semibold">S/ {cartSubtotal.toFixed(2)}</span>
                 </div>
                 {includeShipInsure && (
                   <div className="flex justify-between text-gray-600">
                     <span>Shipping Protection</span>
-                    <span className="font-semibold">${shipInsureCost.toFixed(2)} USD</span>
+                    <span className="font-semibold">S/ {shipInsureCost.toFixed(2)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-stone-900 text-sm font-bold pt-2 border-t">
                   <span>Estimated Total</span>
-                  <span className="text-amber-800 text-base">${cartGrandTotal.toFixed(2)} USD</span>
+                  <span className="text-amber-800 text-base">S/ {cartGrandTotal.toFixed(2)}</span>
                 </div>
               </div>
 
               {/* Checkout CTAs */}
               <div className="space-y-2 pt-2">
                 <button
-                  onClick={() => alert(`Redirecting to Checkout! Total: $${cartGrandTotal.toFixed(2)} USD`)}
+                  onClick={() => alert(`Procesando Compra. Total: S/ ${cartGrandTotal.toFixed(2)}`)}
                   className="w-full bg-[#121212] hover:bg-amber-800 text-white font-bold py-3.5 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center space-x-2 transition-all shadow-lg"
                 >
-                  <span>Checkout • ${cartGrandTotal.toFixed(2)} USD</span>
+                  <span>Comprar • S/ {cartGrandTotal.toFixed(2)}</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
 

@@ -91,7 +91,7 @@ export const SearchModal = () => {
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                <span className="font-bold text-sm text-stone-900">${product.min_price} USD</span>
+                <span className="font-bold text-sm text-stone-900">S/ {product.min_price}</span>
                 <ArrowRight className="w-4 h-4 text-gray-400" />
               </div>
             </div>

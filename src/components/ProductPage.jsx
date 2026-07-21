@@ -305,15 +305,15 @@ export const ProductPage = () => {
             {/* Price & Installments */}
             <div className="pt-1">
               <div className="text-3xl font-bold text-stone-900">
-                ${price.toFixed(2)} USD
+                S/ {price.toFixed(2)}
               </div>
               <p className="text-xs text-gray-500 mt-0.5">
                 <u>Shipping</u> calculated at checkout.
               </p>
               <div className="text-xs sm:text-sm text-stone-700 mt-1 flex items-center space-x-1.5">
-                <span>Pay in 2 interest-free installments of <b>${(price/2).toFixed(2)}</b> with</span>
+                <span>Paga en 2 cuotas sin interés de <b>S/ ${(price/2).toFixed(2)}</b> con</span>
                 <span className="font-bold text-indigo-700 bg-indigo-50 px-1.5 py-0.5 rounded text-[11px]">shopPay</span>
-                <u className="cursor-pointer font-medium">Learn more</u>
+                <u className="cursor-pointer font-medium font-serif">Learn more</u>
               </div>
             </div>
 
@@ -400,7 +400,7 @@ export const ProductPage = () => {
             <div className="space-y-2 pt-3 border-t border-gray-100 text-xs text-stone-700">
               <div className="flex items-center space-x-2">
                 <Truck className="w-4 h-4 text-stone-800" />
-                <span>Free Shipping in orders over $60</span>
+                <span>Envío gratis en compras mayores a S/ 225.00</span>
               </div>
               <div className="flex items-center space-x-2">
                 <RotateCcw className="w-4 h-4 text-stone-800" />
@@ -453,7 +453,7 @@ export const ProductPage = () => {
               <Truck className="w-5 h-5 text-stone-900" />
             </div>
             <h4 className="font-serif font-bold text-sm text-stone-900">Free Shipping</h4>
-            <p className="text-xs text-gray-500">On orders over $100</p>
+            <p className="text-xs text-gray-500">En pedidos superiores a S/ 375.00</p>
           </div>
 
           <div className="flex flex-col items-center space-y-1.5">
@@ -594,7 +594,7 @@ export const ProductPage = () => {
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
-                  addToCart({ id: 'shipinsure', title: 'ShipInsure Package Protection', min_price: 0.98, main_image: '' }, null, 1);
+                  addToCart({ id: 'shipinsure', title: 'ShipInsure Package Protection', min_price: 3.70, main_image: '' }, null, 1);
                 }}
                 className="absolute bottom-2.5 right-2.5 w-7 h-7 bg-white text-stone-900 rounded-full flex items-center justify-center shadow-xs hover:bg-stone-900 hover:text-white transition-all"
                 title="Add ShipInsure"
@@ -604,7 +604,7 @@ export const ProductPage = () => {
             </div>
             <span className="text-[10px] text-stone-500 font-medium block">ShipInsure</span>
             <h4 className="font-serif font-semibold text-stone-900 text-xs sm:text-sm line-clamp-2 leading-tight">ShipInsure Package Protection</h4>
-            <span className="text-xs font-bold text-stone-900 mt-0.5 block">From $0.98 USD</span>
+            <span className="text-xs font-bold text-stone-900 mt-0.5 block">Desde S/ 3.70</span>
           </div>
 
           {/* Catalog Perfume Cards */}
@@ -640,9 +640,9 @@ export const ProductPage = () => {
                 <span className="text-[10px] text-stone-500 font-medium block">Lattafa</span>
                 <h4 className="font-serif font-semibold text-stone-900 text-xs sm:text-sm line-clamp-1">{p.title}</h4>
                 <div className="flex items-center space-x-1.5 mt-0.5">
-                  <span className="text-xs font-bold text-stone-900">${p.min_price} USD</span>
+                  <span className="text-xs font-bold text-stone-900">S/ {p.min_price}</span>
                   {p.compare_at_price && (
-                    <span className="text-[11px] text-stone-400 line-through">${p.compare_at_price} USD</span>
+                    <span className="text-[11px] text-stone-400 line-through">S/ {p.compare_at_price}</span>
                   )}
                 </div>
               </div>
@@ -696,7 +696,7 @@ export const ProductPage = () => {
             />
             <div>
               <h4 className="font-serif font-bold text-stone-900 text-sm line-clamp-1">{activeProduct.title}</h4>
-              <span className="font-bold text-xs text-stone-900">${price.toFixed(2)} USD</span>
+              <span className="font-bold text-xs text-stone-900">S/ {price.toFixed(2)}</span>
             </div>
           </div>
 
@@ -715,7 +715,7 @@ export const ProductPage = () => {
               >
                 {activeProduct.variants.map((v) => (
                   <option key={v.variant_id} value={v.variant_id}>
-                    {v.variant_title} - ${v.price}
+                    {v.variant_title} - S/ {parseFloat(v.price).toFixed(2)}
                   </option>
                 ))}
               </select>

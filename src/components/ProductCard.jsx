@@ -121,11 +121,11 @@ export const ProductCard = ({ product }) => {
             <span className="text-xs sm:text-sm font-bold text-stone-900">
               {comparePrice > minPrice ? (
                 <>
-                  <span className="text-red-700 font-bold">${minPrice.toFixed(2)} USD</span>
-                  <span className="text-xs text-gray-400 line-through ml-1.5">${comparePrice.toFixed(2)} USD</span>
+                  <span className="text-red-700 font-bold">S/ {minPrice.toFixed(2)}</span>
+                  <span className="text-xs text-gray-400 line-through ml-1.5">S/ {comparePrice.toFixed(2)}</span>
                 </>
               ) : (
-                <span>${minPrice.toFixed(2)} USD</span>
+                <span>S/ {minPrice.toFixed(2)}</span>
               )}
             </span>
           </div>

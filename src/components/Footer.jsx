@@ -55,7 +55,7 @@ export const Footer = () => {
             </div>
             <div>
               <h4 className="font-serif font-semibold text-base text-stone-900">Free Shipping</h4>
-              <p className="text-xs text-stone-500 mt-0.5">On orders over $60</p>
+              <p className="text-xs text-stone-500 mt-0.5">En pedidos mayores a S/ 225.00</p>
             </div>
           </div>
 
@@ -65,14 +65,14 @@ export const Footer = () => {
             </div>
             <div>
               <h4 className="font-serif font-semibold text-base text-stone-900">Secure Checkout</h4>
-              <p className="text-xs text-stone-500 mt-0.5">Apple Pay, PayPal & Stripe</p>
+              <p className="text-xs text-stone-500 mt-0.5">100% Encrypted</p>
             </div>
           </div>
 
         </div>
       </div>
 
-      {/* 2. MAIN FOOTER CONTENT (Image 2 & Image 3 - Clean White Theme) */}
+      {/* 2. MAIN FOOTER CONTENT (Clean White Theme) */}
       <div className="w-full px-6 sm:px-10 lg:px-14 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
