@@ -52,8 +52,8 @@ export const StoreProvider = ({ children }) => {
   // Sync route based on window.location.pathname
   const syncRouteWithLocation = (catalog = products) => {
     const path = window.location.pathname;
-    if (path.startsWith('/products/')) {
-      const handle = path.replace('/products/', '').replace(/\/$/, '');
+    if (path.startsWith('/productos/')) {
+      const handle = path.replace('/productos/', '').replace(/\/$/, '');
       if (catalog && catalog.length > 0) {
         const found = catalog.find((p) => p.handle === handle || p.id?.toString() === handle);
         if (found) {
@@ -62,8 +62,8 @@ export const StoreProvider = ({ children }) => {
           return;
         }
       }
-    } else if (path.startsWith('/collections/')) {
-      const handle = path.replace('/collections/', '').replace(/\/$/, '');
+    } else if (path.startsWith('/colecciones/')) {
+      const handle = path.replace('/colecciones/', '').replace(/\/$/, '');
       setActiveCollection({ handle, title: formatTitle(handle) });
       setActivePage('collection');
       return;
@@ -174,7 +174,7 @@ export const StoreProvider = ({ children }) => {
       setAmbientTheme(palette);
       document.documentElement.style.setProperty('--page-bg-color', palette.bg);
 
-      const targetUrl = `/products/${product.handle || product.id}`;
+      const targetUrl = `/productos/${product.handle || product.id}`;
       window.history.pushState({ handle: product.handle }, '', targetUrl);
       setActiveProduct(product);
       setActivePage('product');
@@ -187,7 +187,7 @@ export const StoreProvider = ({ children }) => {
       setAmbientTheme(palette);
       document.documentElement.style.setProperty('--page-bg-color', '#ffffff');
 
-      const targetUrl = `/collections/${handle}`;
+      const targetUrl = `/colecciones/${handle}`;
       const displayTitle = title || formatTitle(handle);
       window.history.pushState({ handle }, '', targetUrl);
       setActiveCollection({ handle, title: displayTitle });

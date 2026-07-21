@@ -42,7 +42,7 @@ export const Header = () => {
     if (found) {
       navigateToProduct(found);
     } else {
-      navigateToCollection('all', 'All Fragrances');
+      navigateToCollection('all', 'Todas las Fragancias');
     }
     setActiveMenu(null);
   };

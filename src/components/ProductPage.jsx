@@ -128,7 +128,7 @@ export const ProductPage = () => {
       <div className="fixed right-6 bottom-6 z-30">
         <button className="bg-[#2d221c] hover:bg-[#1a1410] text-white px-4 py-2.5 rounded-full text-xs font-semibold flex items-center space-x-2 shadow-2xl transition-transform hover:scale-105">
           <Gift className="w-4 h-4 text-amber-300" />
-          <span>Rewards</span>
+          <span>Recompensas</span>
         </button>
       </div>
 
