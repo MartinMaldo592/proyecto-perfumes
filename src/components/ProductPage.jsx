@@ -585,9 +585,9 @@ export const ProductPage = () => {
           
           {/* Card 0: ShipInsure Package Protection Card */}
           <div className="w-[46%] xs:w-[44%] sm:w-auto flex-shrink-0 snap-start group cursor-pointer">
-            <div className="relative aspect-square bg-[#0b0c16] rounded-2xl p-4 flex flex-col items-center justify-center overflow-hidden mb-2 border border-gray-800">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-stone-900 rounded-xl flex items-center justify-center mb-1 border border-stone-700 shadow-md">
-                <Lock className="w-6 h-6 sm:w-8 sm:h-8 text-white stroke-[1.75]" />
+            <div className="relative aspect-[4/5] bg-[#0b0c16] rounded-2xl p-4 flex flex-col items-center justify-center overflow-hidden mb-2 border border-gray-800">
+              <div className="w-14 h-14 sm:w-18 sm:h-18 bg-stone-900 rounded-xl flex items-center justify-center mb-1 border border-stone-700 shadow-md">
+                <Lock className="w-7 h-7 sm:w-8 sm:h-8 text-white stroke-[1.75]" />
               </div>
               
               {/* Quick Add Bag Button */}
@@ -617,7 +617,7 @@ export const ProductPage = () => {
                 onClick={() => navigateToProduct(p)}
                 className="w-[46%] xs:w-[44%] sm:w-auto flex-shrink-0 snap-start group cursor-pointer"
               >
-                <div className="relative aspect-square bg-[#f8f6f2] rounded-2xl p-3 flex items-center justify-center overflow-hidden mb-2 border border-stone-200/50 group-hover:shadow-md transition-all">
+                <div className="relative aspect-[4/5] bg-[#f8f6f2] rounded-2xl p-3 flex items-center justify-center overflow-hidden mb-2 border border-stone-200/50 group-hover:shadow-md transition-all">
                   <img
                     src={p.main_image}
                     alt={p.title}
