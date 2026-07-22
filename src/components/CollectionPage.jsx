@@ -168,10 +168,6 @@ export const CollectionPage = () => {
           <div className="space-y-10">
             {/* Encabezado Principal */}
             <div className="text-center max-w-3xl mx-auto space-y-4">
-              <div className="inline-flex items-center space-x-2 bg-amber-50 border border-amber-200/80 px-4 py-1.5 rounded-full text-amber-900 text-xs font-semibold uppercase tracking-widest">
-                <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-                <span>Catálogo Completo de Colecciones</span>
-              </div>
               <h1 className="font-serif text-4xl sm:text-6xl font-normal text-stone-900 tracking-tight">
                 Nuestras Colecciones
               </h1>
