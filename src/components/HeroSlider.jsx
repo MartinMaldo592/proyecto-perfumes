@@ -10,7 +10,8 @@ export const HeroSlider = () => {
       title: "MUSAMAM BLACK INTENSE",
       subtitle: "ALTA PERFUMERÍA LATTAFA",
       cta: "COMPRAR AHORA",
-      bgImage: "https://www.lattafa-usa.com/cdn/shop/files/COVER_MAIN_UP_4-5.png?v=1769829986",
+      bgImageDesktop: "https://www.lattafa-usa.com/cdn/shop/files/COVER_MAIN_UP_4-5.png?v=1769829986",
+      bgImageMobile: "https://www.lattafa-usa.com/cdn/shop/files/COVER_MAIN_UP_4-5_6f32698e-c222-4d60-aac3-19bee555a281.png",
       query: "Musamam"
     },
     {
@@ -18,7 +19,8 @@ export const HeroSlider = () => {
       title: "ANGHAM SECOND SONG",
       subtitle: "NUEVA COLECCIÓN EXCLUSIVA",
       cta: "EXPLORAR COLECCIÓN",
-      bgImage: "https://www.lattafa-usa.com/cdn/shop/files/JPEG_image-41C4-8874-82-0.png?v=1769830090",
+      bgImageDesktop: "https://www.lattafa-usa.com/cdn/shop/files/JPEG_image-41C4-8874-82-0.png?v=1769830090",
+      bgImageMobile: "https://www.lattafa-usa.com/cdn/shop/files/JPEG_image-41C4-8874-82-0.jpg",
       query: "Angham"
     },
     {
@@ -26,7 +28,8 @@ export const HeroSlider = () => {
       title: "KHAMRAH WAHA",
       subtitle: "DESCUBRE TU OASIS",
       cta: "DESCUBRIR AHORA",
-      bgImage: "https://www.lattafa-usa.com/cdn/shop/files/Khamrah_Waha_edp.png?v=1779478380",
+      bgImageDesktop: "https://www.lattafa-usa.com/cdn/shop/files/Khamrah_Waha_edp.png?v=1779478380",
+      bgImageMobile: "https://www.lattafa-usa.com/cdn/shop/files/Khamrah_Waha_edp_Mobile.webp",
       query: "Khamrah"
     }
   ];
@@ -124,12 +127,14 @@ export const HeroSlider = () => {
               {/* Image Container with Automatic Smooth Zoom-Out (Ken Burns Effect) */}
               <div className="w-full h-full overflow-hidden relative pointer-events-none">
                 {isActive && (
-                  <img
-                    key={`hero-img-${slide.id}-${current}`}
-                    src={slide.bgImage}
-                    alt={slide.title}
-                    className="w-full h-full object-cover animate-kenburns transform-gpu"
-                  />
+                  <picture key={`hero-pic-${slide.id}-${current}`} className="w-full h-full block">
+                    <source media="(max-width: 639px)" srcSet={slide.bgImageMobile} />
+                    <img
+                      src={slide.bgImageDesktop}
+                      alt={slide.title}
+                      className="w-full h-full object-cover animate-kenburns transform-gpu"
+                    />
+                  </picture>
                 )}
               </div>
 
