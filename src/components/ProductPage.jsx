@@ -291,7 +291,7 @@ export const ProductPage = () => {
               )}
             </div>
 
-            {/* Price & Installments */}
+            {/* Price */}
             <div className="pt-1">
               <div className="text-3xl font-bold text-stone-900">
                 S/ {price.toFixed(2)}
@@ -299,11 +299,6 @@ export const ProductPage = () => {
               <p className="text-xs text-gray-500 mt-0.5">
                 <u>Envío</u> calculado en la pantalla de pago.
               </p>
-              <div className="text-xs sm:text-sm text-stone-700 mt-1 flex items-center space-x-1.5">
-                <span>Paga en 2 cuotas sin interés de <b>S/ {(price/2).toFixed(2)}</b> con</span>
-                <span className="font-bold text-indigo-700 bg-indigo-50 px-1.5 py-0.5 rounded text-[11px]">shopPay</span>
-                <u className="cursor-pointer font-medium font-serif">Conocer más</u>
-              </div>
             </div>
 
             {/* Size Variant Picker */}
