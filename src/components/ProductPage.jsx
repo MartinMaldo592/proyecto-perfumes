@@ -183,27 +183,29 @@ export const ProductPage = () => {
       <div className="w-full px-2 sm:px-10 lg:px-14 py-1 sm:py-2">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-12 items-start">
           
-          {/* LEFT COLUMN: IMAGE GALLERY (7 Columns in LG - STICKY ON SCROLL) */}
-          <div className="lg:col-span-7 flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-start lg:sticky lg:top-24 lg:self-start w-full">
+          {/* LEFT COLUMN: IMAGE GALLERY (6 Columns in LG - STICKY ON SCROLL) */}
+          <div className="lg:col-span-6 flex flex-col sm:flex-row gap-3 sm:gap-5 items-stretch sm:items-start lg:sticky lg:top-24 lg:self-start w-full">
             
-            {/* Desktop & Tablet Vertical/Horizontal Thumbnails List */}
+            {/* Desktop & Tablet Vertical Thumbnails List - Enlarged Cards */}
             {images.length > 1 && (
-              <div className="hidden sm:flex sm:flex-col gap-3 overflow-x-auto sm:overflow-y-auto max-h-[540px] flex-shrink-0 w-full sm:w-22">
+              <div className="hidden sm:flex sm:flex-col gap-3.5 overflow-x-auto sm:overflow-y-auto max-h-[460px] flex-shrink-0 w-full sm:w-28">
                 {images.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentImgIdx(idx)}
-                    className={`w-20 h-20 sm:w-22 sm:h-22 rounded-2xl border p-2 bg-[#f5f5f5] flex items-center justify-center transition-all ${
-                      currentImgIdx === idx ? 'border-stone-900 ring-2 ring-stone-900 shadow-xs' : 'border-transparent opacity-70 hover:opacity-100'
+                    className={`w-24 h-24 sm:w-28 sm:h-28 rounded-2xl border p-1 flex items-center justify-center transition-all cursor-pointer bg-[#f7f7f7] ${
+                      currentImgIdx === idx 
+                        ? 'border-2 border-stone-900 shadow-sm ring-1 ring-stone-900/10' 
+                        : 'border border-stone-200/80 opacity-70 hover:opacity-100 hover:border-stone-400'
                     }`}
                   >
-                    <img src={img} alt="" className="max-h-full max-w-full object-contain" />
+                    <img src={img} alt="" className="w-full h-full object-contain mix-blend-multiply rounded-xl" />
                   </button>
                 ))}
               </div>
             )}
 
-            {/* Main Image Stage Container - Drag Swipe & Smooth Fade Effect */}
+            {/* Main Image Stage Container - Full Coverage */}
             <div 
               onMouseDown={(e) => {
                 setDragStart(e.clientX);
@@ -239,12 +241,12 @@ export const ProductPage = () => {
                 setTouchStart(0);
                 setTouchEnd(0);
               }}
-              className="relative w-full aspect-square sm:aspect-auto sm:h-[500px] lg:h-[540px] bg-[#f5f5f5] rounded-2xl sm:rounded-3xl p-4 sm:p-8 flex items-center justify-center border border-gray-100/60 overflow-hidden select-none cursor-grab active:cursor-grabbing"
+              className="relative w-full aspect-square sm:aspect-auto sm:h-[420px] lg:h-[450px] bg-[#f7f7f7] rounded-2xl sm:rounded-3xl border border-stone-200/80 overflow-hidden flex items-center justify-center select-none cursor-grab active:cursor-grabbing p-0"
             >
               
               {/* Zoom Search Button Top-Right */}
-              <button className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-8 h-8 sm:w-9 sm:h-9 bg-white/90 hover:bg-white text-stone-800 rounded-full flex items-center justify-center shadow-xs transition-all">
-                <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <button className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-9 h-9 bg-white/90 hover:bg-white text-stone-800 rounded-full flex items-center justify-center shadow-sm border border-stone-200/60 transition-all">
+                <Search className="w-4 h-4" />
               </button>
 
               {/* Carousel Prev/Next Arrow Buttons */}
@@ -252,27 +254,26 @@ export const ProductPage = () => {
                 <>
                   <button
                     onClick={handlePrevImg}
-                    className="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-white hover:bg-stone-50 text-stone-900 rounded-full items-center justify-center shadow-md transition-all border border-gray-100"
+                    className="hidden sm:flex absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-white/90 hover:bg-white text-stone-900 rounded-full items-center justify-center shadow-md transition-all border border-stone-200"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
                   <button
                     onClick={handleNextImg}
-                    className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-white hover:bg-stone-50 text-stone-900 rounded-full items-center justify-center shadow-md transition-all border border-gray-100"
+                    className="hidden sm:flex absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-white/90 hover:bg-white text-stone-900 rounded-full items-center justify-center shadow-md transition-all border border-stone-200"
                   >
                     <ChevronRight className="w-5 h-5" />
                   </button>
                 </>
               )}
 
-              {/* Absolute Stacked Images for Smooth Cross-Fade Transition */}
-              {/* Main Displayed Image with Parallax Hero Shift & Zoom (Option 3 Effect) */}
-              <div className="w-full h-full overflow-hidden flex items-center justify-center relative">
+              {/* Displayed Main Image - 100% Full Space Coverage */}
+              <div className="w-full h-full overflow-hidden flex items-center justify-center relative p-0">
                 <img
                   key={currentImgIdx}
                   src={images[currentImgIdx]}
                   alt={activeProduct.title}
-                  className="max-h-full max-w-full object-contain filter drop-shadow-xl transition-all duration-700 ease-out transform scale-100 animate-heroZoom"
+                  className="w-full h-full object-contain mix-blend-multiply scale-100 sm:scale-105 transition-all duration-500 ease-out transform animate-heroZoom"
                   style={{
                     transform: isDragging ? `translateX(${dragOffset}px)` : 'none'
                   }}
@@ -282,7 +283,7 @@ export const ProductPage = () => {
           </div>
 
           {/* RIGHT COLUMN: PRODUCT INFO & PURCHASE CONTROLS */}
-          <div className="lg:col-span-5 space-y-5 sm:space-y-6">
+          <div className="lg:col-span-6 space-y-5 sm:space-y-6">
             
             {/* Brand Vendor */}
             <div>
