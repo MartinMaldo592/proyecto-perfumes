@@ -88,27 +88,66 @@ export const CustomerReviews = () => {
     }
   };
 
+  const scrollLeft = () => {
+    if (scrollRef.current) scrollRef.current.scrollBy({ left: -340, behavior: 'smooth' });
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) scrollRef.current.scrollBy({ left: 340, behavior: 'smooth' });
+  };
+
   return (
-    <section className="w-full bg-[#f4f1ea] py-10 my-10 overflow-hidden">
-      {/* Full-width carousel row matching official Lattafa USA layout */}
+    <section className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-[#f4f1ea] py-12 my-12 overflow-hidden">
+      
+      {/* Header with Title and Scroll Controls */}
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 mb-8 flex items-end justify-between">
+        <div>
+          <span className="text-xs uppercase tracking-[0.25em] font-semibold text-amber-900 block mb-1">
+            Reseñas Reales de Compradores
+          </span>
+          <h2 className="font-serif text-2xl sm:text-4xl font-normal text-stone-900">
+            Lo Que Dicen Nuestros Clientes
+          </h2>
+        </div>
+
+        {/* Desktop & Mobile Scroll Arrows */}
+        <div className="flex items-center space-x-3">
+          <button
+            onClick={scrollLeft}
+            className="w-10 h-10 rounded-full bg-white border border-stone-300 flex items-center justify-center text-stone-900 hover:bg-stone-900 hover:text-white transition-colors cursor-pointer shadow-xs"
+            title="Anterior"
+          >
+            ‹
+          </button>
+          <button
+            onClick={scrollRight}
+            className="w-10 h-10 rounded-full bg-white border border-stone-300 flex items-center justify-center text-stone-900 hover:bg-stone-900 hover:text-white transition-colors cursor-pointer shadow-xs"
+            title="Siguiente"
+          >
+            ›
+          </button>
+        </div>
+      </div>
+
+      {/* 100% Edge-to-Edge Full Width Carousel Row */}
       <div 
         ref={scrollRef}
-        className="w-full px-4 sm:px-8 flex space-x-5 overflow-x-auto scrollbar-none scroll-smooth py-2"
+        className="w-full px-6 sm:px-12 lg:px-16 flex space-x-6 overflow-x-auto scrollbar-none scroll-smooth py-3"
       >
         {reviews.map((rev) => (
           <div
             key={rev.id}
-            className="w-[280px] sm:w-[305px] md:w-[325px] flex-shrink-0 bg-white rounded-2xl shadow-xs overflow-hidden flex flex-col justify-between group hover:shadow-md transition-all duration-300"
+            className="w-[285px] sm:w-[315px] md:w-[340px] flex-shrink-0 bg-white rounded-2xl shadow-xs overflow-hidden flex flex-col justify-between group hover:shadow-xl transition-all duration-300"
           >
             {/* Top Photo filling full width of card edge-to-edge */}
             <div 
               onClick={() => handleProductClick(rev.productTitle)}
-              className="w-full aspect-square bg-[#f0eee8] overflow-hidden cursor-pointer relative"
+              className="w-full aspect-square bg-[#f0eee8] overflow-hidden cursor-pointer relative glass-hover-shine"
             >
               <img
                 src={rev.photo}
                 alt={rev.author}
-                className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
             </div>
 
@@ -122,9 +161,9 @@ export const CustomerReviews = () => {
                 </div>
 
                 {/* 5 Solid Black Stars */}
-                <div className="flex items-center space-x-0.5 text-black">
+                <div className="flex items-center space-x-0.5 text-amber-500">
                   {Array.from({ length: rev.rating }).map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-black text-black" />
+                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
 

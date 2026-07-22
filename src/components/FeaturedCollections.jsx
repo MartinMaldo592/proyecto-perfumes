@@ -57,8 +57,8 @@ export const FeaturedCollections = () => {
           </div>
         </ScrollReveal>
 
-        {/* Mobile Horizontal Swipe Carousel / Desktop 4-Card Grid */}
-        <div className="flex overflow-x-auto snap-x snap-mandatory space-x-4 pb-4 sm:pb-0 scrollbar-none sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:space-x-0 sm:gap-6">
+        {/* Mobile Horizontal Swipe Carousel (Edge-to-Edge) / Desktop 4-Card Grid */}
+        <div className="-mx-4 px-4 sm:mx-0 sm:px-0 flex overflow-x-auto snap-x snap-mandatory space-x-4 pb-4 sm:pb-0 scrollbar-none sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:space-x-0 sm:gap-6">
           {displayedProducts.map((product) => (
             <div
               key={product.id}
