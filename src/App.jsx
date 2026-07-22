@@ -28,9 +28,9 @@ const MainLayout = () => {
       {/* Sticky Luxury Header */}
       <Header />
 
-      {/* Main Content View Switcher with Tailor-Made Gold Shimmer Skeleton Transition (Product & Collection Pages Only) */}
+      {/* Main Content View Switcher with Tailor-Made Gold Shimmer Skeleton Transition */}
       <main className="flex-1">
-        {isPending && activePage !== 'home' ? (
+        {isPending ? (
           <SkeletonLoader type={activePage} />
         ) : activePage === 'product' ? (
           <ProductPage />

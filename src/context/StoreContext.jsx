@@ -163,13 +163,11 @@ export const StoreProvider = ({ children }) => {
    */
   const triggerPageTransition = (callback) => {
     setPageTransitioning(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    callback();
+    window.scrollTo(0, 0);
     setTimeout(() => {
-      callback();
-      setTimeout(() => {
-        setPageTransitioning(false);
-      }, 1000); // Duración configurada a 1000ms (1 segundo)
-    }, 1000);
+      setPageTransitioning(false);
+    }, 1000); // Duración del skeleton (1000ms)
   };
 
   const navigateToProduct = (product) => {
