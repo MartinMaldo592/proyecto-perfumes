@@ -1,9 +1,34 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 import { ProductCard } from './ProductCard';
 import { ScrollReveal } from './ScrollReveal';
 import { CustomerReviews } from './CustomerReviews';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+    }
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: 0.15 }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24, scale: 0.95 },
+  show: { 
+    opacity: 1, 
+    y: 0, 
+    scale: 1,
+    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] }
+  }
+};
 
 export const FeaturedCollections = () => {
   const { products, navigateToCollection } = useStore();
@@ -29,12 +54,12 @@ export const FeaturedCollections = () => {
       {/* 1. TABBED PRODUCTS SECTION */}
       <section>
         <ScrollReveal animation="fade-up" duration={600}>
-          <div className="flex items-center justify-between border-b border-gray-100 pb-4 mb-6 sm:mb-8">
+          <div className="flex items-center justify-between pb-2 mb-4 sm:mb-5">
             <div className="flex items-center space-x-6 sm:space-x-8">
               <button
                 onClick={() => setActiveTab('new')}
                 className={`font-serif text-xl sm:text-3xl font-semibold transition-colors cursor-pointer ${
-                  activeTab === 'new' ? 'text-stone-900 border-b-2 border-stone-900 pb-1' : 'text-gray-400 hover:text-stone-600'
+                  activeTab === 'new' ? 'text-stone-900' : 'text-gray-400 hover:text-stone-600'
                 }`}
               >
                 Novedades
@@ -42,7 +67,7 @@ export const FeaturedCollections = () => {
               <button
                 onClick={() => setActiveTab('bestsellers')}
                 className={`font-serif text-xl sm:text-3xl font-semibold transition-colors cursor-pointer ${
-                  activeTab === 'bestsellers' ? 'text-stone-900 border-b-2 border-stone-900 pb-1' : 'text-gray-400 hover:text-stone-600'
+                  activeTab === 'bestsellers' ? 'text-stone-900' : 'text-gray-400 hover:text-stone-600'
                 }`}
               >
                 Los Más Vendidos
@@ -57,64 +82,76 @@ export const FeaturedCollections = () => {
           </div>
         </ScrollReveal>
 
-        {/* Mobile Horizontal Swipe Carousel (Free Momentum Scroll) / Desktop 4-Card Grid */}
-        <div className="-mx-4 px-4 sm:mx-0 sm:px-0 flex overflow-x-auto space-x-4 pb-4 sm:pb-0 scrollbar-none sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:space-x-0 sm:gap-6">
-          {displayedProducts.map((product) => (
-            <div
-              key={product.id}
-              className="w-[75%] xs:w-[70%] sm:w-auto flex-shrink-0 h-full"
-            >
-              <ProductCard product={product} />
-            </div>
-          ))}
-        </div>
+        {/* Mobile Horizontal Swipe Carousel (Free Momentum Scroll) / Desktop 4-Card Grid with Staggered Cascading Animation */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            className="-mx-4 px-4 sm:mx-0 sm:px-0 flex overflow-x-auto space-x-4 pb-2 sm:pb-0 scrollbar-none sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:space-x-0 sm:gap-6"
+          >
+            {displayedProducts.map((product) => (
+              <motion.div
+                key={product.id}
+                variants={cardVariants}
+                className="w-[75%] xs:w-[70%] sm:w-auto flex-shrink-0 h-full"
+              >
+                <ProductCard product={product} />
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </section>
 
-      {/* 2. EXPLORE OUR COLLECTION (Clean Frame-less Container) */}
-      <section className="bg-[#f8f6f2] rounded-3xl p-6 sm:p-10">
-        <ScrollReveal animation="fade-up" duration={600}>
-          <div className="mb-6 max-w-xl">
-            <h2 className="font-serif text-2xl sm:text-4xl font-normal text-stone-900 leading-tight mb-2">
-              Explora Nuestras Colecciones
-            </h2>
-            <p className="text-stone-600 text-xs sm:text-sm leading-relaxed">
-              La fragancia perfecta para cuando deseas ser inolvidable.
-            </p>
-          </div>
-        </ScrollReveal>
+      {/* 2. EXPLORE OUR COLLECTION (Edge-to-Edge Full-Width Container) */}
+      <section className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-[#f8f6f2] -mt-10 sm:-mt-14 py-8 sm:py-12 overflow-hidden">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-14">
+          <ScrollReveal animation="fade-up" duration={600}>
+            <div className="mb-6 max-w-xl">
+              <h2 className="font-serif text-2xl sm:text-4xl font-normal text-stone-900 leading-tight mb-2">
+                Explora Nuestras Colecciones
+              </h2>
+              <p className="text-stone-600 text-xs sm:text-sm leading-relaxed">
+                La fragancia perfecta para cuando deseas ser inolvidable.
+              </p>
+            </div>
+          </ScrollReveal>
 
-        {/* Mobile Horizontal Swipe Carousel / Desktop 4-Column Grid */}
-        <div className="flex overflow-x-auto space-x-4 pb-2 scrollbar-none sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:space-x-0 sm:gap-5">
-          {collectionCards.map((col, idx) => (
-            <div
-              key={idx}
-              className="w-[72%] xs:w-[68%] sm:w-auto flex-shrink-0"
-            >
+          {/* Mobile Horizontal Swipe Carousel / Desktop 4-Column Grid */}
+          <div className="flex overflow-x-auto space-x-4 pb-2 scrollbar-none sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:space-x-0 sm:gap-5">
+            {collectionCards.map((col, idx) => (
               <div
-                onClick={() => navigateToCollection(col.handle, col.title)}
-                className="bg-white rounded-2xl p-3 shadow-xs hover:shadow-md transition-all group cursor-pointer border-0 h-full"
+                key={idx}
+                className="w-[72%] xs:w-[68%] sm:w-auto flex-shrink-0"
               >
-                <div className="aspect-square w-full overflow-hidden rounded-xl bg-stone-100">
-                  <img
-                    src={col.image}
-                    alt={col.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="pt-2 px-1">
-                  <h4 className="font-serif font-semibold text-stone-900 text-base">{col.title}</h4>
-                  <span className="text-xs text-stone-500 mt-0.5 block">{col.count}</span>
+                <div
+                  onClick={() => navigateToCollection(col.handle, col.title)}
+                  className="bg-white rounded-2xl p-3 shadow-xs hover:shadow-md transition-all group cursor-pointer border-0 h-full"
+                >
+                  <div className="aspect-square w-full overflow-hidden rounded-xl bg-stone-100">
+                    <img
+                      src={col.image}
+                      alt={col.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="pt-2 px-1">
+                    <h4 className="font-serif font-semibold text-stone-900 text-base">{col.title}</h4>
+                    <span className="text-xs text-stone-500 mt-0.5 block">{col.count}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* 3. BUNDLES SECTION */}
       <section>
         <ScrollReveal animation="fade-up" duration={600}>
-          <div className="flex items-center justify-between mb-8 border-b border-gray-100 pb-4">
+          <div className="flex items-center justify-between mb-6 pb-2">
             <h2 className="font-serif text-2xl sm:text-3xl font-normal text-stone-900">
               Packs y Kits Exclusivos
             </h2>
