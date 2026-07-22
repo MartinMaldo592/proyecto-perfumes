@@ -16,6 +16,19 @@ import { SkeletonLoader } from './components/SkeletonLoader';
 
 const MainLayout = () => {
   const { activePage, loading, pageTransitioning } = useStore();
+  const [isScrolled, setIsScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const isPending = loading || pageTransitioning;
 
@@ -23,7 +36,11 @@ const MainLayout = () => {
     <div className="min-h-screen bg-white text-stone-900 flex flex-col font-sans selection:bg-amber-500 selection:text-white">
       
       {/* 100% Fixed Header Wrapper Container for Mobile & Desktop */}
-      <header className="fixed top-0 left-0 right-0 z-40 w-full bg-white border-b border-stone-200/60 shadow-xs">
+      <header className={`fixed top-0 left-0 right-0 z-40 w-full bg-white transition-all duration-300 ${
+        isScrolled 
+          ? 'border-b border-stone-200/80 shadow-md' 
+          : 'border-b border-transparent shadow-none'
+      }`}>
         <AnnouncementBar />
         <Header />
       </header>

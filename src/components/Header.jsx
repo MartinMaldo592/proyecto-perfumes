@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Search, ShoppingBag, ChevronDown, ArrowUpRight, ChevronLeft, ChevronRight, Menu, X, ChevronRight as ChevronRightIcon } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
+import { PeruFlagBadge } from './PeruFlagBadge';
 
 export const Header = () => {
   const { cartItemCount, setIsCartOpen, setIsSearchOpen, wishlist, navigateToHome, navigateToProduct, navigateToCollection, products } = useStore();
@@ -67,13 +68,17 @@ export const Header = () => {
           </div>
 
           {/* Logo Container */}
-          <div className="flex-shrink-0 flex items-center mr-2 sm:mr-4 lg:mr-6">
+          <div className="flex-shrink-0 flex items-center space-x-2 mr-2 sm:mr-4 lg:mr-6">
             <img
               src="/logo.jpg"
               alt="Maldonado Parfums"
               onClick={navigateToHome}
               className="h-10 sm:h-14 lg:h-16 max-h-14 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity"
             />
+            {/* Mobile 205 Years Peru Flag Badge - Right side of logo in Mobile */}
+            <div className="flex lg:hidden items-center ml-1">
+              <PeruFlagBadge />
+            </div>
           </div>
 
           {/* Centered Desktop Navigation Links */}
@@ -290,7 +295,12 @@ export const Header = () => {
           </nav>
 
           {/* Right Action Icons on Right Edge (Search, User, Cart, Mobile Menu) */}
-          <div className="flex items-center space-x-3.5 sm:space-x-5">
+          <div className="flex items-center space-x-3 sm:space-x-4">
+
+            {/* Desktop 205 Years Peru Flag Badge - Left of Search Icon in Desktop */}
+            <div className="hidden lg:flex items-center">
+              <PeruFlagBadge />
+            </div>
 
             <button
               onClick={() => setIsSearchOpen(true)}
