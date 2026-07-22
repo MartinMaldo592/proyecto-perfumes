@@ -31,6 +31,35 @@ export const ProductPage = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = async () => {
+    if (!activeProduct) return;
+    const shareUrl = window.location.href;
+    const shareText = `*${activeProduct.title}* — Maldonado Parfums\n${shareUrl}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `${activeProduct.title} — Maldonado Parfums`,
+          text: `Descubre ${activeProduct.title} en Maldonado Parfums:`,
+          url: shareUrl,
+        });
+        return;
+      } catch (err) {
+        // Fallback to WhatsApp link
+      }
+    }
+
+    // Direct WhatsApp Share
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+    
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch(e) {}
+  };
 
   useEffect(() => {
     if (activeProduct) {
@@ -362,7 +391,7 @@ export const ProductPage = () => {
                 {/* Wishlist Button */}
                 <button
                   onClick={() => toggleWishlist(activeProduct.id)}
-                  className={`p-3.5 border rounded-full transition-all ${
+                  className={`p-3.5 border rounded-full transition-all cursor-pointer ${
                     isWishlisted
                       ? 'border-amber-600 bg-amber-50 text-amber-700'
                       : 'border-gray-200 text-stone-600 hover:border-gray-400'
@@ -370,6 +399,20 @@ export const ProductPage = () => {
                   title="Guardar en Favoritos"
                 >
                   <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-amber-600 text-amber-600' : ''}`} />
+                </button>
+
+                {/* Share Button (WhatsApp & Open Graph Compatible) */}
+                <button
+                  onClick={handleShare}
+                  className="p-3.5 border border-gray-200 text-stone-600 hover:border-stone-900 hover:text-stone-900 rounded-full transition-all cursor-pointer relative"
+                  title="Compartir Fragancia"
+                >
+                  <Share2 className="w-4 h-4" />
+                  {copied && (
+                    <span className="absolute -top-9 left-1/2 -translate-x-1/2 bg-stone-900 text-white text-[10px] font-bold px-2 py-1 rounded shadow-md whitespace-nowrap animate-fadeIn">
+                      ¡Enlace copiado!
+                    </span>
+                  )}
                 </button>
 
               </div>
