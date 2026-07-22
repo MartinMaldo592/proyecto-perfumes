@@ -22,11 +22,11 @@ const MainLayout = () => {
   return (
     <div className="min-h-screen bg-white text-stone-900 flex flex-col font-sans selection:bg-amber-500 selection:text-white">
       
-      {/* Rolling Announcement Bar */}
-      <AnnouncementBar />
-
-      {/* Sticky Luxury Header */}
-      <Header />
+      {/* Sticky Header Wrapper Container */}
+      <div className="sticky top-0 z-40 w-full bg-white">
+        <AnnouncementBar />
+        <Header />
+      </div>
 
       {/* Main Content View Switcher with Tailor-Made Gold Shimmer Skeleton Transition */}
       <main className="flex-1">
