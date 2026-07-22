@@ -57,12 +57,12 @@ export const FeaturedCollections = () => {
           </div>
         </ScrollReveal>
 
-        {/* Mobile Horizontal Swipe Carousel (Edge-to-Edge) / Desktop 4-Card Grid */}
-        <div className="-mx-4 px-4 sm:mx-0 sm:px-0 flex overflow-x-auto snap-x snap-mandatory space-x-4 pb-4 sm:pb-0 scrollbar-none sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:space-x-0 sm:gap-6">
+        {/* Mobile Horizontal Swipe Carousel (Free Momentum Scroll) / Desktop 4-Card Grid */}
+        <div className="-mx-4 px-4 sm:mx-0 sm:px-0 flex overflow-x-auto space-x-4 pb-4 sm:pb-0 scrollbar-none sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:space-x-0 sm:gap-6">
           {displayedProducts.map((product) => (
             <div
               key={product.id}
-              className="w-[75%] xs:w-[70%] sm:w-auto flex-shrink-0 snap-start h-full"
+              className="w-[75%] xs:w-[70%] sm:w-auto flex-shrink-0 h-full"
             >
               <ProductCard product={product} />
             </div>
@@ -84,11 +84,11 @@ export const FeaturedCollections = () => {
         </ScrollReveal>
 
         {/* Mobile Horizontal Swipe Carousel / Desktop 4-Column Grid */}
-        <div className="flex overflow-x-auto snap-x snap-mandatory space-x-4 pb-2 scrollbar-none sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:space-x-0 sm:gap-5">
+        <div className="flex overflow-x-auto space-x-4 pb-2 scrollbar-none sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:space-x-0 sm:gap-5">
           {collectionCards.map((col, idx) => (
             <div
               key={idx}
-              className="w-[72%] xs:w-[68%] sm:w-auto flex-shrink-0 snap-start"
+              className="w-[72%] xs:w-[68%] sm:w-auto flex-shrink-0"
             >
               <div
                 onClick={() => navigateToCollection(col.handle, col.title)}
@@ -130,11 +130,11 @@ export const FeaturedCollections = () => {
         </ScrollReveal>
 
         {/* Mobile Horizontal Swipe Carousel / Desktop 4-Card Grid */}
-        <div className="flex overflow-x-auto snap-x snap-mandatory space-x-4 pb-4 sm:pb-0 scrollbar-none sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:space-x-0 sm:gap-6">
+        <div className="flex overflow-x-auto space-x-4 pb-4 sm:pb-0 scrollbar-none sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:space-x-0 sm:gap-6">
           {displayBundles.map((product) => (
             <div
               key={product.id}
-              className="w-[75%] xs:w-[70%] sm:w-auto flex-shrink-0 snap-start h-full"
+              className="w-[75%] xs:w-[70%] sm:w-auto flex-shrink-0 h-full"
             >
               <ProductCard product={product} />
             </div>
