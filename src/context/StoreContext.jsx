@@ -168,8 +168,8 @@ export const StoreProvider = ({ children }) => {
       callback();
       setTimeout(() => {
         setPageTransitioning(false);
-      }, 450); // Duración moderada actual (450ms)
-    }, 450);
+      }, 500); // Duración configurada a 500ms
+    }, 500);
   };
 
   const navigateToProduct = (product) => {
