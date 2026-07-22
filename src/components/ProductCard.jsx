@@ -21,17 +21,17 @@ export const ProductCard = ({ product }) => {
       {/* Top Media Stage & Hover Cross-Fade Images (Clean Borderless Soft Gray Stage matching original site) */}
       <div 
         onClick={() => navigateToProduct(product)}
-        className="relative aspect-square bg-[#f4f4f4] rounded-2xl sm:rounded-3xl overflow-hidden flex items-center justify-center p-5 cursor-pointer"
+        className="relative aspect-square bg-[#f4f4f4] rounded-2xl sm:rounded-3xl overflow-hidden flex items-center justify-center p-5 cursor-pointer glass-hover-shine transition-shadow duration-500 hover:shadow-xl"
       >
         
         {/* Badges (Sold out / Stock) */}
         <div className="absolute top-3 left-3 z-20 flex flex-col gap-1.5 pointer-events-none">
           {!product.is_available ? (
-            <span className="bg-[#121212]/80 backdrop-blur-md text-white text-[10px] sm:text-[11px] font-semibold px-2.5 py-1 rounded-md uppercase tracking-wider">
+            <span className="bg-[#121212]/80 backdrop-blur-md text-white text-[10px] sm:text-[11px] font-semibold px-2.5 py-1 rounded-md uppercase tracking-wider shadow-sm">
               Agotado
             </span>
           ) : discount > 0 ? (
-            <span className="bg-amber-700 text-white text-[10px] sm:text-[11px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">
+            <span className="bg-gold-gradient text-white text-[10px] sm:text-[11px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider shadow-md">
               -{discount}% OFF
             </span>
           ) : null}

@@ -161,10 +161,10 @@ export const HeroSlider = () => {
           {slides[current].title}
         </h2>
 
-        {/* Gold Action Pill Button */}
+        {/* Gold Metallic Action Pill Button */}
         <button
           onClick={() => handleCtaClick(slides[current].query)}
-          className="bg-[#d4b068] hover:bg-[#c5a057] text-stone-950 font-bold px-9 py-3 rounded-lg text-xs tracking-[0.2em] uppercase shadow-sm transition-all hover:scale-105 active:scale-95 cursor-pointer"
+          className="bg-gold-gradient hover:opacity-95 text-stone-950 font-bold px-10 py-3.5 rounded-lg text-xs tracking-[0.2em] uppercase shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 cursor-pointer glass-hover-shine"
         >
           {slides[current].cta}
         </button>

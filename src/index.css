@@ -7,9 +7,61 @@
   --color-lattafa-dark: #121212;
   --color-lattafa-gold: #d4af37;
   --color-lattafa-gold-hover: #b89628;
+  --color-champagne-gold: #c5a059;
+  --color-champagne-light: #f3e9d2;
+  --color-champagne-dark: #8c6d2d;
   --color-lattafa-grey-bg: #f6f6f6;
   --color-lattafa-light-border: #e5e5e5;
   --color-lattafa-red-badge: #d63031;
+}
+
+/* Metallic Champagne Gold Gradients & Micro-Interactions */
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #d4af37 0%, #c5a059 50%, #8c6d2d 100%);
+}
+
+.bg-gold-metallic {
+  background: linear-gradient(135deg, #f3e9d2 0%, #d4af37 50%, #c5a059 100%);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #d4af37 0%, #c5a059 50%, #8c6d2d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.border-gold-metallic {
+  border-image: linear-gradient(135deg, #d4af37, #c5a059, #8c6d2d) 1;
+}
+
+/* Glassmorphic luxury shine hover effect */
+.glass-hover-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-hover-shine::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 40%,
+    rgba(212, 175, 55, 0.25) 50%,
+    rgba(255, 255, 255, 0.03) 60%,
+    transparent 100%
+  );
+  transform: rotate(30deg) translateY(-100%);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.glass-hover-shine:hover::before {
+  transform: rotate(30deg) translateY(100%);
 }
 
 html,
