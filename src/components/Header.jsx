@@ -54,13 +54,25 @@ export const Header = () => {
       <div className="w-full px-3 sm:px-5 lg:px-6">
         <div className="flex items-center justify-between h-13 sm:h-16 lg:h-18">
 
-          {/* Logo on Left Edge */}
+          {/* Mobile Left Hamburger Menu Button */}
+          <div className="flex items-center lg:hidden mr-2">
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="p-2 -ml-2 text-stone-900 hover:text-[#c5a059] transition-colors rounded-full cursor-pointer focus:outline-none"
+              title="Abrir Menú"
+              aria-label="Abrir Menú"
+            >
+              <Menu className="w-6 h-6 stroke-[1.75]" />
+            </button>
+          </div>
+
+          {/* Logo Container */}
           <div className="flex-shrink-0 flex items-center mr-2 sm:mr-4 lg:mr-6">
             <img
               src="/logo.avif"
               alt="Lattafa Perfumes"
               onClick={navigateToHome}
-              className="h-9 sm:h-11 lg:h-12 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity"
+              className="h-8 sm:h-11 lg:h-12 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity"
             />
           </div>
 
@@ -308,14 +320,6 @@ export const Header = () => {
               )}
             </button>
 
-            {/* Mobile Hamburger Menu Icon */}
-            <button
-              onClick={() => setIsMobileMenuOpen(true)}
-              className="p-1 text-stone-900 hover:text-[#c5a059] transition-colors rounded-full lg:hidden"
-              title="Menú"
-            >
-              <Menu className="w-5 h-5 stroke-[1.75]" />
-            </button>
           </div>
 
         </div>
@@ -323,16 +327,17 @@ export const Header = () => {
 
       {/* FULL-SCREEN MOBILE NAVIGATION DRAWER */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-white animate-fadeIn text-stone-900 lg:hidden">
+        <div className="fixed inset-0 z-[100] flex flex-col bg-white animate-fadeIn text-stone-900 lg:hidden h-screen overflow-hidden">
           
           {/* Drawer Top Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-white">
             <img src="/logo.avif" alt="Lattafa" className="h-8 w-auto object-contain" />
             <button
               onClick={() => setIsMobileMenuOpen(false)}
-              className="p-2 text-stone-900 hover:text-amber-800 transition-colors"
+              className="p-2 text-stone-900 hover:text-[#c5a059] transition-colors rounded-full cursor-pointer"
+              title="Cerrar Menú"
             >
-              <X className="w-5 h-5" />
+              <X className="w-6 h-6 stroke-[1.75]" />
             </button>
           </div>
 
