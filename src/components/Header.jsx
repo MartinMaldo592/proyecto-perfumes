@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, ShoppingBag, User, ChevronDown, ArrowUpRight, ChevronLeft, ChevronRight, Menu, X, ChevronRight as ChevronRightIcon } from 'lucide-react';
+import { Search, ShoppingBag, ChevronDown, ArrowUpRight, ChevronLeft, ChevronRight, Menu, X, ChevronRight as ChevronRightIcon } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 
 export const Header = () => {
@@ -298,13 +298,6 @@ export const Header = () => {
               title="Buscar"
             >
               <Search className="w-5 h-5 stroke-[1.75]" />
-            </button>
-
-            <button
-              className="p-1 text-stone-900 hover:text-[#c5a059] transition-colors rounded-full hidden sm:block"
-              title="Mi Cuenta"
-            >
-              <User className="w-5 h-5 stroke-[1.75]" />
             </button>
 
             <button
