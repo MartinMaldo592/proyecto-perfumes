@@ -55,30 +55,30 @@ export const Header = () => {
       <div className="w-full px-3 sm:px-5 lg:px-6">
         <div className="flex items-center justify-between h-13 sm:h-16 lg:h-18">
 
-          {/* Mobile Left Hamburger Menu Button */}
-          <div className="flex items-center lg:hidden mr-2">
+          {/* Mobile Left Hamburger Menu Button + Peru Badge */}
+          <div className="flex items-center lg:hidden mr-2 space-x-1 sm:space-x-2">
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="p-2 -ml-2 text-stone-900 hover:text-[#c5a059] transition-colors rounded-full cursor-pointer focus:outline-none"
+              className="p-1.5 -ml-1 text-stone-900 hover:text-[#c5a059] transition-colors rounded-full cursor-pointer focus:outline-none"
               title="Abrir Menú"
               aria-label="Abrir Menú"
             >
               <Menu className="w-6 h-6 stroke-[1.75]" />
             </button>
+            {/* Mobile 205 Years Peru Flag Badge - Right side of Hamburger Menu Icon */}
+            <div className="flex items-center">
+              <PeruFlagBadge />
+            </div>
           </div>
 
           {/* Logo Container */}
-          <div className="flex-shrink-0 flex items-center space-x-2 mr-2 sm:mr-4 lg:mr-6">
+          <div className="flex-shrink-0 flex items-center mr-2 sm:mr-4 lg:mr-6">
             <img
               src="/logo.jpg"
               alt="Maldonado Parfums"
               onClick={navigateToHome}
               className="h-10 sm:h-14 lg:h-16 max-h-14 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity"
             />
-            {/* Mobile 205 Years Peru Flag Badge - Right side of logo in Mobile */}
-            <div className="flex lg:hidden items-center ml-1">
-              <PeruFlagBadge />
-            </div>
           </div>
 
           {/* Centered Desktop Navigation Links */}
