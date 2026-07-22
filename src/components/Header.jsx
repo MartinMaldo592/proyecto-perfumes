@@ -48,7 +48,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-xs transition-all duration-200">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-stone-200/60 shadow-sm transition-all duration-300">
 
       {/* Full-width container with edge-aligned padding matching official store layout */}
       <div className="w-full px-3 sm:px-5 lg:px-6">
