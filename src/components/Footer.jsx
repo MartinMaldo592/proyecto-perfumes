@@ -24,7 +24,7 @@ export const Footer = () => {
   };
 
   const pillars = [
-    { icon: CheckCircle2, title: "Perfumes 100% Auténticos", subtitle: "Importado Directo de Lattafa" },
+    { icon: CheckCircle2, title: "Perfumes 100% Auténticos", subtitle: "Importación Directa de Perfumería Fina" },
     { icon: Package, title: "Devoluciones Sencillas", subtitle: "Garantía de Satisfacción" },
     { icon: Truck, title: "Envío Gratis", subtitle: "En compras superiores a S/ 225.00" },
     { icon: ShieldCheck, title: "Pago 100% Seguro", subtitle: "Transacciones Encriptadas" }
@@ -156,7 +156,7 @@ export const Footer = () => {
 
             {/* Copyright */}
             <div className="text-xs text-stone-500">
-              © 2026 Lattafa Perfumes. Todos los derechos reservados.
+              © 2026 Maldonado Parfums. Todos los derechos reservados.
             </div>
 
           </div>

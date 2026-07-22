@@ -8,7 +8,7 @@ export const AnnouncementBar = () => {
     "•",
     "ENVÍO GRATIS en compras superiores a S/ 225.00",
     "•",
-    "Distribución Oficial Lattafa",
+    "Distribución Oficial Maldonado Parfums",
     "•",
   ];
 

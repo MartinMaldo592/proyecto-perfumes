@@ -69,10 +69,10 @@ export const Header = () => {
           {/* Logo Container */}
           <div className="flex-shrink-0 flex items-center mr-2 sm:mr-4 lg:mr-6">
             <img
-              src="/logo.avif"
-              alt="Lattafa Perfumes"
+              src="/logo.jpg"
+              alt="Maldonado Parfums"
               onClick={navigateToHome}
-              className="h-8 sm:h-11 lg:h-12 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity"
+              className="h-10 sm:h-14 lg:h-16 max-h-14 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity"
             />
           </div>
 
@@ -331,7 +331,7 @@ export const Header = () => {
           
           {/* Drawer Top Header */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-white">
-            <img src="/logo.avif" alt="Lattafa" className="h-8 w-auto object-contain" />
+            <img src="/logo.jpg" alt="Maldonado Parfums" className="h-10 w-auto object-contain" />
             <button
               onClick={() => setIsMobileMenuOpen(false)}
               className="p-2 text-stone-900 hover:text-[#c5a059] transition-colors rounded-full cursor-pointer"
