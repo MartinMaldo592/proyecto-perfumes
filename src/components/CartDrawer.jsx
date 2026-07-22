@@ -202,6 +202,24 @@ export const CartDrawer = () => {
                 >
                   or Checkout without protection
                 </button>
+
+                {/* Trust Badges & Guarantee Icons */}
+                <div className="pt-3 mt-2 border-t border-stone-200/60 grid grid-cols-3 gap-2 text-center text-[10px] text-stone-600 font-medium">
+                  <div className="flex flex-col items-center">
+                    <ShieldCheck className="w-4 h-4 text-amber-700 mb-1" />
+                    <span>100% Original</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <Truck className="w-4 h-4 text-amber-700 mb-1" />
+                    <span>Envío Asegurado</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <div className="w-4 h-4 rounded-full bg-amber-700 text-white flex items-center justify-center font-bold text-[9px] mb-1">
+                      ✓
+                    </div>
+                    <span>Pago Seguro</span>
+                  </div>
+                </div>
               </div>
 
             </div>
