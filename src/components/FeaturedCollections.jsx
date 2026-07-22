@@ -44,9 +44,13 @@ export const FeaturedCollections = () => {
   const bundleProducts = products.filter((p) => p.is_bundle || p.title.toLowerCase().includes('set') || p.title.toLowerCase().includes('collection')).slice(0, 4);
   const displayBundles = bundleProducts.length > 0 ? bundleProducts : products.slice(0, 4);
 
+  const bestSellers = products.filter((p) => 
+    ['khamrah', 'yara', 'asad', 'badee-al-oud', 'ameerat-al-arab', 'teriaq'].some(h => (p.handle || '').toLowerCase().includes(h))
+  );
+
   const displayedProducts = activeTab === 'new'
     ? products.slice(0, 4)
-    : products.filter((p) => p.rating >= 4.5 || p.review_count > 50).slice(0, 4);
+    : (bestSellers.length >= 4 ? bestSellers.slice(0, 4) : products.slice(4, 8));
 
   return (
     <div className="w-full px-4 sm:px-10 lg:px-14 py-8 sm:py-12 space-y-16 sm:space-y-20">
