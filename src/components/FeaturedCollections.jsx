@@ -44,13 +44,20 @@ export const FeaturedCollections = () => {
   const bundleProducts = products.filter((p) => p.is_bundle || p.title.toLowerCase().includes('set') || p.title.toLowerCase().includes('collection')).slice(0, 4);
   const displayBundles = bundleProducts.length > 0 ? bundleProducts : products.slice(0, 4);
 
-  const bestSellers = products.filter((p) => 
-    ['khamrah', 'yara', 'asad', 'badee-al-oud', 'ameerat-al-arab', 'teriaq'].some(h => (p.handle || '').toLowerCase().includes(h))
-  );
+  const bestSellersTitles = [
+    "His Confession",
+    "Al Noble Ameer",
+    "Layaan",
+    "Musamam White Intense 3pcs Gift Set"
+  ];
+
+  const bestSellers = bestSellersTitles
+    .map((title) => products.find((p) => p.title && p.title.toLowerCase() === title.toLowerCase()))
+    .filter(Boolean);
 
   const displayedProducts = activeTab === 'new'
     ? products.slice(0, 4)
-    : (bestSellers.length >= 4 ? bestSellers.slice(0, 4) : products.slice(4, 8));
+    : (bestSellers.length > 0 ? bestSellers : products.slice(4, 8));
 
   return (
     <div className="w-full px-4 sm:px-10 lg:px-14 py-8 sm:py-12 space-y-16 sm:space-y-20">
