@@ -122,6 +122,45 @@ export const StoreProvider = ({ children }) => {
     return () => window.removeEventListener('popstate', handlePopState);
   }, [products]);
 
+  // Dynamic Open Graph Meta Tags & Page Title Updater (WhatsApp / Social Media Previews)
+  useEffect(() => {
+    const setMeta = (attr, attrName, value) => {
+      let el = document.querySelector(`meta[${attr}="${attrName}"]`);
+      if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute(attr, attrName);
+        document.head.appendChild(el);
+      }
+      el.setAttribute('content', value);
+    };
+
+    if (activePage === 'product' && activeProduct) {
+      const title = `${activeProduct.title} — Maldonado Parfums`;
+      const rawDesc = activeProduct.description_plain || `${activeProduct.title} de ${activeProduct.vendor || 'Maldonado Parfums'}. Fragancia de lujo 100% auténtica.`;
+      const desc = rawDesc.replace(/\s+/g, ' ').trim().slice(0, 160) + '...';
+      const img = activeProduct.main_image || '/logo.jpg';
+
+      document.title = title;
+      setMeta('name', 'description', desc);
+      setMeta('property', 'og:title', title);
+      setMeta('property', 'og:description', desc);
+      setMeta('property', 'og:image', img);
+      setMeta('property', 'og:url', window.location.href);
+      setMeta('name', 'twitter:title', title);
+      setMeta('name', 'twitter:description', desc);
+      setMeta('name', 'twitter:image', img);
+    } else if (activePage === 'collection' && activeCollection) {
+      const title = `${activeCollection.title} — Maldonado Parfums`;
+      const desc = `Explora la colección ${activeCollection.title} en Maldonado Parfums. Fragancias finas auténticas importadas.`;
+      document.title = title;
+      setMeta('name', 'description', desc);
+      setMeta('property', 'og:title', title);
+      setMeta('property', 'og:description', desc);
+    } else {
+      document.title = 'Maldonado Parfums — Tienda Oficial de Perfumería Fina';
+    }
+  }, [activePage, activeProduct, activeCollection]);
+
   const [ambientTheme, setAmbientTheme] = useState({
     bg: '#ffffff',
     glow: 'rgba(212, 175, 55, 0.08)',
