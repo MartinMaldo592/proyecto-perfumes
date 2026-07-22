@@ -105,13 +105,24 @@ export const CollectionPage = () => {
       {/* 1. BREADCRUMBS NAVIGATION */}
       <div className="w-full px-4 sm:px-10 lg:px-14 pt-5 pb-4 border-b border-gray-100">
         <div className="flex items-center space-x-2 text-xs text-stone-500 font-medium">
-          <button onClick={navigateToHome} className="hover:text-stone-900 transition-colors">
+          <button onClick={navigateToHome} className="hover:text-stone-900 hover:underline transition-colors cursor-pointer">
             Inicio
           </button>
           <ChevronRight className="w-3 h-3 text-stone-400" />
-          <span>Colección</span>
-          <ChevronRight className="w-3 h-3 text-stone-400" />
-          <span className="text-stone-900 font-semibold uppercase tracking-wider">{collectionTitle}</span>
+          {collectionHandle === 'all' ? (
+            <span className="text-stone-900 font-semibold uppercase tracking-wider">Colección</span>
+          ) : (
+            <>
+              <button 
+                onClick={() => navigateToCollection('all', 'Todas las Fragancias')} 
+                className="hover:text-stone-900 hover:underline transition-colors cursor-pointer"
+              >
+                Colección
+              </button>
+              <ChevronRight className="w-3 h-3 text-stone-400" />
+              <span className="text-stone-900 font-semibold uppercase tracking-wider">{collectionTitle}</span>
+            </>
+          )}
         </div>
       </div>
 

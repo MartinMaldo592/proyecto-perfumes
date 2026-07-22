@@ -20,7 +20,7 @@ import { useStore } from '../context/StoreContext';
 import { ScrollReveal } from './ScrollReveal';
 
 export const ProductPage = () => {
-  const { activeProduct, navigateToHome, navigateToProduct, addToCart, toggleWishlist, wishlist, products } = useStore();
+  const { activeProduct, navigateToHome, navigateToProduct, navigateToCollection, addToCart, toggleWishlist, wishlist, products } = useStore();
 
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [currentImgIdx, setCurrentImgIdx] = useState(0);
@@ -134,16 +134,19 @@ export const ProductPage = () => {
 
       {/* 1. BREADCRUMBS NAVIGATION */}
       <div className="w-full px-4 sm:px-10 lg:px-14 pt-5 pb-4 border-b border-gray-100">
-        <div className="flex items-center space-x-2 text-xs text-stone-500 font-medium">
-          <button onClick={navigateToHome} className="hover:text-stone-900 transition-colors">
+        <div className="flex items-center space-x-2 text-xs text-stone-500 font-medium flex-wrap gap-y-1">
+          <button onClick={navigateToHome} className="hover:text-stone-900 hover:underline transition-colors cursor-pointer">
             Inicio
           </button>
-          <ChevronRight className="w-3 h-3 text-stone-400" />
-          <button onClick={() => navigateToHome()} className="hover:text-stone-900 transition-colors">
-            Todas las Fragancias
+          <ChevronRight className="w-3 h-3 text-stone-400 flex-shrink-0" />
+          <button 
+            onClick={() => navigateToCollection('all', 'Todas las Fragancias')} 
+            className="hover:text-stone-900 hover:underline transition-colors cursor-pointer"
+          >
+            Colección
           </button>
-          <ChevronRight className="w-3 h-3 text-stone-400" />
-          <span className="text-stone-900 font-semibold uppercase tracking-wider">{activeProduct.title}</span>
+          <ChevronRight className="w-3 h-3 text-stone-400 flex-shrink-0" />
+          <span className="text-stone-900 font-semibold uppercase tracking-wider truncate max-w-xs sm:max-w-md">{activeProduct.title}</span>
         </div>
       </div>
 
