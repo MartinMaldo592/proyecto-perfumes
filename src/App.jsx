@@ -22,14 +22,14 @@ const MainLayout = () => {
   return (
     <div className="min-h-screen bg-white text-stone-900 flex flex-col font-sans selection:bg-amber-500 selection:text-white">
       
-      {/* Sticky Header Wrapper Container */}
-      <div className="sticky top-0 z-40 w-full bg-white">
+      {/* 100% Fixed Header Wrapper Container for Mobile & Desktop */}
+      <header className="fixed top-0 left-0 right-0 z-40 w-full bg-white border-b border-stone-200/60 shadow-xs">
         <AnnouncementBar />
         <Header />
-      </div>
+      </header>
 
-      {/* Main Content View Switcher with Tailor-Made Gold Shimmer Skeleton Transition */}
-      <main className="flex-1">
+      {/* Main Content Container with Top Padding to clear fixed header */}
+      <main className="flex-1 pt-[88px] sm:pt-[102px] lg:pt-[112px]">
         {isPending ? (
           <SkeletonLoader type={activePage} />
         ) : activePage === 'product' ? (
