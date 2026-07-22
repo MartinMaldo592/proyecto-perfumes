@@ -98,6 +98,23 @@ body,
   to { width: 100%; }
 }
 
+/* Keyframes for Hero Banner Smooth Zoom-Out (Ken Burns Effect) */
+@keyframes kenBurnsZoomOut {
+  0% {
+    transform: scale(1.18);
+    opacity: 0.88;
+  }
+  100% {
+    transform: scale(1.0);
+    opacity: 1;
+  }
+}
+
+.animate-kenburns {
+  animation: kenBurnsZoomOut 6.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
 /* Keyframes & utility for Mega Menu curtain opening effect */
 @keyframes megaMenuDown {
   0% {

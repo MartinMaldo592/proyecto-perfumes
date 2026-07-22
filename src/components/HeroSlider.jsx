@@ -121,15 +121,16 @@ export const HeroSlider = () => {
                 isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
               }`}
             >
-              {/* Image Container with Ken Burns Zoom-Out Animation restarting on active slide */}
+              {/* Image Container with Automatic Smooth Zoom-Out (Ken Burns Effect) */}
               <div className="w-full h-full overflow-hidden relative pointer-events-none">
-                <img
-                  src={slide.bgImage}
-                  alt={slide.title}
-                  className={`w-full h-full object-cover transition-transform duration-[5000ms] cubic-bezier(0.25, 1, 0.5, 1) ${
-                    isActive ? 'scale-100 transform-gpu' : 'scale-115 duration-0'
-                  }`}
-                />
+                {isActive && (
+                  <img
+                    key={`hero-img-${slide.id}-${current}`}
+                    src={slide.bgImage}
+                    alt={slide.title}
+                    className="w-full h-full object-cover animate-kenburns transform-gpu"
+                  />
+                )}
               </div>
 
             </div>
