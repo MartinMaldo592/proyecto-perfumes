@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 import { ProductCard } from './ProductCard';
 import { ScrollReveal } from './ScrollReveal';
+import { CustomerReviews } from './CustomerReviews';
 
 export const FeaturedCollections = () => {
   const { products, navigateToCollection } = useStore();
@@ -181,6 +182,9 @@ export const FeaturedCollections = () => {
           </div>
         </ScrollReveal>
       </section>
+
+      {/* 5. CUSTOMER REVIEWS (OFFICIAL LATTAFA USA REAL PHOTO REVIEWS) */}
+      <CustomerReviews />
 
     </div>
   );
