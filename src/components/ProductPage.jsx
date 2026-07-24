@@ -162,7 +162,7 @@ export const ProductPage = () => {
       </div>
 
       {/* 1. BREADCRUMBS NAVIGATION */}
-      <div className="w-full px-4 sm:px-10 lg:px-14 pt-5 pb-4 border-b border-gray-100">
+      <div className="w-full px-4 sm:px-10 lg:px-14 pt-5 pb-4">
         <div className="flex items-center space-x-2 text-xs text-stone-500 font-medium flex-wrap gap-y-1">
           <button onClick={navigateToHome} className="hover:text-stone-900 hover:underline transition-colors cursor-pointer">
             Inicio
@@ -186,20 +186,20 @@ export const ProductPage = () => {
           {/* LEFT COLUMN: IMAGE GALLERY (6 Columns in LG - STICKY ON SCROLL) */}
           <div className="lg:col-span-6 flex flex-col sm:flex-row gap-3 sm:gap-5 items-stretch sm:items-start lg:sticky lg:top-24 lg:self-start w-full">
             
-            {/* Desktop & Tablet Vertical Thumbnails List - Enlarged Cards */}
+            {/* Desktop & Tablet Vertical Thumbnails List - Dynamically Fits Main Image Height Exactly */}
             {images.length > 1 && (
-              <div className="hidden sm:flex sm:flex-col gap-3.5 overflow-x-auto sm:overflow-y-auto max-h-[460px] flex-shrink-0 w-full sm:w-28">
+              <div className="hidden sm:flex sm:flex-col justify-between gap-2.5 sm:h-[420px] lg:h-[450px] w-20 sm:w-24 lg:w-28 shrink-0 overflow-hidden select-none">
                 {images.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentImgIdx(idx)}
-                    className={`w-24 h-24 sm:w-28 sm:h-28 rounded-2xl border p-1 flex items-center justify-center transition-all cursor-pointer bg-[#f7f7f7] ${
+                    className={`w-full flex-1 min-h-0 rounded-2xl border p-1 sm:p-1.5 flex items-center justify-center transition-all cursor-pointer bg-[#f7f7f7] overflow-hidden ${
                       currentImgIdx === idx 
                         ? 'border-2 border-stone-900 shadow-sm ring-1 ring-stone-900/10' 
                         : 'border border-stone-200/80 opacity-70 hover:opacity-100 hover:border-stone-400'
                     }`}
                   >
-                    <img src={img} alt="" className="w-full h-full object-contain mix-blend-multiply rounded-xl" />
+                    <img src={img} alt="" className="max-h-full max-w-full object-contain mix-blend-multiply rounded-xl" />
                   </button>
                 ))}
               </div>
