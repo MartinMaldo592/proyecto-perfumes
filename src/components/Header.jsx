@@ -22,16 +22,25 @@ export const Header = () => {
     }
   }, [isSearchOpen]);
 
-  // Lock background body scroll when mobile hamburger menu is open
+  // Bulletproof lock background body scroll when mobile hamburger menu is open
   React.useEffect(() => {
     if (isMobileMenuOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+      document.documentElement.style.overflow = 'hidden';
+
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        window.scrollTo(0, scrollY);
+      };
     }
-    return () => {
-      document.body.style.overflow = '';
-    };
   }, [isMobileMenuOpen]);
 
   // Handle Escape key and outside click to close search
@@ -564,7 +573,7 @@ export const Header = () => {
 
       {/* FULL-SCREEN MOBILE NAVIGATION DRAWER */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[100] flex flex-col bg-white animate-fadeIn text-stone-900 lg:hidden h-[100dvh] max-h-[100dvh] overflow-hidden">
+        <div className="fixed inset-0 z-[100] flex flex-col bg-white animate-fadeIn text-stone-900 lg:hidden h-[100dvh] max-h-[100dvh] overflow-hidden overscroll-contain touch-none">
           
           {/* Drawer Top Header (Fixed top) */}
           <div className="flex items-center justify-between px-5 py-3.5 border-b border-gray-100 bg-white shrink-0">
@@ -579,7 +588,7 @@ export const Header = () => {
           </div>
 
           {/* Drawer Main Link List (Scrolls smoothly in middle if submenus are expanded) */}
-          <div className="flex-1 overflow-y-auto px-5 py-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex-1 overflow-y-auto px-5 py-2 overscroll-contain touch-pan-y [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             
             {/* 1. Shop */}
             <div>
