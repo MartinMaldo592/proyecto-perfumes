@@ -350,15 +350,15 @@ export const Header = () => {
             </nav>
           ) : (
             /* FLUID MORPHING INLINE SEARCH BAR (Replaces Nav Links seamlessly) */
-            <div className="flex-1 max-w-2xl mx-2 sm:mx-6 relative animate-fadeIn transition-all duration-300">
-              <div className="flex items-center bg-stone-100/90 border border-amber-900/20 focus-within:border-amber-600 focus-within:bg-white focus-within:ring-4 focus-within:ring-amber-500/10 rounded-full px-3.5 sm:px-4 py-1.5 sm:py-2 transition-all shadow-inner">
-                <Search className="w-4 h-4 text-amber-700 mr-2.5 shrink-0" />
+            <div className="flex-1 max-w-2xl mx-1 sm:mx-6 relative animate-fadeIn transition-all duration-300">
+              <div className="flex items-center bg-stone-100/90 border border-amber-900/20 focus-within:border-amber-600 focus-within:bg-white focus-within:ring-4 focus-within:ring-amber-500/10 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 transition-all shadow-inner">
+                <Search className="w-4 h-4 text-amber-700 mr-2 shrink-0" />
                 <input
                   ref={searchInputRef}
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="¿Qué perfume buscas hoy? (ej: Asad, Yara, Oud, Vainilla)..."
+                  placeholder="¿Qué perfume buscas? (ej: Asad, Yara, Oud)..."
                   className="w-full bg-transparent text-xs sm:text-sm font-medium text-stone-900 placeholder-stone-400 focus:outline-none"
                 />
                 {searchQuery && (
@@ -370,12 +370,13 @@ export const Header = () => {
                     <X className="w-3.5 h-3.5" />
                   </button>
                 )}
+                {/* Desktop Inline Close Button */}
                 <button
                   onClick={() => {
                     setIsSearchOpen(false);
                     setSearchQuery('');
                   }}
-                  className="ml-1 sm:ml-2 px-3 py-1 bg-stone-200 hover:bg-stone-300 text-stone-800 font-bold text-[11px] sm:text-xs rounded-full transition-all flex items-center shrink-0 cursor-pointer"
+                  className="hidden lg:flex ml-2 px-3 py-1 bg-stone-200 hover:bg-stone-300 text-stone-800 font-bold text-xs rounded-full transition-all items-center shrink-0 cursor-pointer"
                 >
                   Cerrar
                 </button>
@@ -383,27 +384,44 @@ export const Header = () => {
             </div>
           )}
 
-          {/* Right Action Icons on Right Edge (Search, User, Cart, Mobile Menu) */}
-          <div className="flex items-center space-x-3 sm:space-x-4">
+          {/* Right Action Icons on Right Edge */}
+          <div className="flex items-center space-x-2 sm:space-x-4">
 
             {/* Desktop 205 Years Peru Flag Badge - Left of Search Icon in Desktop */}
             <div className="hidden lg:flex items-center">
               <PeruFlagBadge />
             </div>
 
+            {/* Mobile Close Button (Placed right where Cart Icon is located when search is active) */}
+            {isSearchOpen && (
+              <button
+                onClick={() => {
+                  setIsSearchOpen(false);
+                  setSearchQuery('');
+                }}
+                className="lg:hidden px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-900 font-bold text-xs rounded-full transition-all flex items-center shrink-0 cursor-pointer border border-stone-200 shadow-sm"
+              >
+                Cerrar
+              </button>
+            )}
+
+            {/* Search Toggle Icon (Visible on mobile when search is inactive; on desktop toggles state) */}
             <button
               onClick={() => setIsSearchOpen(!isSearchOpen)}
               className={`p-1.5 transition-all rounded-full cursor-pointer ${
-                isSearchOpen ? 'text-amber-700 bg-amber-50' : 'text-stone-900 hover:text-[#c5a059]'
+                isSearchOpen ? 'text-amber-700 bg-amber-50 hidden lg:flex' : 'text-stone-900 hover:text-[#c5a059] flex'
               }`}
               title={isSearchOpen ? "Cerrar Buscador" : "Buscar Perfume"}
             >
               <Search className="w-5 h-5 stroke-[1.75]" />
             </button>
 
+            {/* Shopping Bag Icon (Deactivated/Hidden on mobile when search is active) */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative p-1 text-stone-900 hover:text-[#c5a059] transition-colors rounded-full flex items-center justify-center group"
+              className={`relative p-1 text-stone-900 hover:text-[#c5a059] transition-colors rounded-full items-center justify-center group ${
+                isSearchOpen ? 'hidden lg:flex' : 'flex'
+              }`}
               title="Bolsa de Compras"
             >
               <ShoppingBag className="w-5 h-5 stroke-[1.75] group-hover:scale-110 transition-transform" />
