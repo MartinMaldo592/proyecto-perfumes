@@ -358,7 +358,7 @@ export const Header = () => {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="¿Qué perfume buscas? (ej: Asad, Yara, Oud)..."
+                  placeholder="¿Qué perfume buscas?"
                   className="w-full bg-transparent text-xs sm:text-sm font-medium text-stone-900 placeholder-stone-400 focus:outline-none"
                 />
                 {searchQuery && (
