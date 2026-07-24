@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, ShoppingBag, ChevronDown, ArrowUpRight, ChevronLeft, ChevronRight, Menu, X, ChevronRight as ChevronRightIcon } from 'lucide-react';
+import { Search, ShoppingBag, ChevronDown, ArrowUpRight, ChevronLeft, ChevronRight, Menu, X, ChevronRight as ChevronRightIcon, Eye, ArrowRight } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 import { PeruFlagBadge } from './PeruFlagBadge';
 
@@ -478,31 +478,68 @@ export const Header = () => {
                 {filteredProducts.map((product) => (
                   <div
                     key={product.id}
-                    onClick={() => {
-                      setSelectedProduct(product);
-                      setIsSearchOpen(false);
-                      setSearchQuery('');
-                    }}
-                    className="flex items-center space-x-3.5 p-3 rounded-2xl border border-stone-100 bg-stone-50/60 hover:bg-amber-50/50 hover:border-amber-300/60 transition-all cursor-pointer group shadow-sm hover:shadow-md"
+                    className="flex flex-col justify-between p-3.5 rounded-2xl border border-stone-100 bg-stone-50/70 hover:bg-white hover:border-amber-300/80 transition-all group shadow-sm hover:shadow-md"
                   >
-                    <div className="w-14 h-14 bg-white rounded-xl p-1.5 flex items-center justify-center shrink-0 border border-stone-100 shadow-sm">
-                      <img src={product.main_image} alt={product.title} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <span className="text-[10px] uppercase font-bold text-amber-800 tracking-wider block truncate">
-                        {product.vendor || "Lattafa"} • {product.gender || "Unisex"}
-                      </span>
-                      <h5 className="font-serif font-bold text-stone-900 text-sm truncate group-hover:text-amber-800 transition-colors">
-                        {product.title}
-                      </h5>
-                      <div className="flex items-center justify-between mt-1">
-                        <span className="font-bold text-xs text-stone-900">
+                    <div className="flex items-center space-x-3.5 mb-2.5">
+                      <div
+                        onClick={() => {
+                          navigateToProduct(product);
+                          setIsSearchOpen(false);
+                          setSearchQuery('');
+                        }}
+                        className="w-16 h-16 bg-white rounded-xl p-1.5 flex items-center justify-center shrink-0 border border-stone-100 shadow-sm cursor-pointer"
+                      >
+                        <img src={product.main_image} alt={product.title} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <span className="text-[10px] uppercase font-bold text-amber-800 tracking-wider block truncate">
+                          {product.vendor || "Lattafa"} • {product.gender || "Unisex"}
+                        </span>
+                        <h5
+                          onClick={() => {
+                            navigateToProduct(product);
+                            setIsSearchOpen(false);
+                            setSearchQuery('');
+                          }}
+                          className="font-serif font-bold text-stone-900 text-sm truncate group-hover:text-amber-800 transition-colors cursor-pointer"
+                        >
+                          {product.title}
+                        </h5>
+                        <span className="font-bold text-xs text-stone-900 block mt-0.5">
                           S/ {parseFloat(product.min_price).toFixed(2)}
                         </span>
-                        <span className="text-[10px] font-bold text-amber-700 bg-amber-100/80 px-2 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                          Ver Perfume →
-                        </span>
                       </div>
+                    </div>
+
+                    {/* Dual Action Buttons: Vista Rápida (Preview Modal) & Ir al Producto (Full Page) */}
+                    <div className="grid grid-cols-2 gap-2 pt-2.5 border-t border-stone-200/60 text-[11px] font-bold">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedProduct(product);
+                          setIsSearchOpen(false);
+                          setSearchQuery('');
+                        }}
+                        className="flex items-center justify-center px-2.5 py-1.5 rounded-xl bg-stone-100 hover:bg-amber-100 text-stone-700 hover:text-amber-900 transition-colors cursor-pointer"
+                        title="Vista previa rápida"
+                      >
+                        <Eye className="w-3.5 h-3.5 mr-1 text-amber-700 shrink-0" />
+                        Vista Rápida
+                      </button>
+
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigateToProduct(product);
+                          setIsSearchOpen(false);
+                          setSearchQuery('');
+                        }}
+                        className="flex items-center justify-center px-2.5 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white transition-colors cursor-pointer shadow-sm"
+                        title="Ir a la página del producto"
+                      >
+                        <ArrowRight className="w-3.5 h-3.5 mr-1 shrink-0" />
+                        Ir al Producto
+                      </button>
                     </div>
                   </div>
                 ))}
