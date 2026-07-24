@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Star, ShoppingBag, Heart, ShieldCheck, Truck, Sparkles } from 'lucide-react';
+import { X, Star, ShoppingBag, Heart, ShieldCheck, Truck } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 
 export const ProductModal = () => {
@@ -27,6 +27,14 @@ export const ProductModal = () => {
     ? selectedProduct.all_images
     : [selectedProduct.main_image];
 
+  const formatGender = (gender) => {
+    if (!gender) return "Unisex";
+    const g = gender.toLowerCase();
+    if (g.includes('women') || g.includes('dama') || g.includes('mujer')) return "Damas";
+    if (g.includes('men') || g.includes('caballero') || g.includes('hombre')) return "Caballeros";
+    return "Unisex";
+  };
+
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 animate-fadeIn">
       
@@ -36,30 +44,31 @@ export const ProductModal = () => {
         {/* Close Button */}
         <button
           onClick={() => setSelectedProduct(null)}
-          className="absolute top-4 right-4 z-20 p-2 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-full transition-colors"
+          className="absolute top-4 right-4 z-30 p-2 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-full transition-colors shadow-sm"
+          title="Cerrar"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Left Column: Image Gallery */}
-        <div className="w-full md:w-1/2 bg-[#f8f8f8] p-6 flex flex-col justify-between items-center border-b md:border-b-0 md:border-r border-gray-100">
-          <div className="w-full aspect-square relative flex items-center justify-center">
+        <div className="w-full md:w-1/2 bg-[#f8f8f8] p-6 flex flex-col justify-between items-center border-b md:border-b-0 md:border-r border-gray-100 min-h-[380px] md:min-h-[440px] shrink-0">
+          <div className="w-full flex-1 relative flex items-center justify-center min-h-[260px] sm:min-h-[300px]">
             <img
               src={activeImage || selectedProduct.main_image}
               alt={selectedProduct.title}
-              className="max-h-80 w-auto object-contain drop-shadow-lg"
+              className="max-h-72 sm:max-h-80 max-w-full w-auto h-auto object-contain drop-shadow-lg transition-all duration-300"
             />
           </div>
 
           {/* Thumbnail Gallery */}
           {images.length > 1 && (
-            <div className="flex space-x-2 overflow-x-auto pt-4 max-w-full">
+            <div className="flex items-center space-x-2 overflow-x-auto pt-3 pb-1 max-w-full h-16 shrink-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
               {images.map((img, idx) => (
                 <button
                   key={idx}
                   onClick={() => setActiveImage(img)}
-                  className={`w-14 h-14 rounded-lg overflow-hidden border-2 transition-all ${
-                    activeImage === img ? 'border-amber-600 scale-105 shadow' : 'border-gray-200 opacity-60'
+                  className={`w-12 h-12 rounded-lg overflow-hidden border-2 shrink-0 transition-all ${
+                    activeImage === img ? 'border-amber-600 ring-2 ring-amber-600/30 shadow-md' : 'border-gray-200 opacity-60 hover:opacity-100'
                   }`}
                 >
                   <img src={img} alt="" className="w-full h-full object-cover" />
@@ -69,17 +78,17 @@ export const ProductModal = () => {
           )}
         </div>
 
-        {/* Right Column: Details & Olfactory Pyramid */}
+        {/* Right Column: Details */}
         <div className="w-full md:w-1/2 p-6 sm:p-8 overflow-y-auto flex flex-col justify-between">
           <div>
             
-            {/* Vendor & Category */}
-            <div className="flex items-center justify-between">
+            {/* Vendor & Category (pr-12 prevents overlap with top-right Close button) */}
+            <div className="flex items-center justify-between pr-12">
               <span className="text-xs font-bold text-amber-800 uppercase tracking-widest">
                 {selectedProduct.vendor || "Lattafa Parfums"}
               </span>
               <span className="text-[11px] bg-amber-100 text-amber-900 font-semibold px-2.5 py-0.5 rounded-full">
-                {selectedProduct.gender || "Unisex"}
+                {formatGender(selectedProduct.gender)}
               </span>
             </div>
 
@@ -143,34 +152,7 @@ export const ProductModal = () => {
               </div>
             )}
 
-            {/* OLFACTORY PYRAMID (FRAGRANCE NOTES) */}
-            <div className="mb-6 bg-[#fcfbfa] p-4 rounded-xl border border-amber-900/10 space-y-2.5">
-              <h4 className="text-xs font-bold text-amber-900 uppercase tracking-widest flex items-center gap-1.5 border-b pb-2">
-                <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-                Pirámide Olfativa
-              </h4>
 
-              <div className="grid grid-cols-3 gap-2 pt-1 text-xs">
-                <div className="bg-amber-100/50 p-2 rounded-lg">
-                  <span className="text-[10px] font-bold text-amber-900 block uppercase">Notas de Salida</span>
-                  <p className="text-gray-700 text-[11px] font-medium leading-snug mt-0.5">
-                    {selectedProduct.top_notes || "Bergamota, Acorde Cítrico"}
-                  </p>
-                </div>
-                <div className="bg-amber-100/50 p-2 rounded-lg">
-                  <span className="text-[10px] font-bold text-amber-900 block uppercase">Notas de Corazón</span>
-                  <p className="text-gray-700 text-[11px] font-medium leading-snug mt-0.5">
-                    {selectedProduct.heart_notes || "Lavanda, Pachulí"}
-                  </p>
-                </div>
-                <div className="bg-amber-100/50 p-2 rounded-lg">
-                  <span className="text-[10px] font-bold text-amber-900 block uppercase">Notas de Fondo</span>
-                  <p className="text-gray-700 text-[11px] font-medium leading-snug mt-0.5">
-                    {selectedProduct.base_notes || "Ámbar, Vainilla, Oud"}
-                  </p>
-                </div>
-              </div>
-            </div>
 
           </div>
 

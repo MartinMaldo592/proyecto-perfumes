@@ -428,59 +428,7 @@ export const ProductPage = () => {
                 {activeProduct.description_plain || "Descubre el cautivador contraste de calidez y frescura de esta exclusiva fragancia de Lattafa, elaborada para quienes aprecian la elegancia y la sofisticación moderna."}
               </p>
 
-              {/* Visual Olfactory Pyramid Section */}
-              {(activeProduct.top_notes || activeProduct.heart_notes || activeProduct.base_notes) && (
-                <div className="pt-2">
-                  <h5 className="text-xs font-bold text-stone-900 uppercase tracking-widest mb-3 flex items-center space-x-2">
-                    <span className="w-2 h-2 rounded-full bg-amber-500"></span>
-                    <span>Pirámide Olfativa de la Fragancia</span>
-                  </h5>
-                  
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    {/* Top Notes */}
-                    <div className="bg-[#fbf9f5] border border-amber-900/10 rounded-xl p-3.5 flex flex-col justify-between space-y-2 hover:border-amber-500/40 transition-colors">
-                      <div className="flex items-center space-x-2">
-                        <span className="text-base">🍊</span>
-                        <div>
-                          <span className="text-[10px] uppercase font-bold tracking-wider text-amber-900 block">Notas de Salida</span>
-                          <span className="text-[10px] text-stone-400">Primer impacto (0-15 min)</span>
-                        </div>
-                      </div>
-                      <p className="text-xs text-stone-800 font-medium leading-relaxed">
-                        {activeProduct.top_notes || "Bergamota fresca, Cítricos, Especias suaves"}
-                      </p>
-                    </div>
 
-                    {/* Heart Notes */}
-                    <div className="bg-[#fbf9f5] border border-amber-900/10 rounded-xl p-3.5 flex flex-col justify-between space-y-2 hover:border-amber-500/40 transition-colors">
-                      <div className="flex items-center space-x-2">
-                        <span className="text-base">🌹</span>
-                        <div>
-                          <span className="text-[10px] uppercase font-bold tracking-wider text-amber-900 block">Notas de Corazón</span>
-                          <span className="text-[10px] text-stone-400">El alma (2-4 horas)</span>
-                        </div>
-                      </div>
-                      <p className="text-xs text-stone-800 font-medium leading-relaxed">
-                        {activeProduct.heart_notes || "Flor de Azahar, Rosa Oriental, Canela"}
-                      </p>
-                    </div>
-
-                    {/* Base Notes */}
-                    <div className="bg-[#fbf9f5] border border-amber-900/10 rounded-xl p-3.5 flex flex-col justify-between space-y-2 hover:border-amber-500/40 transition-colors">
-                      <div className="flex items-center space-x-2">
-                        <span className="text-base">🪵</span>
-                        <div>
-                          <span className="text-[10px] uppercase font-bold tracking-wider text-amber-900 block">Notas de Fondo</span>
-                          <span className="text-[10px] text-stone-400">La estela (6+ horas)</span>
-                        </div>
-                      </div>
-                      <p className="text-xs text-stone-800 font-medium leading-relaxed">
-                        {activeProduct.base_notes || "Ámbar cálido, Vainilla Madagascar, Oud Ahumado"}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Trust Perks List */}
