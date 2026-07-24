@@ -22,6 +22,18 @@ export const Header = () => {
     }
   }, [isSearchOpen]);
 
+  // Lock background body scroll when mobile hamburger menu is open
+  React.useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   // Handle Escape key and outside click to close search
   React.useEffect(() => {
     const handleKeyDown = (e) => {
@@ -552,34 +564,34 @@ export const Header = () => {
 
       {/* FULL-SCREEN MOBILE NAVIGATION DRAWER */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[100] flex flex-col bg-white animate-fadeIn text-stone-900 lg:hidden h-screen overflow-hidden">
+        <div className="fixed inset-0 z-[100] flex flex-col bg-white animate-fadeIn text-stone-900 lg:hidden h-[100dvh] max-h-[100dvh] overflow-hidden">
           
-          {/* Drawer Top Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-white">
-            <img src="/logo.jpg" alt="Maldonado Parfums" className="h-10 w-auto object-contain" />
+          {/* Drawer Top Header (Fixed top) */}
+          <div className="flex items-center justify-between px-5 py-3.5 border-b border-gray-100 bg-white shrink-0">
+            <img src="/logo.jpg" alt="Maldonado Parfums" className="h-9 w-auto object-contain" />
             <button
               onClick={() => setIsMobileMenuOpen(false)}
-              className="p-2 text-stone-900 hover:text-[#c5a059] transition-colors rounded-full cursor-pointer"
+              className="p-1.5 text-stone-900 hover:text-[#c5a059] transition-colors rounded-full cursor-pointer"
               title="Cerrar Menú"
             >
-              <X className="w-6 h-6 stroke-[1.75]" />
+              <X className="w-5 h-5 stroke-[1.75]" />
             </button>
           </div>
 
-          {/* Drawer Main Link List */}
-          <div className="flex-1 overflow-y-auto px-6 py-2">
+          {/* Drawer Main Link List (Scrolls smoothly in middle if submenus are expanded) */}
+          <div className="flex-1 overflow-y-auto px-5 py-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             
             {/* 1. Shop */}
             <div>
               <div 
                 onClick={() => setExpandedMobileSubmenu(expandedMobileSubmenu === 'shop' ? null : 'shop')}
-                className="flex items-center justify-between py-4 border-b border-gray-100 font-serif text-lg text-stone-900 cursor-pointer"
+                className="flex items-center justify-between py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
               >
                 <span>Catálogo Completo</span>
                 <ChevronRightIcon className={`w-4 h-4 text-stone-600 transition-transform ${expandedMobileSubmenu === 'shop' ? 'rotate-90' : ''}`} />
               </div>
               {expandedMobileSubmenu === 'shop' && (
-                <div className="pl-4 py-2 space-y-3 text-sm font-medium text-stone-700 bg-stone-50 rounded-xl my-2">
+                <div className="pl-3 py-2 space-y-2.5 text-xs font-medium text-stone-700 bg-stone-50 rounded-xl my-1.5">
                   <div onClick={() => { navigateToCollection('all', 'Todas las Fragancias'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Todas las Fragancias</div>
                   <div onClick={() => { navigateToCollection('edp', 'Eau de Parfum'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Eau de Parfum</div>
                   <div onClick={() => { navigateToCollection('air-freshener', 'Aromatizadores'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Aromatizadores</div>
@@ -592,13 +604,13 @@ export const Header = () => {
             <div>
               <div 
                 onClick={() => setExpandedMobileSubmenu(expandedMobileSubmenu === 'new' ? null : 'new')}
-                className="flex items-center justify-between py-4 border-b border-gray-100 font-serif text-lg text-stone-900 cursor-pointer"
+                className="flex items-center justify-between py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
               >
                 <span>Novedades</span>
                 <ChevronRightIcon className={`w-4 h-4 text-stone-600 transition-transform ${expandedMobileSubmenu === 'new' ? 'rotate-90' : ''}`} />
               </div>
               {expandedMobileSubmenu === 'new' && (
-                <div className="pl-4 py-2 space-y-3 text-sm font-medium text-stone-700 bg-stone-50 rounded-xl my-2">
+                <div className="pl-3 py-2 space-y-2.5 text-xs font-medium text-stone-700 bg-stone-50 rounded-xl my-1.5">
                   <div onClick={() => { navigateToCollection('new-arrivals', 'Nuevos Lanzamientos'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer font-bold">Ver Todas las Novedades</div>
                   <div onClick={() => { handleCardClick('Khamrah Waha'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Khamrah Waha</div>
                   <div onClick={() => { handleCardClick('Art of Universe'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Art of Universe</div>
@@ -611,13 +623,13 @@ export const Header = () => {
             <div>
               <div 
                 onClick={() => setExpandedMobileSubmenu(expandedMobileSubmenu === 'bestsellers' ? null : 'bestsellers')}
-                className="flex items-center justify-between py-4 border-b border-gray-100 font-serif text-lg text-stone-900 cursor-pointer"
+                className="flex items-center justify-between py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
               >
                 <span>Los Más Vendidos</span>
                 <ChevronRightIcon className={`w-4 h-4 text-stone-600 transition-transform ${expandedMobileSubmenu === 'bestsellers' ? 'rotate-90' : ''}`} />
               </div>
               {expandedMobileSubmenu === 'bestsellers' && (
-                <div className="pl-4 py-2 space-y-3 text-sm font-medium text-stone-700 bg-stone-50 rounded-xl my-2">
+                <div className="pl-3 py-2 space-y-2.5 text-xs font-medium text-stone-700 bg-stone-50 rounded-xl my-1.5">
                   <div onClick={() => { navigateToCollection('best-sellers', 'Los Más Vendidos'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer font-bold">Ver Todos Los Más Vendidos</div>
                   <div onClick={() => { handleCardClick('Asad'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Asad</div>
                   <div onClick={() => { handleCardClick('Yara'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Yara Candy</div>
@@ -630,13 +642,13 @@ export const Header = () => {
             <div>
               <div 
                 onClick={() => setExpandedMobileSubmenu(expandedMobileSubmenu === 'collections' ? null : 'collections')}
-                className="flex items-center justify-between py-4 border-b border-gray-100 font-serif text-lg text-stone-900 cursor-pointer"
+                className="flex items-center justify-between py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
               >
                 <span>Colecciones</span>
                 <ChevronRightIcon className={`w-4 h-4 text-stone-600 transition-transform ${expandedMobileSubmenu === 'collections' ? 'rotate-90' : ''}`} />
               </div>
               {expandedMobileSubmenu === 'collections' && (
-                <div className="pl-4 py-2 space-y-3 text-sm font-medium text-stone-700 bg-stone-50 rounded-xl my-2">
+                <div className="pl-3 py-2 space-y-2.5 text-xs font-medium text-stone-700 bg-stone-50 rounded-xl my-1.5">
                   <div onClick={() => { navigateToCollection('pride', 'Lattafa Pride'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Lattafa Pride</div>
                   <div onClick={() => { navigateToCollection('badee-al-oud', 'Badee Al Oud Collection'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Badee Al Oud</div>
                   <div onClick={() => { navigateToCollection('asad', 'Asad Collection'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Asad</div>
@@ -647,7 +659,7 @@ export const Header = () => {
             {/* 5. Bundles */}
             <div 
               onClick={() => { navigateToCollection('bundles', 'Packs Exclusivos'); setIsMobileMenuOpen(false); }}
-              className="py-4 border-b border-gray-100 font-serif text-lg text-stone-900 cursor-pointer"
+              className="py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
             >
               Packs y Kits
             </div>
@@ -655,29 +667,29 @@ export const Header = () => {
             {/* 6. Track My Order */}
             <div 
               onClick={() => { setIsSearchOpen(true); setIsMobileMenuOpen(false); }}
-              className="py-4 border-b border-gray-100 font-serif text-lg text-stone-900 cursor-pointer"
+              className="py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
             >
               Seguir Mi Pedido
             </div>
 
           </div>
 
-          {/* Drawer Bottom Footer */}
-          <div className="p-6 border-t border-gray-100 space-y-4 text-center bg-white">
+          {/* Drawer Bottom Footer (Locked at bottom, never cut off) */}
+          <div className="p-4 border-t border-gray-100 space-y-3 text-center bg-white shrink-0">
             
             {/* Country Selector */}
-            <div className="inline-flex items-center justify-center space-x-2 text-xs font-semibold text-stone-900 cursor-pointer">
+            <div className="inline-flex items-center justify-center space-x-2 text-[11px] font-semibold text-stone-900 cursor-pointer">
               <span>🇵🇪 Perú (PEN S/)</span>
               <ChevronDown className="w-3.5 h-3.5 text-stone-600" />
             </div>
 
             {/* LOG IN Pill Button */}
-            <button className="w-full bg-black hover:bg-stone-800 text-white font-bold text-xs py-3.5 rounded-full uppercase tracking-widest transition-all shadow-md">
+            <button className="w-full bg-black hover:bg-stone-800 text-white font-bold text-[11px] py-3 rounded-full uppercase tracking-widest transition-all shadow-md">
               INICIAR SESIÓN
             </button>
 
             {/* Social Media Icons */}
-            <div className="flex items-center justify-center space-x-6 text-stone-800 pt-1">
+            <div className="flex items-center justify-center space-x-6 text-stone-800 pt-0.5">
               <a href="#facebook" className="hover:text-amber-800" title="Facebook">
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
               </a>
