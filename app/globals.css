@@ -178,12 +178,14 @@ body {
   background: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0) 0%,
-    rgba(212, 175, 55, 0.18) 40%,
-    rgba(255, 223, 118, 0.35) 50%,
-    rgba(212, 175, 55, 0.18) 60%,
+    rgba(212, 175, 55, 0.3) 30%,
+    rgba(245, 208, 97, 0.7) 50%,
+    rgba(212, 175, 55, 0.3) 70%,
     rgba(255, 255, 255, 0) 100%
   );
-  animation: goldShimmer 1.4s infinite;
+  animation: goldShimmer 1.2s infinite;
+  pointer-events: none;
+  z-index: 10;
 }
 
 /* Custom scrollbar */

@@ -32,8 +32,17 @@ export const StoreProvider = ({ children }) => {
     new: 'Nuevos Lanzamientos'
   };
 
+  const getInitialPage = () => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
+      if (path.startsWith('/productos/')) return 'product';
+      if (path.startsWith('/colecciones/')) return 'collection';
+    }
+    return 'home';
+  };
+
   // Real URL Router, Active Product & Active Collection
-  const [activePage, setActivePage] = useState('home'); // 'home' | 'product' | 'collection'
+  const [activePage, setActivePage] = useState(getInitialPage); // 'home' | 'product' | 'collection'
   const [activeProduct, setActiveProduct] = useState(null);
   const [activeCollection, setActiveCollection] = useState({ handle: 'all', title: 'Todas las Fragancias' });
 
@@ -202,17 +211,22 @@ export const StoreProvider = ({ children }) => {
    * 3. Escuchar el evento onLoad de la imagen principal en ProductPage.jsx / CollectionPage.jsx
    *    y llamar a setPageTransitioning(false).
    */
-  const triggerPageTransition = (callback) => {
+  const triggerPageTransition = (targetPage, callback) => {
     setPageTransitioning(true);
-    callback();
+    if (targetPage) {
+      setActivePage(targetPage);
+    }
+    if (typeof callback === 'function') {
+      callback();
+    }
     window.scrollTo(0, 0);
     setTimeout(() => {
       setPageTransitioning(false);
-    }, 1000); // Duración del skeleton (1000ms)
+    }, 1100); // Duración del skeleton dorado (1100ms)
   };
 
   const navigateToProduct = (product) => {
-    triggerPageTransition(() => {
+    triggerPageTransition('product', () => {
       const palette = getFragrancePalette(product);
       setAmbientTheme(palette);
       document.documentElement.style.setProperty('--page-bg-color', palette.bg);
@@ -225,7 +239,7 @@ export const StoreProvider = ({ children }) => {
   };
 
   const navigateToCollection = (handle = 'all', title = null) => {
-    triggerPageTransition(() => {
+    triggerPageTransition('collection', () => {
       const palette = { bg: '#ffffff', glow: 'rgba(212, 175, 55, 0.08)', accent: '#d4b068', textDark: true };
       setAmbientTheme(palette);
       document.documentElement.style.setProperty('--page-bg-color', '#ffffff');
@@ -239,7 +253,7 @@ export const StoreProvider = ({ children }) => {
   };
 
   const navigateToHome = () => {
-    triggerPageTransition(() => {
+    triggerPageTransition('home', () => {
       const palette = { bg: '#ffffff', glow: 'rgba(212, 175, 55, 0.08)', accent: '#d4b068', textDark: true };
       setAmbientTheme(palette);
       document.documentElement.style.setProperty('--page-bg-color', '#ffffff');
