@@ -32,6 +32,18 @@ export const MainLayout = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Guarantee instant scroll-to-top for both Lenis and native window on page change
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (window.lenis) {
+        window.lenis.scrollTo(0, { immediate: true });
+      }
+      window.scrollTo(0, 0);
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+  }, [activePage, pageTransitioning]);
+
   const isPending = loading || pageTransitioning;
 
   return (

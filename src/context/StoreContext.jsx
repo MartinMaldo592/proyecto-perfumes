@@ -219,7 +219,14 @@ export const StoreProvider = ({ children }) => {
     if (typeof callback === 'function') {
       callback();
     }
-    window.scrollTo(0, 0);
+    if (typeof window !== 'undefined') {
+      if (window.lenis) {
+        window.lenis.scrollTo(0, { immediate: true });
+      }
+      window.scrollTo(0, 0);
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
     setTimeout(() => {
       setPageTransitioning(false);
     }, 1100); // Duración del skeleton dorado (1100ms)
