@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Search, ShoppingBag, Heart, Star } from 'lucide-react';
 import { useStore } from '../context/StoreContext';

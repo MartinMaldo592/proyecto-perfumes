@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useMemo } from 'react';
 import { SlidersHorizontal, ChevronRight, ChevronDown, ArrowRight, Sparkles } from 'lucide-react';
 import { useStore } from '../context/StoreContext';

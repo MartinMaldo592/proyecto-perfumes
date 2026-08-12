@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { X, Trash2, ShieldCheck, Truck, ArrowRight, ShoppingBag } from 'lucide-react';
 import { useStore } from '../context/StoreContext';

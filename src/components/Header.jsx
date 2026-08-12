@@ -1,7 +1,8 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Search, ShoppingBag, ChevronDown, ArrowUpRight, ChevronLeft, ChevronRight, Menu, X, ChevronRight as ChevronRightIcon, Eye, ArrowRight } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
-import { PeruFlagBadge } from './PeruFlagBadge';
 
 export const Header = () => {
   const { cartItemCount, setIsCartOpen, isSearchOpen, setIsSearchOpen, wishlist, navigateToHome, navigateToProduct, navigateToCollection, products, setSelectedProduct } = useStore();
@@ -137,12 +138,6 @@ export const Header = () => {
             >
               <Menu className="w-6 h-6 stroke-[1.75]" />
             </button>
-            {/* Mobile 205 Years Peru Flag Badge (Hidden when search is active in mobile) */}
-            {!isSearchOpen && (
-              <div className="flex items-center">
-                <PeruFlagBadge />
-              </div>
-            )}
           </div>
 
           {/* Logo Container (Hidden on mobile when search is active) */}
@@ -407,11 +402,6 @@ export const Header = () => {
 
           {/* Right Action Icons on Right Edge */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-
-            {/* Desktop 205 Years Peru Flag Badge - Left of Search Icon in Desktop */}
-            <div className="hidden lg:flex items-center">
-              <PeruFlagBadge />
-            </div>
 
             {/* Mobile Close Button (Placed right where Cart Icon is located when search is active) */}
             {isSearchOpen && (

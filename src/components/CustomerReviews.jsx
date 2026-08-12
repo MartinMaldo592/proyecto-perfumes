@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useRef } from 'react';
 import { Star } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
