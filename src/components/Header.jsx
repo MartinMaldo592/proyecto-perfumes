@@ -175,18 +175,18 @@ export const Header = () => {
 
                       {/* Col 1: Left Main Navigation Links */}
                       <div className="col-span-3 space-y-4 font-serif text-[15px] text-stone-800 tracking-wider border-r border-stone-100 pr-6 font-semibold">
-                        <div onClick={() => { navigateToCollection('best-sellers', 'Los Más Vendidos'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors">LOS MÁS VENDIDOS</div>
-                        <div onClick={() => { navigateToCollection('new-arrivals', 'Nuevos Lanzamientos'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors">NOVEDADES</div>
-                        <div onClick={() => { navigateToCollection('bundles', 'Packs y Kits'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors">PACKS Y KITS</div>
+                        <div onClick={() => { navigateToCollection('mas-vendidos', 'Los Más Vendidos'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors">LOS MÁS VENDIDOS</div>
+                        <div onClick={() => { navigateToCollection('novedades', 'Nuevos Lanzamientos'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors">NOVEDADES</div>
+                        <div onClick={() => { navigateToCollection('packs', 'Packs y Kits'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors">PACKS Y KITS</div>
                       </div>
 
                       {/* Col 2: Por Categoría */}
                       <div className="col-span-3 text-xs">
                         <h4 className="font-serif font-semibold text-stone-500 text-xs mb-3.5 uppercase tracking-wider">Por Categoría</h4>
                         <ul className="space-y-2.5 text-stone-900 font-semibold text-xs tracking-tight">
-                          <li><span onClick={() => { navigateToCollection('all', 'Todas las Fragancias'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors block uppercase">Todas las Fragancias</span></li>
-                          <li><span onClick={() => { navigateToCollection('women', "Fragancias para Damas"); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors block uppercase">Fragancias para Damas</span></li>
-                          <li><span onClick={() => { navigateToCollection('men', "Fragancias para Caballeros"); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors block uppercase">Fragancias para Caballeros</span></li>
+                          <li><span onClick={() => { navigateToCollection('todas', 'Todas las Fragancias'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors block uppercase">Todas las Fragancias</span></li>
+                          <li><span onClick={() => { navigateToCollection('damas', "Fragancias para Damas"); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors block uppercase">Fragancias para Damas</span></li>
+                          <li><span onClick={() => { navigateToCollection('caballeros', "Fragancias para Caballeros"); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors block uppercase">Fragancias para Caballeros</span></li>
                           <li><span onClick={() => { navigateToCollection('unisex', 'Fragancias Unisex'); setActiveMenu(null); }} className="hover:text-amber-700 cursor-pointer transition-colors block uppercase">Fragancias Unisex</span></li>
                         </ul>
                       </div>
@@ -290,7 +290,7 @@ export const Header = () => {
                 onMouseLeave={() => setActiveMenu(null)}
               >
                 <button 
-                  onClick={() => { navigateToCollection('best-sellers', 'Los Más Vendidos'); setActiveMenu(null); }}
+                  onClick={() => { navigateToCollection('mas-vendidos', 'Los Más Vendidos'); setActiveMenu(null); }}
                   className="flex items-center space-x-1 hover:text-[#c5a059] transition-colors py-1 cursor-pointer"
                 >
                   <span>MÁS VENDIDOS</span>
@@ -327,7 +327,7 @@ export const Header = () => {
                 onMouseLeave={() => setActiveMenu(null)}
               >
                 <button 
-                  onClick={() => { navigateToCollection('all', 'Todas las Colecciones'); setActiveMenu(null); }}
+                  onClick={() => { navigateToCollection('todas', 'Todas las Colecciones'); setActiveMenu(null); }}
                   className="flex items-center space-x-1 hover:text-[#c5a059] transition-colors py-1 cursor-pointer"
                 >
                   <span>COLECCIONES</span>
@@ -357,7 +357,7 @@ export const Header = () => {
                 )}
               </div>
 
-              <button onClick={() => navigateToCollection('bundles', 'Packs Exclusivos')} className="hover:text-[#c5a059] transition-colors py-1 cursor-pointer">
+              <button onClick={() => navigateToCollection('packs', 'Packs Exclusivos')} className="hover:text-[#c5a059] transition-colors py-1 cursor-pointer">
                 PACKS Y KITS
               </button>
               <button onClick={() => setIsSearchOpen(true)} className="hover:text-[#c5a059] transition-colors py-1 cursor-pointer">
@@ -629,7 +629,7 @@ export const Header = () => {
               </div>
               {expandedMobileSubmenu === 'bestsellers' && (
                 <div className="pl-3 py-2 space-y-2.5 text-xs font-medium text-stone-700 bg-stone-50 rounded-xl my-1.5">
-                  <div onClick={() => { navigateToCollection('best-sellers', 'Los Más Vendidos'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer font-bold">Ver Todos Los Más Vendidos</div>
+                  <div onClick={() => { navigateToCollection('mas-vendidos', 'Los Más Vendidos'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer font-bold">Ver Todos Los Más Vendidos</div>
                   <div onClick={() => { handleCardClick('Asad'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Asad</div>
                   <div onClick={() => { handleCardClick('Yara'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Yara Candy</div>
                   <div onClick={() => { handleCardClick('Badee'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Badee Al Oud</div>
@@ -657,7 +657,7 @@ export const Header = () => {
 
             {/* 5. Bundles */}
             <div 
-              onClick={() => { navigateToCollection('bundles', 'Packs Exclusivos'); setIsMobileMenuOpen(false); }}
+              onClick={() => { navigateToCollection('packs', 'Packs Exclusivos'); setIsMobileMenuOpen(false); }}
               className="py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
             >
               Packs y Kits

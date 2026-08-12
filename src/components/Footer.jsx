@@ -13,7 +13,7 @@ import { useStore } from '../context/StoreContext';
 import { ScrollReveal } from './ScrollReveal';
 
 export const Footer = () => {
-  const { navigateToHome } = useStore();
+  const { navigateToHome, navigateToCollection } = useStore();
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -108,11 +108,10 @@ export const Footer = () => {
             <div>
               <h4 className="font-serif font-bold text-stone-900 text-sm mb-4">Navegación Rápida</h4>
               <ul className="space-y-3 text-stone-700 font-medium">
-                <li><a href="#all" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Todas las Fragancias</a></li>
-                <li><a href="#new" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Nuevos Lanzamientos</a></li>
-                <li><a href="#bestsellers" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Los Más Vendidos</a></li>
-                <li><a href="#gift" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Tarjetas de Regalo</a></li>
-                <li><a href="#bundles" onClick={navigateToHome} className="hover:text-amber-800 transition-colors">Packs Exclusivos</a></li>
+                <li><button onClick={() => navigateToCollection('todas', 'Todas las Fragancias')} className="hover:text-amber-800 transition-colors text-left cursor-pointer">Todas las Fragancias</button></li>
+                <li><button onClick={() => navigateToCollection('novedades', 'Nuevos Lanzamientos')} className="hover:text-amber-800 transition-colors text-left cursor-pointer">Nuevos Lanzamientos</button></li>
+                <li><button onClick={() => navigateToCollection('mas-vendidos', 'Los Más Vendidos')} className="hover:text-amber-800 transition-colors text-left cursor-pointer">Los Más Vendidos</button></li>
+                <li><button onClick={() => navigateToCollection('packs', 'Packs y Kits Exclusivos')} className="hover:text-amber-800 transition-colors text-left cursor-pointer">Packs Exclusivos</button></li>
               </ul>
             </div>
 

@@ -194,7 +194,7 @@ export const FeaturedCollections = () => {
         {/* View More Button */}
         <ScrollReveal animation="fade-up" delay={200} duration={600} className="flex justify-center pt-10">
           <button 
-            onClick={() => navigateToCollection('bundles', 'Packs y Kits Exclusivos')} 
+            onClick={() => navigateToCollection('packs', 'Packs y Kits Exclusivos')} 
             className="bg-black hover:bg-stone-800 text-white font-bold text-xs px-10 py-3.5 rounded-full uppercase tracking-widest shadow-md transition-all cursor-pointer"
           >
             VER MÁS PACKS
