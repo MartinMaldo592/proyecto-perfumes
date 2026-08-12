@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ShoppingBag, ChevronDown, ArrowUpRight, ChevronLeft, ChevronRight, Menu, X, ChevronRight as ChevronRightIcon, Eye, ArrowRight } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 
@@ -448,260 +449,288 @@ export const Header = () => {
         </div>
       </div>
 
-      {/* LIVE ATTACHED DROPDOWN SEARCH RESULTS PANEL */}
-      {isSearchOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white/98 backdrop-blur-xl border-b border-stone-200 shadow-2xl z-50 animate-curtain max-h-[75vh] overflow-y-auto">
-          <div className="max-w-6xl mx-auto p-4 sm:p-6">
-            
-            {/* Quick search chips */}
-            <div className="flex items-center space-x-2 pb-3 overflow-x-auto border-b border-stone-100 mb-4 [scrollbar-width:none]">
-              <span className="text-[11px] font-bold text-stone-400 uppercase tracking-widest shrink-0 mr-1">Búsquedas Populares:</span>
-              {["Asad", "Yara", "Khamrah", "Oud", "Vainilla", "Damas", "Caballeros", "Lattafa"].map((chip) => (
-                <button
-                  key={chip}
-                  onClick={() => setSearchQuery(chip)}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold shrink-0 transition-all cursor-pointer ${
-                    searchQuery.toLowerCase() === chip.toLowerCase()
-                      ? 'bg-amber-600 text-white shadow-sm scale-105'
-                      : 'bg-stone-100 text-stone-700 hover:bg-amber-100 hover:text-amber-900'
-                  }`}
-                >
-                  {chip}
-                </button>
-              ))}
-            </div>
-
-            {/* Results Header */}
-            <div className="flex justify-between items-center mb-3">
-              <span className="text-xs font-bold text-stone-500 uppercase tracking-wider">
-                {searchQuery.trim() ? `Resultados para "${searchQuery}" (${filteredProducts.length})` : 'Perfumes Sugeridos'}
-              </span>
-            </div>
-
-            {/* Results Grid */}
-            {filteredProducts.length === 0 ? (
-              <div className="py-12 text-center text-stone-500 text-sm">
-                No encontramos perfumes que coincidan con <span className="font-bold text-stone-800">"{searchQuery}"</span>.<br />
-                Prueba buscando por familias olfativas como <span className="text-amber-800 font-semibold">"Oud"</span>, <span className="text-amber-800 font-semibold">"Vainilla"</span> o <span className="text-amber-800 font-semibold">"Ámbar"</span>.
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-                {filteredProducts.map((product) => (
-                  <div
-                    key={product.id}
-                    className="flex flex-col justify-between p-3.5 rounded-2xl border border-stone-100 bg-stone-50/70 hover:bg-white hover:border-amber-300/80 transition-all group shadow-sm hover:shadow-md"
+      {/* LIVE ATTACHED DROPDOWN SEARCH RESULTS PANEL WITH ELEGANT CURTAIN SLIDE */}
+      <AnimatePresence>
+        {isSearchOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute top-full left-0 right-0 bg-white/98 backdrop-blur-xl border-b border-stone-200 shadow-2xl z-50 max-h-[75vh] overflow-y-auto"
+          >
+            <div className="max-w-6xl mx-auto p-4 sm:p-6">
+              
+              {/* Quick search chips */}
+              <div className="flex items-center space-x-2 pb-3 overflow-x-auto border-b border-stone-100 mb-4 [scrollbar-width:none]">
+                <span className="text-[11px] font-bold text-stone-400 uppercase tracking-widest shrink-0 mr-1">Búsquedas Populares:</span>
+                {["Asad", "Yara", "Khamrah", "Oud", "Vainilla", "Damas", "Caballeros", "Lattafa"].map((chip) => (
+                  <button
+                    key={chip}
+                    onClick={() => setSearchQuery(chip)}
+                    className={`px-3 py-1 rounded-full text-xs font-semibold shrink-0 transition-all cursor-pointer ${
+                      searchQuery.toLowerCase() === chip.toLowerCase()
+                        ? 'bg-amber-600 text-white shadow-sm scale-105'
+                        : 'bg-stone-100 text-stone-700 hover:bg-amber-100 hover:text-amber-900'
+                    }`}
                   >
-                    <div className="flex items-center space-x-3.5 mb-2.5">
-                      <div
-                        onClick={() => {
-                          navigateToProduct(product);
-                          setIsSearchOpen(false);
-                          setSearchQuery('');
-                        }}
-                        className="w-16 h-16 bg-white rounded-xl p-1.5 flex items-center justify-center shrink-0 border border-stone-100 shadow-sm cursor-pointer"
-                      >
-                        <img src={product.main_image} alt={product.title} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <span className="text-[10px] uppercase font-bold text-amber-800 tracking-wider block truncate">
-                          {product.vendor || "Lattafa"} • {product.gender || "Unisex"}
-                        </span>
-                        <h5
+                    {chip}
+                  </button>
+                ))}
+              </div>
+
+              {/* Results Header */}
+              <div className="flex justify-between items-center mb-3">
+                <span className="text-xs font-bold text-stone-500 uppercase tracking-wider">
+                  {searchQuery.trim() ? `Resultados para "${searchQuery}" (${filteredProducts.length})` : 'Perfumes Sugeridos'}
+                </span>
+              </div>
+
+              {/* Results Grid */}
+              {filteredProducts.length === 0 ? (
+                <div className="py-12 text-center text-stone-500 text-sm">
+                  No encontramos perfumes que coincidan con <span className="font-bold text-stone-800">"{searchQuery}"</span>.<br />
+                  Prueba buscando por familias olfativas como <span className="text-amber-800 font-semibold">"Oud"</span>, <span className="text-amber-800 font-semibold">"Vainilla"</span> o <span className="text-amber-800 font-semibold">"Ámbar"</span>.
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                  {filteredProducts.map((product) => (
+                    <div
+                      key={product.id}
+                      className="flex flex-col justify-between p-3.5 rounded-2xl border border-stone-100 bg-stone-50/70 hover:bg-white hover:border-amber-300/80 transition-all group shadow-sm hover:shadow-md"
+                    >
+                      <div className="flex items-center space-x-3.5 mb-2.5">
+                        <div
                           onClick={() => {
                             navigateToProduct(product);
                             setIsSearchOpen(false);
                             setSearchQuery('');
                           }}
-                          className="font-serif font-bold text-stone-900 text-sm truncate group-hover:text-amber-800 transition-colors cursor-pointer"
+                          className="w-16 h-16 bg-white rounded-xl p-1.5 flex items-center justify-center shrink-0 border border-stone-100 shadow-sm cursor-pointer"
                         >
-                          {product.title}
-                        </h5>
-                        <span className="font-bold text-xs text-stone-900 block mt-0.5">
-                          S/ {parseFloat(product.min_price).toFixed(2)}
-                        </span>
+                          <img src={product.main_image} alt={product.title} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <span className="text-[10px] uppercase font-bold text-amber-800 tracking-wider block truncate">
+                            {product.vendor || "Lattafa"} • {product.gender || "Unisex"}
+                          </span>
+                          <h5
+                            onClick={() => {
+                              navigateToProduct(product);
+                              setIsSearchOpen(false);
+                              setSearchQuery('');
+                            }}
+                            className="font-serif font-bold text-stone-900 text-sm truncate group-hover:text-amber-800 transition-colors cursor-pointer"
+                          >
+                            {product.title}
+                          </h5>
+                          <span className="font-bold text-xs text-stone-900 block mt-0.5">
+                            S/ {parseFloat(product.min_price).toFixed(2)}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Dual Action Buttons: Vista Rápida (Preview Modal) & Ir al Producto (Full Page) */}
+                      <div className="grid grid-cols-2 gap-2 pt-2.5 border-t border-stone-200/60 text-[11px] font-bold">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedProduct(product);
+                            setIsSearchOpen(false);
+                            setSearchQuery('');
+                          }}
+                          className="flex items-center justify-center px-2.5 py-1.5 rounded-xl bg-stone-100 hover:bg-amber-100 text-stone-700 hover:text-amber-900 transition-colors cursor-pointer"
+                          title="Vista previa rápida"
+                        >
+                          <Eye className="w-3.5 h-3.5 mr-1 text-amber-700 shrink-0" />
+                          Vista Rápida
+                        </button>
+
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigateToProduct(product);
+                            setIsSearchOpen(false);
+                            setSearchQuery('');
+                          }}
+                          className="flex items-center justify-center px-2.5 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white transition-colors cursor-pointer shadow-sm"
+                          title="Ir a la página del producto"
+                        >
+                          <ArrowRight className="w-3.5 h-3.5 mr-1 shrink-0" />
+                          Ir al Producto
+                        </button>
                       </div>
                     </div>
+                  ))}
+                </div>
+              )}
 
-                    {/* Dual Action Buttons: Vista Rápida (Preview Modal) & Ir al Producto (Full Page) */}
-                    <div className="grid grid-cols-2 gap-2 pt-2.5 border-t border-stone-200/60 text-[11px] font-bold">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedProduct(product);
-                          setIsSearchOpen(false);
-                          setSearchQuery('');
-                        }}
-                        className="flex items-center justify-center px-2.5 py-1.5 rounded-xl bg-stone-100 hover:bg-amber-100 text-stone-700 hover:text-amber-900 transition-colors cursor-pointer"
-                        title="Vista previa rápida"
-                      >
-                        <Eye className="w-3.5 h-3.5 mr-1 text-amber-700 shrink-0" />
-                        Vista Rápida
-                      </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigateToProduct(product);
-                          setIsSearchOpen(false);
-                          setSearchQuery('');
-                        }}
-                        className="flex items-center justify-center px-2.5 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white transition-colors cursor-pointer shadow-sm"
-                        title="Ir a la página del producto"
-                      >
-                        <ArrowRight className="w-3.5 h-3.5 mr-1 shrink-0" />
-                        Ir al Producto
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-          </div>
-        </div>
-      )}
-
-      {/* FULL-SCREEN MOBILE NAVIGATION DRAWER */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[100] flex flex-col bg-white animate-fadeIn text-stone-900 lg:hidden h-[100dvh] max-h-[100dvh] overflow-hidden overscroll-contain touch-none">
-          
-          {/* Drawer Top Header (Fixed top) */}
-          <div className="flex items-center justify-between px-5 py-3.5 border-b border-gray-100 bg-white shrink-0">
-            <img src="/logo.jpg" alt="Maldonado Parfums" className="h-9 w-auto object-contain" />
-            <button
+      {/* FULL-SCREEN MOBILE NAVIGATION DRAWER WITH CURTAIN SLIDE ANIMATION */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            {/* Backdrop Overlay with Smooth Fade */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="p-1.5 text-stone-900 hover:text-[#c5a059] transition-colors rounded-full cursor-pointer"
-              title="Cerrar Menú"
+              className="fixed inset-0 bg-black/40 backdrop-blur-xs z-[99] lg:hidden"
+            />
+
+            {/* Sliding Curtain Drawer Container */}
+            <motion.div
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed inset-y-0 left-0 w-[88%] max-w-xs sm:max-w-sm z-[100] flex flex-col bg-white text-stone-900 shadow-2xl lg:hidden h-[100dvh] max-h-[100dvh] overflow-hidden overscroll-contain touch-none"
             >
-              <X className="w-5 h-5 stroke-[1.75]" />
-            </button>
-          </div>
-
-          {/* Drawer Main Link List (Scrolls smoothly in middle if submenus are expanded) */}
-          <div className="flex-1 overflow-y-auto px-5 py-2 overscroll-contain touch-pan-y [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-            
-            {/* 1. Shop */}
-            <div>
-              <div 
-                onClick={() => setExpandedMobileSubmenu(expandedMobileSubmenu === 'shop' ? null : 'shop')}
-                className="flex items-center justify-between py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
-              >
-                <span>Catálogo Completo</span>
-                <ChevronRightIcon className={`w-4 h-4 text-stone-600 transition-transform ${expandedMobileSubmenu === 'shop' ? 'rotate-90' : ''}`} />
+              {/* Drawer Top Header (Fixed top) */}
+              <div className="flex items-center justify-between px-5 py-3.5 border-b border-gray-100 bg-white shrink-0">
+                <img src="/logo.jpg" alt="Maldonado Parfums" className="h-9 w-auto object-contain" />
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-1.5 text-stone-900 hover:text-[#c5a059] transition-colors rounded-full cursor-pointer"
+                  title="Cerrar Menú"
+                >
+                  <X className="w-5 h-5 stroke-[1.75]" />
+                </button>
               </div>
-              {expandedMobileSubmenu === 'shop' && (
-                <div className="pl-3 py-2 space-y-2.5 text-xs font-medium text-stone-700 bg-stone-50 rounded-xl my-1.5">
-                  <div onClick={() => { navigateToCollection('all', 'Todas las Fragancias'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Todas las Fragancias</div>
-                  <div onClick={() => { navigateToCollection('edp', 'Eau de Parfum'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Eau de Parfum</div>
-                  <div onClick={() => { navigateToCollection('air-freshener', 'Aromatizadores'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Aromatizadores</div>
-                  <div onClick={() => { navigateToCollection('body-spray', 'Sprays Corporales'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Sprays Corporales</div>
-                </div>
-              )}
-            </div>
 
-            {/* 2. New Arrivals */}
-            <div>
-              <div 
-                onClick={() => setExpandedMobileSubmenu(expandedMobileSubmenu === 'new' ? null : 'new')}
-                className="flex items-center justify-between py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
-              >
-                <span>Novedades</span>
-                <ChevronRightIcon className={`w-4 h-4 text-stone-600 transition-transform ${expandedMobileSubmenu === 'new' ? 'rotate-90' : ''}`} />
+              {/* Drawer Main Link List (Scrolls smoothly in middle if submenus are expanded) */}
+              <div className="flex-1 overflow-y-auto px-5 py-2 overscroll-contain touch-pan-y [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                
+                {/* 1. Shop */}
+                <div>
+                  <div 
+                    onClick={() => setExpandedMobileSubmenu(expandedMobileSubmenu === 'shop' ? null : 'shop')}
+                    className="flex items-center justify-between py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
+                  >
+                    <span>Catálogo Completo</span>
+                    <ChevronRightIcon className={`w-4 h-4 text-stone-600 transition-transform ${expandedMobileSubmenu === 'shop' ? 'rotate-90' : ''}`} />
+                  </div>
+                  {expandedMobileSubmenu === 'shop' && (
+                    <div className="pl-3 py-2 space-y-2.5 text-xs font-medium text-stone-700 bg-stone-50 rounded-xl my-1.5">
+                      <div onClick={() => { navigateToCollection('all', 'Todas las Fragancias'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Todas las Fragancias</div>
+                      <div onClick={() => { navigateToCollection('edp', 'Eau de Parfum'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Eau de Parfum</div>
+                      <div onClick={() => { navigateToCollection('air-freshener', 'Aromatizadores'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Aromatizadores</div>
+                      <div onClick={() => { navigateToCollection('body-spray', 'Sprays Corporales'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Sprays Corporales</div>
+                    </div>
+                  )}
+                </div>
+
+                {/* 2. New Arrivals */}
+                <div>
+                  <div 
+                    onClick={() => setExpandedMobileSubmenu(expandedMobileSubmenu === 'new' ? null : 'new')}
+                    className="flex items-center justify-between py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
+                  >
+                    <span>Novedades</span>
+                    <ChevronRightIcon className={`w-4 h-4 text-stone-600 transition-transform ${expandedMobileSubmenu === 'new' ? 'rotate-90' : ''}`} />
+                  </div>
+                  {expandedMobileSubmenu === 'new' && (
+                    <div className="pl-3 py-2 space-y-2.5 text-xs font-medium text-stone-700 bg-stone-50 rounded-xl my-1.5">
+                      <div onClick={() => { navigateToCollection('new-arrivals', 'Nuevos Lanzamientos'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer font-bold">Ver Todas las Novedades</div>
+                      <div onClick={() => { handleCardClick('Khamrah Waha'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Khamrah Waha</div>
+                      <div onClick={() => { handleCardClick('Art of Universe'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Art of Universe</div>
+                      <div onClick={() => { handleCardClick('Atheeri'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Atheeri</div>
+                    </div>
+                  )}
+                </div>
+
+                {/* 3. Best Sellers */}
+                <div>
+                  <div 
+                    onClick={() => setExpandedMobileSubmenu(expandedMobileSubmenu === 'bestsellers' ? null : 'bestsellers')}
+                    className="flex items-center justify-between py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
+                  >
+                    <span>Los Más Vendidos</span>
+                    <ChevronRightIcon className={`w-4 h-4 text-stone-600 transition-transform ${expandedMobileSubmenu === 'bestsellers' ? 'rotate-90' : ''}`} />
+                  </div>
+                  {expandedMobileSubmenu === 'bestsellers' && (
+                    <div className="pl-3 py-2 space-y-2.5 text-xs font-medium text-stone-700 bg-stone-50 rounded-xl my-1.5">
+                      <div onClick={() => { navigateToCollection('mas-vendidos', 'Los Más Vendidos'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer font-bold">Ver Todos Los Más Vendidos</div>
+                      <div onClick={() => { handleCardClick('Asad'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Asad</div>
+                      <div onClick={() => { handleCardClick('Yara'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Yara Candy</div>
+                      <div onClick={() => { handleCardClick('Badee'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Badee Al Oud</div>
+                    </div>
+                  )}
+                </div>
+
+                {/* 4. Collections */}
+                <div>
+                  <div 
+                    onClick={() => setExpandedMobileSubmenu(expandedMobileSubmenu === 'collections' ? null : 'collections')}
+                    className="flex items-center justify-between py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
+                  >
+                    <span>Colecciones</span>
+                    <ChevronRightIcon className={`w-4 h-4 text-stone-600 transition-transform ${expandedMobileSubmenu === 'collections' ? 'rotate-90' : ''}`} />
+                  </div>
+                  {expandedMobileSubmenu === 'collections' && (
+                    <div className="pl-3 py-2 space-y-2.5 text-xs font-medium text-stone-700 bg-stone-50 rounded-xl my-1.5">
+                      <div onClick={() => { navigateToCollection('pride', 'Lattafa Pride'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Lattafa Pride</div>
+                      <div onClick={() => { navigateToCollection('badee-al-oud', 'Badee Al Oud Collection'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Badee Al Oud</div>
+                      <div onClick={() => { navigateToCollection('asad', 'Asad Collection'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Asad</div>
+                    </div>
+                  )}
+                </div>
+
+                {/* 5. Bundles */}
+                <div 
+                  onClick={() => { navigateToCollection('packs', 'Packs Exclusivos'); setIsMobileMenuOpen(false); }}
+                  className="py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
+                >
+                  Packs y Kits
+                </div>
+
+                {/* 6. Track My Order */}
+                <div 
+                  onClick={() => { setIsSearchOpen(true); setIsMobileMenuOpen(false); }}
+                  className="py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
+                >
+                  Seguir Mi Pedido
+                </div>
+
               </div>
-              {expandedMobileSubmenu === 'new' && (
-                <div className="pl-3 py-2 space-y-2.5 text-xs font-medium text-stone-700 bg-stone-50 rounded-xl my-1.5">
-                  <div onClick={() => { navigateToCollection('new-arrivals', 'Nuevos Lanzamientos'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer font-bold">Ver Todas las Novedades</div>
-                  <div onClick={() => { handleCardClick('Khamrah Waha'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Khamrah Waha</div>
-                  <div onClick={() => { handleCardClick('Art of Universe'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Art of Universe</div>
-                  <div onClick={() => { handleCardClick('Atheeri'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Atheeri</div>
-                </div>
-              )}
-            </div>
 
-            {/* 3. Best Sellers */}
-            <div>
-              <div 
-                onClick={() => setExpandedMobileSubmenu(expandedMobileSubmenu === 'bestsellers' ? null : 'bestsellers')}
-                className="flex items-center justify-between py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
-              >
-                <span>Los Más Vendidos</span>
-                <ChevronRightIcon className={`w-4 h-4 text-stone-600 transition-transform ${expandedMobileSubmenu === 'bestsellers' ? 'rotate-90' : ''}`} />
+              {/* Drawer Bottom Footer (Locked at bottom, never cut off) */}
+              <div className="p-4 border-t border-gray-100 space-y-3 text-center bg-white shrink-0">
+                
+                {/* Country Selector */}
+                <div className="inline-flex items-center justify-center space-x-2 text-[11px] font-semibold text-stone-900 cursor-pointer">
+                  <span>🇵🇪 Perú (PEN S/)</span>
+                  <ChevronDown className="w-3.5 h-3.5 text-stone-600" />
+                </div>
+
+                {/* LOG IN Pill Button */}
+                <button className="w-full bg-black hover:bg-stone-800 text-white font-bold text-[11px] py-3 rounded-full uppercase tracking-widest transition-all shadow-md">
+                  INICIAR SESIÓN
+                </button>
+
+                {/* Social Media Icons */}
+                <div className="flex items-center justify-center space-x-6 text-stone-800 pt-0.5">
+                  <a href="#facebook" className="hover:text-amber-800" title="Facebook">
+                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                  </a>
+                  <a href="#instagram" className="hover:text-amber-800" title="Instagram">
+                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                  </a>
+                  <a href="#tiktok" className="font-bold text-xs hover:text-amber-800" title="TikTok">🎵</a>
+                </div>
+
               </div>
-              {expandedMobileSubmenu === 'bestsellers' && (
-                <div className="pl-3 py-2 space-y-2.5 text-xs font-medium text-stone-700 bg-stone-50 rounded-xl my-1.5">
-                  <div onClick={() => { navigateToCollection('mas-vendidos', 'Los Más Vendidos'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer font-bold">Ver Todos Los Más Vendidos</div>
-                  <div onClick={() => { handleCardClick('Asad'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Asad</div>
-                  <div onClick={() => { handleCardClick('Yara'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Yara Candy</div>
-                  <div onClick={() => { handleCardClick('Badee'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Badee Al Oud</div>
-                </div>
-              )}
-            </div>
 
-            {/* 4. Collections */}
-            <div>
-              <div 
-                onClick={() => setExpandedMobileSubmenu(expandedMobileSubmenu === 'collections' ? null : 'collections')}
-                className="flex items-center justify-between py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
-              >
-                <span>Colecciones</span>
-                <ChevronRightIcon className={`w-4 h-4 text-stone-600 transition-transform ${expandedMobileSubmenu === 'collections' ? 'rotate-90' : ''}`} />
-              </div>
-              {expandedMobileSubmenu === 'collections' && (
-                <div className="pl-3 py-2 space-y-2.5 text-xs font-medium text-stone-700 bg-stone-50 rounded-xl my-1.5">
-                  <div onClick={() => { navigateToCollection('pride', 'Lattafa Pride'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Lattafa Pride</div>
-                  <div onClick={() => { navigateToCollection('badee-al-oud', 'Badee Al Oud Collection'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Badee Al Oud</div>
-                  <div onClick={() => { navigateToCollection('asad', 'Asad Collection'); setIsMobileMenuOpen(false); }} className="py-1 hover:text-amber-800 cursor-pointer">Asad</div>
-                </div>
-              )}
-            </div>
-
-            {/* 5. Bundles */}
-            <div 
-              onClick={() => { navigateToCollection('packs', 'Packs Exclusivos'); setIsMobileMenuOpen(false); }}
-              className="py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
-            >
-              Packs y Kits
-            </div>
-
-            {/* 6. Track My Order */}
-            <div 
-              onClick={() => { setIsSearchOpen(true); setIsMobileMenuOpen(false); }}
-              className="py-3 border-b border-gray-100 font-serif text-base text-stone-900 cursor-pointer"
-            >
-              Seguir Mi Pedido
-            </div>
-
-          </div>
-
-          {/* Drawer Bottom Footer (Locked at bottom, never cut off) */}
-          <div className="p-4 border-t border-gray-100 space-y-3 text-center bg-white shrink-0">
-            
-            {/* Country Selector */}
-            <div className="inline-flex items-center justify-center space-x-2 text-[11px] font-semibold text-stone-900 cursor-pointer">
-              <span>🇵🇪 Perú (PEN S/)</span>
-              <ChevronDown className="w-3.5 h-3.5 text-stone-600" />
-            </div>
-
-            {/* LOG IN Pill Button */}
-            <button className="w-full bg-black hover:bg-stone-800 text-white font-bold text-[11px] py-3 rounded-full uppercase tracking-widest transition-all shadow-md">
-              INICIAR SESIÓN
-            </button>
-
-            {/* Social Media Icons */}
-            <div className="flex items-center justify-center space-x-6 text-stone-800 pt-0.5">
-              <a href="#facebook" className="hover:text-amber-800" title="Facebook">
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-              </a>
-              <a href="#instagram" className="hover:text-amber-800" title="Instagram">
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-              </a>
-              <a href="#tiktok" className="font-bold text-xs hover:text-amber-800" title="TikTok">🎵</a>
-            </div>
-
-          </div>
-
-        </div>
-      )}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
