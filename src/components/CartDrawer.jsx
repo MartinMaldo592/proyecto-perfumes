@@ -46,29 +46,6 @@ export const CartDrawer = () => {
             </button>
           </div>
 
-          {/* FREE SHIPPING THRESHOLD PROGRESS BAR */}
-          <div className="bg-amber-950 text-white p-4 border-b border-amber-900/50">
-            <div className="flex items-center space-x-2 text-xs font-semibold mb-2">
-              <Truck className="w-4 h-4 text-amber-400" />
-              {amountToFreeShipping > 0 ? (
-                <span>
-                  Agrega <b className="text-amber-400">S/ {amountToFreeShipping.toFixed(2)}</b> más para obtener <b>ENVÍO GRATIS</b>!
-                </span>
-              ) : (
-                <span className="text-emerald-400 font-bold">
-                  ¡Felicidades! ¡Desbloqueaste ENVÍO GRATIS!
-                </span>
-              )}
-            </div>
-
-            {/* Progress Bar Track */}
-            <div className="w-full bg-amber-900/60 h-2 rounded-full overflow-hidden">
-              <div
-                className="bg-gradient-to-r from-amber-500 to-amber-300 h-full transition-all duration-500 rounded-full"
-                style={{ width: `${freeShippingProgress}%` }}
-              ></div>
-            </div>
-          </div>
 
           {/* Cart Item List */}
           <div className="flex-1 overflow-y-auto p-5 space-y-4">
