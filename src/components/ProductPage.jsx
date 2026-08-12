@@ -282,6 +282,55 @@ export const ProductPage = () => {
                 />
               </div>
             </div>
+
+            {/* Elegant Image Pagination Indicator Bar (Mobile & Desktop) */}
+            {images.length > 1 && (
+              <div className="flex flex-col items-center w-full space-y-3 pt-2">
+                
+                {/* Horizontal Interactive Thumbnail Strip */}
+                <div className="flex items-center justify-center space-x-2.5 overflow-x-auto max-w-full px-2 py-1 scrollbar-none">
+                  {images.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentImgIdx(idx)}
+                      className={`relative rounded-xl border p-1 transition-all duration-300 cursor-pointer bg-[#f7f7f7] shrink-0 overflow-hidden ${
+                        currentImgIdx === idx 
+                          ? 'w-14 h-14 border-2 border-stone-900 shadow-md scale-105 ring-2 ring-amber-500/20' 
+                          : 'w-11 h-11 sm:w-12 sm:h-12 border border-stone-200/80 opacity-60 hover:opacity-100 hover:border-stone-400'
+                      }`}
+                      title={`Ver imagen ${idx + 1}`}
+                    >
+                      <img src={img} alt="" className="w-full h-full object-contain mix-blend-multiply rounded-lg" />
+                      {currentImgIdx === idx && (
+                        <div className="absolute inset-x-0 bottom-0 h-1 bg-amber-600 rounded-b-xl"></div>
+                      )}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Sleek Champagne Pill Page Counter & Morphing Dots */}
+                <div className="flex items-center space-x-3 bg-stone-100/90 backdrop-blur-md border border-stone-200/80 rounded-full px-4 py-1.5 shadow-sm">
+                  <div className="flex items-center space-x-1.5">
+                    {images.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setCurrentImgIdx(idx)}
+                        className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                          currentImgIdx === idx 
+                            ? 'w-6 bg-stone-900 shadow-sm' 
+                            : 'w-1.5 bg-stone-300 hover:bg-stone-400'
+                        }`}
+                        aria-label={`Ir a la imagen ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-[11px] font-bold text-stone-800 tracking-wider font-mono border-l border-stone-300/80 pl-2.5">
+                    {currentImgIdx + 1} / {images.length}
+                  </span>
+                </div>
+
+              </div>
+            )}
           </div>
 
           {/* RIGHT COLUMN: PRODUCT INFO & PURCHASE CONTROLS */}
