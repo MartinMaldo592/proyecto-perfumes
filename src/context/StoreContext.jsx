@@ -146,10 +146,10 @@ export const StoreProvider = ({ children }) => {
     };
 
     if (activePage === 'product' && activeProduct) {
-      const title = `${activeProduct.title} — Maldonado Parfums`;
-      const rawDesc = activeProduct.description_plain || `${activeProduct.title} de ${activeProduct.vendor || 'Maldonado Parfums'}. Fragancia de lujo 100% auténtica.`;
+      const title = `${activeProduct.title} — OUD AL-ASIL`;
+      const rawDesc = activeProduct.description_plain || `${activeProduct.title} de ${activeProduct.vendor || 'OUD AL-ASIL'}. Fragancia de lujo 100% auténtica.`;
       const desc = rawDesc.replace(/\s+/g, ' ').trim().slice(0, 160) + '...';
-      const img = activeProduct.main_image || '/logo.jpg';
+      const img = activeProduct.main_image || '/3-Falcon_wings_perfume_logo.jpg';
 
       document.title = title;
       setMeta('name', 'description', desc);
@@ -161,14 +161,14 @@ export const StoreProvider = ({ children }) => {
       setMeta('name', 'twitter:description', desc);
       setMeta('name', 'twitter:image', img);
     } else if (activePage === 'collection' && activeCollection) {
-      const title = `${activeCollection.title} — Maldonado Parfums`;
-      const desc = `Explora la colección ${activeCollection.title} en Maldonado Parfums. Fragancias finas auténticas importadas.`;
+      const title = `${activeCollection.title} — OUD AL-ASIL`;
+      const desc = `Explora la colección ${activeCollection.title} en OUD AL-ASIL. Fragancias finas auténticas importadas.`;
       document.title = title;
       setMeta('name', 'description', desc);
       setMeta('property', 'og:title', title);
       setMeta('property', 'og:description', desc);
     } else {
-      document.title = 'Maldonado Parfums — Tienda Oficial de Perfumería Fina';
+      document.title = 'OUD AL-ASIL — Tienda Oficial de Perfumería Fina';
     }
   }, [activePage, activeProduct, activeCollection]);
 

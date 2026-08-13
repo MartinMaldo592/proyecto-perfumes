@@ -144,10 +144,10 @@ export const Header = () => {
           {/* Logo Container (Hidden on mobile when search is active) */}
           <div className={`flex-shrink-0 flex items-center mr-2 sm:mr-4 lg:mr-6 ${isSearchOpen ? 'hidden lg:flex' : 'flex'}`}>
             <img
-              src="/logo.jpg"
-              alt="Maldonado Parfums"
+              src="/3-Falcon_wings_perfume_logo.jpg"
+              alt="OUD AL-ASIL Perfumes"
               onClick={navigateToHome}
-              className="h-10 sm:h-14 lg:h-16 max-h-14 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity"
+              className="h-10 sm:h-14 lg:h-16 max-h-16 w-auto object-contain cursor-pointer hover:opacity-90 transition-opacity rounded-lg"
             />
           </div>
 
@@ -594,7 +594,7 @@ export const Header = () => {
             >
               {/* Drawer Top Header (Fixed top) */}
               <div className="flex items-center justify-between px-5 py-3.5 border-b border-gray-100 bg-white shrink-0">
-                <img src="/logo.jpg" alt="Maldonado Parfums" className="h-9 w-auto object-contain" />
+                <img src="/3-Falcon_wings_perfume_logo.jpg" alt="OUD AL-ASIL" className="h-10 sm:h-12 w-auto object-contain rounded-md" />
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="p-1.5 text-stone-900 hover:text-[#c5a059] transition-colors rounded-full cursor-pointer"

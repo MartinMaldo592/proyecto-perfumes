@@ -38,13 +38,13 @@ export const ProductPage = () => {
   const handleShare = async () => {
     if (!activeProduct) return;
     const shareUrl = window.location.href;
-    const shareText = `*${activeProduct.title}* — Maldonado Parfums\n${shareUrl}`;
+    const shareText = `*${activeProduct.title}* — OUD AL-ASIL\n${shareUrl}`;
 
     if (navigator.share) {
       try {
         await navigator.share({
-          title: `${activeProduct.title} — Maldonado Parfums`,
-          text: `Descubre ${activeProduct.title} en Maldonado Parfums:`,
+          title: `${activeProduct.title} — OUD AL-ASIL`,
+          text: `Descubre ${activeProduct.title} en OUD AL-ASIL:`,
           url: shareUrl,
         });
         return;

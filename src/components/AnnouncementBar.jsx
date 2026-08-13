@@ -10,7 +10,7 @@ export const AnnouncementBar = () => {
     "•",
     "ENVÍO GRATIS en compras superiores a S/ 225.00",
     "•",
-    "Distribución Oficial Maldonado Parfums",
+    "Distribución Oficial OUD AL-ASIL",
     "•",
   ];
 

@@ -1,16 +1,11 @@
-# React + Vite
+# OUD AL-ASIL — Tienda Virtual de Perfumería Fina & Cosmética de Lujo
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Tienda virtual moderna desarrollada con Next.js 15 App Router, React 19, Tailwind CSS y Framer Motion. Especializada en la distribución de fragancias finas auténticas de Oriente Medio y alta perfumería.
 
-Currently, two official plugins are available:
+## Stack Tecnológico
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- **Framework:** Next.js 15 (App Router)
+- **UI & Estilos:** React 19 + Tailwind CSS
+- **Animaciones:** Framer Motion (Transiciones tipo cortina y micro-interacciones)
+- **Desplazamiento Suave:** Lenis Scroll
+- **Iconos:** Lucide React

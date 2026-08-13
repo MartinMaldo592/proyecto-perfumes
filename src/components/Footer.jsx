@@ -157,7 +157,7 @@ export const Footer = () => {
 
             {/* Copyright */}
             <div className="text-xs text-stone-500">
-              © 2026 Maldonado Parfums. Todos los derechos reservados.
+              © 2026 OUD AL-ASIL. Todos los derechos reservados.
             </div>
 
           </div>
