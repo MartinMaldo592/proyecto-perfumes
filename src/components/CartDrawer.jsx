@@ -130,56 +130,26 @@ export const CartDrawer = () => {
           {cart.length > 0 && (
             <div className="p-5 border-t border-gray-100 bg-stone-50 space-y-4">
               
-              {/* ShipInsure Addon */}
-              <div className="flex items-center justify-between p-3 bg-white rounded-lg border border-amber-900/10 text-xs">
-                <div className="flex items-center space-x-2">
-                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                  <div>
-                    <span className="font-bold text-stone-800 block">Protección de Envío ShipInsure</span>
-                    <span className="text-[10px] text-gray-500">Cubre pérdida, daño y robo por S/ 4.90</span>
-                  </div>
-                </div>
-                <input
-                  type="checkbox"
-                  checked={includeShipInsure}
-                  onChange={(e) => setIncludeShipInsure(e.target.checked)}
-                  className="w-4 h-4 accent-amber-600 rounded cursor-pointer"
-                />
-              </div>
-
               {/* Subtotal & Totals */}
               <div className="space-y-1 text-xs">
                 <div className="flex justify-between text-gray-600">
                   <span>Subtotal</span>
                   <span className="font-semibold">S/ {cartSubtotal.toFixed(2)}</span>
                 </div>
-                {includeShipInsure && (
-                  <div className="flex justify-between text-gray-600">
-                    <span>Protección de Envío</span>
-                    <span className="font-semibold">S/ {shipInsureCost.toFixed(2)}</span>
-                  </div>
-                )}
                 <div className="flex justify-between text-stone-900 text-sm font-bold pt-2 border-t">
                   <span>Total Estimado</span>
-                  <span className="text-amber-800 text-base">S/ {cartGrandTotal.toFixed(2)}</span>
+                  <span className="text-amber-800 text-base">S/ {cartSubtotal.toFixed(2)}</span>
                 </div>
               </div>
 
               {/* Checkout CTAs */}
               <div className="space-y-2 pt-2">
                 <button
-                  onClick={() => alert(`Procesando Compra. Total: S/ ${cartGrandTotal.toFixed(2)}`)}
+                  onClick={() => alert(`Procesando Compra. Total: S/ ${cartSubtotal.toFixed(2)}`)}
                   className="w-full bg-[#121212] hover:bg-amber-800 text-white font-bold py-3.5 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center space-x-2 transition-all shadow-lg cursor-pointer"
                 >
-                  <span>Comprar • S/ {cartGrandTotal.toFixed(2)}</span>
+                  <span>Comprar • S/ {cartSubtotal.toFixed(2)}</span>
                   <ArrowRight className="w-4 h-4" />
-                </button>
-
-                <button
-                  onClick={() => alert(`Redirecting to Standard Checkout without Protection!`)}
-                  className="w-full text-[11px] text-gray-500 hover:text-stone-900 underline text-center block pt-1"
-                >
-                  or Checkout without protection
                 </button>
 
                 {/* Trust Badges & Guarantee Icons */}
